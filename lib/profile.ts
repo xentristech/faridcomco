@@ -25,9 +25,9 @@ export const profile = {
   whatsappLabel: "+57 300 000 0000", // TODO: como se muestra
 
   // Redes / credenciales
-  linkedin: "https://www.linkedin.com/in/", // TODO: tu perfil
-  github: "https://github.com/", // TODO: tu usuario
-  credly: "https://www.credly.com/users/", // TODO: tu perfil credly
+  linkedin: "https://www.linkedin.com/in/farideathan/",
+  github: "https://github.com/xentristech",
+  credly: "https://www.credly.com/users/farid-jimenez",
 
   // Foto del hero / vCard.
   // Placeholder de marca = /farid.svg. Para tu foto real:
