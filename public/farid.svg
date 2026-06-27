@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="560" viewBox="0 0 560 560" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="28%" r="85%">
+      <stop offset="0%" stop-color="#1a2350"/>
+      <stop offset="55%" stop-color="#0c1030"/>
+      <stop offset="100%" stop-color="#070914"/>
+    </radialGradient>
+    <linearGradient id="mono" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8fb0ff"/>
+      <stop offset="55%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#7fe7f5"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f7cff"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="560" height="560" fill="url(#bg)"/>
+  <g stroke="url(#line)" stroke-width="1.4" opacity="0.5">
+    <line x1="90" y1="120" x2="200" y2="220"/>
+    <line x1="200" y1="220" x2="120" y2="360"/>
+    <line x1="200" y1="220" x2="360" y2="180"/>
+    <line x1="360" y1="180" x2="470" y2="300"/>
+    <line x1="360" y1="180" x2="420" y2="430"/>
+    <line x1="120" y1="360" x2="280" y2="450"/>
+    <line x1="280" y1="450" x2="420" y2="430"/>
+    <line x1="470" y1="300" x2="420" y2="430"/>
+  </g>
+  <g fill="#7fa0ff">
+    <circle cx="90" cy="120" r="4"/>
+    <circle cx="200" cy="220" r="5"/>
+    <circle cx="360" cy="180" r="5"/>
+    <circle cx="120" cy="360" r="4"/>
+    <circle cx="470" cy="300" r="4"/>
+    <circle cx="280" cy="450" r="5"/>
+    <circle cx="420" cy="430" r="4"/>
+  </g>
+  <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Geist, Segoe UI, sans-serif" font-size="280" font-weight="700"
+        fill="url(#mono)">F</text>
+  <text x="50%" y="80%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Geist Mono, monospace" font-size="26" letter-spacing="6"
+        fill="#9aa3ba">EATHAN</text>
+</svg>

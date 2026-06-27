@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"C:/Users/user/proyectos/faridcomco\")",
+      "Bash(git log *)",
+      "Bash(git status *)"
+    ]
+  }
+}
