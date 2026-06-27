@@ -14,13 +14,13 @@ type Msg = { role: "user" | "assistant"; content: string };
 const intro: Msg = {
   role: "assistant",
   content:
-    "¡Hola! Soy la IA de Farid. Pregúntame sobre sus servicios de IA, proyectos, automatización o cómo trabajar con él.",
+    "¡Hola! Soy Eathan, la IA de Farid (su gemelo digital). Pregúntame sobre sus servicios de IA, proyectos, automatización o cómo trabajar con él.",
 };
 
 const suggestions = [
+  "¿Cómo te llamas?",
   "¿Qué servicios ofrece Farid?",
-  "¿Cómo puede ayudar a mi empresa?",
-  "¿Cómo lo contacto?",
+  "¿Dónde veo su trabajo?",
 ];
 
 export function AskAI() {
@@ -81,7 +81,7 @@ export function AskAI() {
       {/* Boton flotante */}
       <motion.button
         onClick={() => setOpen((o) => !o)}
-        aria-label="Pregúntale a mi IA"
+        aria-label="Habla con Eathan, la IA de Farid"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
@@ -92,7 +92,7 @@ export function AskAI() {
         ) : (
           <>
             <ChatCircleDots size={20} weight="fill" />
-            <span className="hidden sm:inline">Pregúntale a mi IA</span>
+            <span className="hidden sm:inline">Habla con Eathan</span>
           </>
         )}
       </motion.button>
@@ -112,10 +112,10 @@ export function AskAI() {
                 <Sparkle size={18} weight="fill" />
               </span>
               <div className="leading-tight">
-                <p className="text-sm font-semibold">La IA de Farid</p>
+                <p className="text-sm font-semibold">Eathan</p>
                 <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  En línea
+                  IA de Farid · En línea
                 </p>
               </div>
             </div>
