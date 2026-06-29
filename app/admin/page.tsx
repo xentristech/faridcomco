@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
-import { prisma } from "@/lib/prisma";
-import { ensureDb } from "@/lib/ensure-db";
+import { query } from "@/lib/mysql";
 import { withTimeout } from "@/lib/with-timeout";
 import { toggleProject, setLeadAttended, logout } from "./actions";
 
@@ -13,15 +12,14 @@ type Lead = {
   name: string;
   email: string;
   message: string;
-  attended: boolean;
-  createdAt: Date;
+  attended: number;
+  createdAt: string | Date;
 };
 type Project = {
   id: number;
   name: string;
   tag: string;
-  active: boolean;
-  order: number;
+  active: number;
 };
 
 const fmt = new Intl.DateTimeFormat("es-CO", {
@@ -36,11 +34,14 @@ export default async function AdminPage() {
   let projects: Project[] = [];
   let dbError = false;
   try {
-    await withTimeout(ensureDb());
     [leads, projects] = await withTimeout(
       Promise.all([
-        prisma.lead.findMany({ orderBy: { createdAt: "desc" } }),
-        prisma.project.findMany({ orderBy: { order: "asc" } }),
+        query<Lead>(
+          "SELECT `id`, `name`, `email`, `message`, `attended`, `created_at` AS `createdAt` FROM `leads` ORDER BY `created_at` DESC"
+        ),
+        query<Project>(
+          "SELECT `id`, `name`, `tag`, `active` FROM `projects` ORDER BY `order` ASC"
+        ),
       ])
     );
   } catch {
@@ -70,8 +71,8 @@ export default async function AdminPage() {
           role="alert"
           className="mt-6 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-300"
         >
-          No se pudo conectar a la base de datos. Revisa DATABASE_URL en el
-          servidor.
+          No se pudo conectar a la base de datos, o las tablas no existen.
+          Llama a <code>/api/admin/migrate?secret=…</code> primero.
         </p>
       )}
 
@@ -107,7 +108,9 @@ export default async function AdminPage() {
                       {l.message}
                     </p>
                   </div>
-                  <form action={setLeadAttended.bind(null, l.id, !l.attended)}>
+                  <form
+                    action={setLeadAttended.bind(null, l.id, !l.attended)}
+                  >
                     <button
                       type="submit"
                       className="btn btn-ghost !px-3 !py-1.5 text-xs"
@@ -127,7 +130,7 @@ export default async function AdminPage() {
         <h2 className="text-lg font-semibold tracking-tight">Proyectos</h2>
         {projects.length === 0 ? (
           <p className="mt-3 text-sm text-[var(--text-faint)]">
-            No hay proyectos en la base de datos. Corre el seed.
+            No hay proyectos en la base de datos. Llama al endpoint de migración.
           </p>
         ) : (
           <ul className="mt-4 space-y-2">

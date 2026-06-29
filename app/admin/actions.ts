@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+import { query } from "@/lib/mysql";
 import { isAdmin, ADMIN_COOKIE } from "@/lib/admin-auth";
 
 export async function logout() {
@@ -14,13 +14,19 @@ export async function logout() {
 
 export async function toggleProject(id: number, active: boolean) {
   if (!(await isAdmin())) throw new Error("No autorizado");
-  await prisma.project.update({ where: { id }, data: { active } });
+  await query("UPDATE `projects` SET `active` = ? WHERE `id` = ?", [
+    active ? 1 : 0,
+    id,
+  ]);
   revalidatePath("/admin");
   revalidatePath("/");
 }
 
 export async function setLeadAttended(id: number, attended: boolean) {
   if (!(await isAdmin())) throw new Error("No autorizado");
-  await prisma.lead.update({ where: { id }, data: { attended } });
+  await query("UPDATE `leads` SET `attended` = ? WHERE `id` = ?", [
+    attended ? 1 : 0,
+    id,
+  ]);
   revalidatePath("/admin");
 }

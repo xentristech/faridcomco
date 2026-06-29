@@ -1,5 +1,4 @@
-import { prisma } from "./prisma";
-import { ensureDb } from "./ensure-db";
+import { query } from "./mysql";
 import { withTimeout } from "./with-timeout";
 import {
   projects as fallbackProjects,
@@ -21,25 +20,17 @@ export type ServiceDTO = {
   icon: string;
 };
 
-// Lee de la DB; si falla (DB caída / sin seed) cae a los datos de profile.ts
-// para que el sitio nunca se rompa. Misma filosofía que /api/ask.
+// Lee de MySQL (mysql2). Si falla (DB caída / sin tablas) cae al fallback de
+// profile.ts para que el sitio nunca se rompa.
 export async function getProjects(): Promise<ProjectDTO[]> {
   try {
-    await withTimeout(ensureDb());
     const rows = await withTimeout(
-      prisma.project.findMany({
-        where: { active: true },
-        orderBy: { order: "asc" },
-      })
+      query<ProjectDTO>(
+        "SELECT `id`, `name`, `tag`, `desc`, `seed` FROM `projects` WHERE `active` = 1 ORDER BY `order` ASC"
+      )
     );
     if (rows.length === 0) return fallbackProjectsDTO();
-    return rows.map((r) => ({
-      id: r.id,
-      name: r.name,
-      tag: r.tag,
-      desc: r.desc,
-      seed: r.seed,
-    }));
+    return rows;
   } catch {
     return fallbackProjectsDTO();
   }
@@ -47,20 +38,13 @@ export async function getProjects(): Promise<ProjectDTO[]> {
 
 export async function getServices(): Promise<ServiceDTO[]> {
   try {
-    await withTimeout(ensureDb());
     const rows = await withTimeout(
-      prisma.service.findMany({
-        where: { active: true },
-        orderBy: { order: "asc" },
-      })
+      query<ServiceDTO>(
+        "SELECT `id`, `title`, `desc`, `icon` FROM `services` WHERE `active` = 1 ORDER BY `order` ASC"
+      )
     );
     if (rows.length === 0) return fallbackServicesDTO();
-    return rows.map((r) => ({
-      id: r.id,
-      title: r.title,
-      desc: r.desc,
-      icon: r.icon,
-    }));
+    return rows;
   } catch {
     return fallbackServicesDTO();
   }

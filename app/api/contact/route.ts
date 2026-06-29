@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { ensureDb } from "@/lib/ensure-db";
+import { query } from "@/lib/mysql";
 import { withTimeout } from "@/lib/with-timeout";
 
 export const runtime = "nodejs";
@@ -31,8 +30,12 @@ export async function POST(req: Request) {
   }
 
   try {
-    await withTimeout(ensureDb());
-    await withTimeout(prisma.lead.create({ data: { name, email, message } }));
+    await withTimeout(
+      query(
+        "INSERT INTO `leads` (`name`, `email`, `message`) VALUES (?, ?, ?)",
+        [name, email, message]
+      )
+    );
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[/api/contact] error:", err);
