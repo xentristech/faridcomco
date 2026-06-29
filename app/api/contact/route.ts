@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { ensureDb } from "@/lib/ensure-db";
+import { withTimeout } from "@/lib/with-timeout";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,8 +31,8 @@ export async function POST(req: Request) {
   }
 
   try {
-    await ensureDb();
-    await prisma.lead.create({ data: { name, email, message } });
+    await withTimeout(ensureDb());
+    await withTimeout(prisma.lead.create({ data: { name, email, message } }));
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[/api/contact] error:", err);

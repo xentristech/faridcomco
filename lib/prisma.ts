@@ -6,9 +6,27 @@ import { PrismaClient } from "@prisma/client";
 // va dentro de try/catch, el sitio siempre cae al fallback en vez de morir.
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
+// Añade connect_timeout/pool_timeout a la URL para que la conexión falle
+// rápido (5s) en vez de colgar el render. Si la URL no parsea, se deja igual.
+function datasourceUrl(): string | undefined {
+  const raw = process.env.DATABASE_URL;
+  if (!raw) return undefined;
+  try {
+    const u = new URL(raw);
+    if (!u.searchParams.has("connect_timeout"))
+      u.searchParams.set("connect_timeout", "5");
+    if (!u.searchParams.has("pool_timeout"))
+      u.searchParams.set("pool_timeout", "5");
+    return u.toString();
+  } catch {
+    return raw;
+  }
+}
+
 function createPrisma(): PrismaClient {
   try {
     return new PrismaClient({
+      datasourceUrl: datasourceUrl(),
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
     });
   } catch (e) {

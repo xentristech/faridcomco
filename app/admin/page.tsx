@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
 import { prisma } from "@/lib/prisma";
 import { ensureDb } from "@/lib/ensure-db";
+import { withTimeout } from "@/lib/with-timeout";
 import { toggleProject, setLeadAttended, logout } from "./actions";
 
 export const runtime = "nodejs";
@@ -35,11 +36,13 @@ export default async function AdminPage() {
   let projects: Project[] = [];
   let dbError = false;
   try {
-    await ensureDb();
-    [leads, projects] = await Promise.all([
-      prisma.lead.findMany({ orderBy: { createdAt: "desc" } }),
-      prisma.project.findMany({ orderBy: { order: "asc" } }),
-    ]);
+    await withTimeout(ensureDb());
+    [leads, projects] = await withTimeout(
+      Promise.all([
+        prisma.lead.findMany({ orderBy: { createdAt: "desc" } }),
+        prisma.project.findMany({ orderBy: { order: "asc" } }),
+      ])
+    );
   } catch {
     dbError = true;
   }

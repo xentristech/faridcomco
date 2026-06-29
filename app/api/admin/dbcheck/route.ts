@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { withTimeout } from "@/lib/with-timeout";
 
 // Diagnóstico temporal de la DB. Protegido con ADMIN_SECRET.
 //   /api/admin/dbcheck?secret=TU_ADMIN_SECRET
@@ -21,7 +22,7 @@ export async function GET(req: Request) {
   };
 
   try {
-    await prisma.$queryRawUnsafe("SELECT 1 AS ok");
+    await withTimeout(prisma.$queryRawUnsafe("SELECT 1 AS ok"), 6000);
     out.connection = "ok";
   } catch (e) {
     out.connection = "FAILED";
@@ -29,7 +30,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    out.tables = await prisma.$queryRawUnsafe("SHOW TABLES");
+    out.tables = await withTimeout(prisma.$queryRawUnsafe("SHOW TABLES"), 6000);
   } catch (e) {
     out.tablesError = String(e instanceof Error ? e.message : e).slice(0, 300);
   }
