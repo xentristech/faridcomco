@@ -75,7 +75,9 @@ export function IdeaDemo() {
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && run(idea)}
-              placeholder="Ej: quiero automatizar las cotizaciones de mi empresa"
+              placeholder="Ej: quiero automatizar las cotizaciones de mi empresa…"
+              aria-label="Describe tu idea para convertirla en una solución con IA"
+              autoComplete="off"
               className="flex-1 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
             />
             <button
@@ -114,7 +116,11 @@ export function IdeaDemo() {
                 transition={{ duration: 0.3 }}
                 className="mt-5 overflow-hidden"
               >
-                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-elev)] p-4">
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="rounded-xl border border-[var(--border)] bg-[var(--bg-elev)] p-4"
+                >
                   <div className="mb-2 flex items-center gap-2 text-xs font-medium text-[var(--accent-cyan)]">
                     <Sparkle size={14} weight="fill" />
                     Propuesta generada

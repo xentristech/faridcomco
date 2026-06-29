@@ -37,6 +37,16 @@ export function AskAI() {
     });
   }, [messages, loading, open]);
 
+  // Cerrar el panel con Escape
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   async function send(text: string) {
     const value = text.trim();
     if (!value || loading) return;
@@ -104,6 +114,8 @@ export function AskAI() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            role="dialog"
+            aria-label="Chat con Eathan, la IA de Farid"
             className="fixed bottom-20 right-5 z-50 flex h-[min(560px,72vh)] w-[min(380px,92vw)] flex-col overflow-hidden rounded-[22px] border border-[var(--border-strong)] bg-[rgba(10,12,22,0.92)] shadow-2xl backdrop-blur-2xl"
           >
             {/* header */}
@@ -121,7 +133,13 @@ export function AskAI() {
             </div>
 
             {/* mensajes */}
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
+            <div
+              ref={scrollRef}
+              role="log"
+              aria-live="polite"
+              aria-atomic="false"
+              className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-4"
+            >
               {messages.map((m, i) => (
                 <div
                   key={i}
@@ -174,12 +192,14 @@ export function AskAI() {
 
             {/* input */}
             <div className="border-t border-[var(--border)] p-3">
-              <div className="flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-elev)] py-1 pl-4 pr-1">
+              <div className="flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-elev)] py-1 pl-4 pr-1 transition focus-within:border-[rgba(124,108,255,0.6)] focus-within:ring-2 focus-within:ring-[rgba(79,124,255,0.25)]">
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && send(input)}
                   placeholder="Escribe tu pregunta…"
+                  aria-label="Escribe tu pregunta para Eathan"
+                  autoComplete="off"
                   className="flex-1 bg-transparent py-2 text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-faint)]"
                 />
                 <button

@@ -61,6 +61,43 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  color-scheme: dark;
+}
+
+/* Foco visible consistente para teclado (sin tocar el hover/mouse) */
+:where(a, button, input, summary, [role="button"], [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Evita el delay de doble-tap y el flash de selección en móvil */
+a,
+button,
+input,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Salta al contenido (accesibilidad de teclado) */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 body {
@@ -173,6 +210,10 @@ body {
 }
 .btn:active {
   transform: translateY(1px) scale(0.99);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
 }
 .btn-primary {
   background-image: var(--grad);

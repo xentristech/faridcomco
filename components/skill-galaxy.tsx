@@ -18,7 +18,11 @@ export function SkillGalaxy() {
   const R = 120;
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[420px]">
+    <div
+      role="group"
+      aria-label="Mis disciplinas: toca cada nodo para ver cómo se conectan"
+      className="relative mx-auto aspect-square w-full max-w-[420px]"
+    >
       {/* anillos */}
       <div className="absolute inset-[8%] rounded-full border border-[var(--border)]" />
       <div className="absolute inset-[22%] rounded-full border border-dashed border-[var(--border)] animate-spin-slow" />
@@ -57,6 +61,8 @@ export function SkillGalaxy() {
         return (
           <button
             key={n.label}
+            type="button"
+            aria-pressed={isActive}
             onClick={() => setActive(i)}
             onMouseEnter={() => setActive(i)}
             className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"

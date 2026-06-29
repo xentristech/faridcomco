@@ -13,7 +13,7 @@
 import React from "react";
 import { WhatsappLogo } from "@phosphor-icons/react";
 import { useAudience } from "./audience-context";
-import { audiences, whatsappUrl } from "@/lib/profile";
+import { audiences, whatsappUrl, profile } from "@/lib/profile";
 import { downloadVCard } from "@/lib/vcard";
 
 class HeroSphere extends React.Component {
@@ -54,6 +54,11 @@ class HeroSphere extends React.Component {
   }
 
   componentDidMount() {
+    // Respeta prefers-reduced-motion: sin starfield, parallax, partículas ni tipeo.
+    this.reduced =
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // visit counter
     try { this.visit = (parseInt(localStorage.getItem("farid_visits") || "0", 10) || 0) + 1; localStorage.setItem("farid_visits", String(this.visit)); } catch (e) { this.visit = 1; }
     this.liveNow = new Date();
@@ -64,9 +69,10 @@ class HeroSphere extends React.Component {
     window.addEventListener("scroll", this._sc = () => this.measure(), { passive: true });
     this.measure();
     this.clock = setInterval(() => { this.liveNow = new Date(); this.setState((s) => ({ tick: s.tick + 1 })); }, 1000);
-    this.t0 = performance.now(); this.loop = this.loop.bind(this); this.raf = requestAnimationFrame(this.loop);
-    // kick off first welcome shortly after load
-    setTimeout(() => this.runWelcome(null), 700);
+    this.t0 = performance.now(); this.loop = this.loop.bind(this);
+    if (!this.reduced) this.raf = requestAnimationFrame(this.loop);
+    // kick off first welcome shortly after load (inmediato si reduced)
+    setTimeout(() => this.runWelcome(null), this.reduced ? 0 : 700);
   }
   componentWillUnmount() {
     cancelAnimationFrame(this.raf); clearInterval(this.clock); clearInterval(this.typer);
@@ -103,6 +109,11 @@ class HeroSphere extends React.Component {
     this.ctx = this.detectCtx(sim);
     const phrase = this.genWelcome(this.ctx);
     this.target = phrase;
+    // reduced-motion: muestra el saludo y el glifo completos sin tipeo ni burst.
+    if (this.reduced) {
+      this.setState({ typed: phrase, phase: "done", expanded: true, activeLang: this.ctx.lang });
+      return;
+    }
     this.setState({ typed: "", phase: "typing", expanded: false, activeLang: this.ctx.lang });
     let i = 0;
     this.typer = setInterval(() => {
@@ -197,7 +208,7 @@ class HeroSphere extends React.Component {
       e("rect", { x: caretX, y: -FS * 0.78, width: 7, height: FS * 0.84, rx: 3, fill: "url(#caretGrad)", style: { transition: "x .5s cubic-bezier(.2,.75,.2,1)", animation: "faridCaret 1.05s steps(1,end) infinite" } }),
       e("g", { style: { transform: `translateX(${closeX}px)`, transition: "transform .5s cubic-bezier(.2,.75,.2,1)" } }, e("text", { x: ADV / 2, y: 0, textAnchor: "middle", fill: C.cyan, style: mono }, ">")),
     );
-    const svg = e("svg", { viewBox: `0 0 ${VB} ${VB}`, style: { width: "100%", height: "100%", overflow: "visible", display: "block" } },
+    const svg = e("svg", { viewBox: `0 0 ${VB} ${VB}`, "aria-hidden": true, focusable: false, style: { width: "100%", height: "100%", overflow: "visible", display: "block" } },
       e("defs", null,
         e("linearGradient", { id: "aridGrad", x1: "0", y1: "0", x2: "1", y2: "0" }, e("stop", { offset: "0", stopColor: C.violet }), e("stop", { offset: "1", stopColor: C.cyan })),
         e("linearGradient", { id: "caretGrad", x1: "0", y1: "0", x2: "0", y2: "1" }, e("stop", { offset: "0", stopColor: C.violet }), e("stop", { offset: "1", stopColor: C.cyan })),
@@ -235,7 +246,7 @@ class HeroSphere extends React.Component {
             e("span", { dir: (g.l === "ar" || g.l === "he") ? "rtl" : "ltr", style: { display: "inline-block", whiteSpace: "nowrap", fontFamily: `${g.f},'Inter',sans-serif`, fontSize: on ? 22 : 17, fontWeight: on ? 600 : 500, letterSpacing: ".3px", color: on ? "#eaf6ff" : "rgba(150,158,205,0.5)", textShadow: on ? "0 0 18px rgba(98,219,228,0.7)" : "none", transition: "all .5s ease", transform: "translateX(-50%)" } }, g.t))));
     });
     const inner = e("div", { ref: this.stageWrapRef, style: { position: "absolute", left: 0, top: 0, width: STAGE, height: STAGE, transformOrigin: "top left" } },
-      e("canvas", { ref: this.pCanvasRef, width: STAGE, height: STAGE, style: { position: "absolute", inset: 0, width: STAGE, height: STAGE, pointerEvents: "none", zIndex: 4 } }),
+      e("canvas", { ref: this.pCanvasRef, "aria-hidden": true, width: STAGE, height: STAGE, style: { position: "absolute", inset: 0, width: STAGE, height: STAGE, pointerEvents: "none", zIndex: 4 } }),
       e("div", { style: { position: "absolute", left: "50%", top: "50%", width: STAGE, height: STAGE, transform: "translate(-50%,-50%) rotate(0deg)", animation: "faridRing 150s linear infinite", transformOrigin: "center" } }, ...labels),
       e("div", { ref: this.logoRef, style: { position: "absolute", inset: 0, zIndex: 3 } }, this.buildSphere()),
     );
@@ -296,7 +307,11 @@ class HeroSphere extends React.Component {
           fontFamily: "'Inter',system-ui,sans-serif", cursor: "default", padding: "30px 18px",
         }}
       >
-        <canvas ref={v.bgCanvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }} />
+        <canvas aria-hidden ref={v.bgCanvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }} />
+
+        {/* Encabezado real de la página (oculto a la vista, presente para SEO y lectores de pantalla).
+            El glifo </FARID> es decorativo y va aria-hidden. */}
+        {this.props.heading ? <h1 className="sr-only">{this.props.heading}</h1> : null}
 
         {this.props.topSlot || null}
         {v.panel}
@@ -322,6 +337,8 @@ export function HeroFarid() {
   // Selector de audiencia — controla el resto del sitio. Bajo el nav, centrado.
   const topSlot = (
     <div
+      role="group"
+      aria-label="Elige tu perfil para personalizar el mensaje"
       style={{
         position: "absolute", top: 76, left: "50%", transform: "translateX(-50%)", zIndex: 6,
         display: "flex", gap: 6, padding: 5, borderRadius: 999,
@@ -334,11 +351,13 @@ export function HeroFarid() {
         return (
           <button
             key={k}
+            type="button"
+            aria-pressed={on}
             onClick={() => setAudience(k)}
             style={{
               cursor: "pointer", fontFamily: PILL, fontSize: 12.5, fontWeight: 600, letterSpacing: ".2px",
               padding: "7px 14px", borderRadius: 999, border: "1px solid transparent",
-              transition: "all .2s ease",
+              transition: "background .2s ease, color .2s ease, box-shadow .2s ease",
               color: on ? "#fff" : "rgba(174,180,216,0.75)",
               background: on ? "linear-gradient(135deg,#6c5cf5,#8b7ff6)" : "transparent",
               boxShadow: on ? "0 8px 22px -10px rgba(124,108,246,0.9)" : "none",
@@ -374,5 +393,11 @@ export function HeroFarid() {
     </div>
   );
 
-  return <HeroSphere topSlot={topSlot} actionsSlot={actionsSlot} />;
+  return (
+    <HeroSphere
+      topSlot={topSlot}
+      actionsSlot={actionsSlot}
+      heading={`${profile.name} — ${profile.role}. ${profile.tagline}`}
+    />
+  );
 }

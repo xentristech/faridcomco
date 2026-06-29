@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <AudienceProvider>
       <Nav />
-      <main>
+      <main id="main">
         <HeroFarid />
         <VCard />
         <WhatIDo />

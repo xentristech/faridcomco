@@ -81,6 +81,9 @@ export default function RootLayout({
           precedence="high"
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans:wght@500;600&family=Noto+Sans+JP:wght@500;700&family=Noto+Sans+SC:wght@500;700&family=Noto+Sans+KR:wght@500;700&family=Noto+Sans+Arabic:wght@500;700&family=Noto+Sans+Hebrew:wght@500&family=Noto+Sans+Devanagari:wght@500&display=swap"
         />
+        <a href="#main" className="skip-link">
+          Saltar al contenido
+        </a>
         <div className="grain" aria-hidden />
         {children}
       </body>
