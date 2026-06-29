@@ -1,0 +1,43 @@
+// Prisma — MySQL en Hostinger (DATABASE_URL viene de variables de entorno).
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id     Int     @id @default(autoincrement())
+  name   String
+  tag    String
+  desc   String  @map("description") @db.Text
+  seed   String
+  active Boolean @default(true)
+  order  Int     @default(0) @map("sort_order")
+
+  @@map("projects")
+}
+
+model Service {
+  id     Int     @id @default(autoincrement())
+  title  String
+  desc   String  @map("description") @db.Text
+  icon   String
+  active Boolean @default(true)
+  order  Int     @default(0) @map("sort_order")
+
+  @@map("services")
+}
+
+model Lead {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String   @db.Text
+  attended  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("leads")
+}

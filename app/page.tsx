@@ -13,6 +13,9 @@ import { FinalCta } from "@/components/final-cta";
 import { Footer } from "@/components/footer";
 import { AskAI } from "@/components/ask-ai";
 
+// ISR: regenera cada 5 min; el panel admin también invalida con revalidatePath.
+export const revalidate = 300;
+
 export default function Home() {
   return (
     <AudienceProvider>

@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Brain,
   ChartLineUp,
@@ -9,9 +7,9 @@ import {
   Code,
   Robot,
   ChartBar,
-  type Icon,
-} from "@phosphor-icons/react";
-import { services } from "@/lib/profile";
+} from "@phosphor-icons/react/dist/ssr";
+import type { Icon } from "@phosphor-icons/react";
+import { getServices } from "@/lib/data";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
 
 const icons: Record<string, Icon> = {
@@ -25,7 +23,9 @@ const icons: Record<string, Icon> = {
   ChartBar,
 };
 
-export function WhatIDo() {
+export async function WhatIDo() {
+  const services = await getServices();
+
   return (
     <section id="servicios" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal>
@@ -41,7 +41,7 @@ export function WhatIDo() {
           const Ico = icons[s.icon] ?? Brain;
           const featured = i === 0 || i === 6;
           return (
-            <RevealItem key={s.title}>
+            <RevealItem key={s.id ?? s.title}>
               <article
                 className={`spotlight group h-full rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-1 ${
                   featured
