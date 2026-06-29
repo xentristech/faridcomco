@@ -14,7 +14,7 @@ export const profile = {
 
   web: "https://farid.com.co",
   webLabel: "farid.com.co",
-  email: "eathanjimenez3@gmail.com",
+  email: "info@farid.com.co",
 
   // Ubicacion
   city: "Barranquilla, Colombia",

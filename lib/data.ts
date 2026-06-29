@@ -1,4 +1,5 @@
 import { prisma } from "./prisma";
+import { ensureDb } from "./ensure-db";
 import {
   projects as fallbackProjects,
   services as fallbackServices,
@@ -23,6 +24,7 @@ export type ServiceDTO = {
 // para que el sitio nunca se rompa. Misma filosofía que /api/ask.
 export async function getProjects(): Promise<ProjectDTO[]> {
   try {
+    await ensureDb();
     const rows = await prisma.project.findMany({
       where: { active: true },
       orderBy: { order: "asc" },
@@ -42,6 +44,7 @@ export async function getProjects(): Promise<ProjectDTO[]> {
 
 export async function getServices(): Promise<ServiceDTO[]> {
   try {
+    await ensureDb();
     const rows = await prisma.service.findMany({
       where: { active: true },
       orderBy: { order: "asc" },
