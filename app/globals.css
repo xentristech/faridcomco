@@ -255,8 +255,7 @@ body {
   50% { opacity: 1; }
 }
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  to { transform: translateX(100%); }
 }
 @keyframes spin-slow {
   to { transform: rotate(360deg); }
@@ -274,14 +273,23 @@ body {
 @keyframes faridRing { from{transform:translate(-50%,-50%) rotate(0)} to{transform:translate(-50%,-50%) rotate(360deg)} }
 @keyframes faridRingR { from{transform:rotate(0)} to{transform:rotate(-360deg)} }
 
+/* Skeleton shimmer: el brillo se desplaza con transform (GPU), no con background-position. */
 .shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
   background: linear-gradient(
     100deg,
-    rgba(255, 255, 255, 0.05) 30%,
-    rgba(255, 255, 255, 0.22) 50%,
-    rgba(255, 255, 255, 0.05) 70%
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
   );
-  background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
 }
 
@@ -304,6 +312,19 @@ body {
   color: var(--text-faint);
 }
 
+/* En táctil (sin puntero fino) el :hover se queda "pegado" tras tocar:
+   anulamos solo el movimiento, no los cambios de color. */
+@media (hover: none), (pointer: coarse) {
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover {
+    transform: none;
+  }
+  .spotlight:hover::before {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
@@ -314,7 +335,7 @@ body {
   .animate-float,
   .animate-spin-slow,
   .marquee-track,
-  .shimmer {
+  .shimmer::after {
     animation: none !important;
   }
 }

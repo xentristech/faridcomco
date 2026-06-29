@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
 
 const nodes = [
   { label: "IA", desc: "El cerebro: modelos y razonamiento." },
@@ -14,7 +13,6 @@ const nodes = [
 
 export function SkillGalaxy() {
   const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
   const R = 120;
 
   return (
@@ -37,19 +35,14 @@ export function SkillGalaxy() {
 
       {/* nucleo */}
       <div className="absolute left-1/2 top-1/2 z-10 w-[46%] -translate-x-1/2 -translate-y-1/2 text-center">
-        <motion.div
-          key={active}
-          initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
+        <div>
           <p className="bg-grad bg-clip-text text-lg font-bold text-transparent">
             {nodes[active].label}
           </p>
           <p className="mt-1 text-xs leading-snug text-[var(--text-dim)]">
             {nodes[active].desc}
           </p>
-        </motion.div>
+        </div>
       </div>
 
       {/* nodos orbitando */}

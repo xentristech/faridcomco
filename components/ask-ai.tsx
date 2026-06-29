@@ -92,7 +92,7 @@ export function AskAI() {
       <motion.button
         onClick={() => setOpen((o) => !o)}
         aria-label="Habla con Eathan, la IA de Farid"
-        initial={{ scale: 0, opacity: 0 }}
+        initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
         className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-grad px-4 py-3 font-semibold text-white shadow-[0_14px_40px_-12px_rgba(124,108,255,0.9)]"
@@ -116,6 +116,7 @@ export function AskAI() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label="Chat con Eathan, la IA de Farid"
+            style={{ transformOrigin: "bottom right" }}
             className="fixed bottom-20 right-5 z-50 flex h-[min(560px,72vh)] w-[min(380px,92vw)] flex-col overflow-hidden rounded-[22px] border border-[var(--border-strong)] bg-[rgba(10,12,22,0.92)] shadow-2xl backdrop-blur-2xl"
           >
             {/* header */}
