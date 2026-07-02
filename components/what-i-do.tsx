@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Brain,
   ChartLineUp,
@@ -7,10 +9,11 @@ import {
   Code,
   Robot,
   ChartBar,
-} from "@phosphor-icons/react/dist/ssr";
-import type { Icon } from "@phosphor-icons/react";
-import { getServices } from "@/lib/data";
+  type Icon,
+} from "@phosphor-icons/react";
+import { services } from "@/lib/profile";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
+import { GlowingEffect } from "@/components/ui/glowing-effect-card";
 
 const icons: Record<string, Icon> = {
   Brain,
@@ -23,9 +26,7 @@ const icons: Record<string, Icon> = {
   ChartBar,
 };
 
-export async function WhatIDo() {
-  const services = await getServices();
-
+export function WhatIDo() {
   return (
     <section id="servicios" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal>
@@ -41,14 +42,22 @@ export async function WhatIDo() {
           const Ico = icons[s.icon] ?? Brain;
           const featured = i === 0 || i === 6;
           return (
-            <RevealItem key={s.id ?? s.title}>
+            <RevealItem key={s.title}>
               <article
-                className={`spotlight group h-full rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-1 ${
+                className={`spotlight group relative h-full rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-1 ${
                   featured
                     ? "border border-[rgba(124,108,255,0.28)] bg-[linear-gradient(150deg,rgba(79,124,255,0.16),rgba(139,92,246,0.06))]"
                     : "card"
                 }`}
               >
+                <GlowingEffect
+                  spread={40}
+                  glow={false}
+                  disabled={false}
+                  proximity={64}
+                  inactiveZone={0.01}
+                  borderWidth={1}
+                />
                 <span
                   className={`mb-5 inline-grid h-11 w-11 place-items-center rounded-xl ${
                     featured
