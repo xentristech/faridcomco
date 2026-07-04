@@ -9,7 +9,7 @@ import {
   SpeakerHigh,
   Stop,
 } from "@phosphor-icons/react";
-import { useTTS } from "./use-tts";
+import { useTTS } from "../use-tts";
 
 type Msg = { role: "user" | "assistant"; content: string };
 

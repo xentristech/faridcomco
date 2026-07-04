@@ -1,7 +1,7 @@
 "use client";
 
 import { SpeakerHigh, Stop, Waveform } from "@phosphor-icons/react";
-import { useTTS } from "./use-tts";
+import { useTTS } from "../use-tts";
 
 // Botón que lee el artículo completo en voz alta (Web Speech API).
 export function ListenArticle({ text }: { text: string }) {

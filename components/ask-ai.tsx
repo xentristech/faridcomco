@@ -7,14 +7,19 @@ import {
   X,
   PaperPlaneTilt,
   Sparkle,
+  Microphone,
+  SpeakerHigh,
+  Stop,
 } from "@phosphor-icons/react";
+import { useTTS } from "./use-tts";
+import { useMic } from "./use-mic";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 const intro: Msg = {
   role: "assistant",
   content:
-    "¡Hola! Soy Eathan, la IA de Farid (su gemelo digital). Pregúntame sobre sus servicios de IA, proyectos, automatización o cómo trabajar con él.",
+    "¡Hola! Soy Eathan, la IA de Farid (su gemelo digital). Pregúntame sobre sus servicios de IA, proyectos, automatización o cómo trabajar con él. Puedes escribirme o hablarme por voz.",
 };
 
 const suggestions = [
@@ -28,7 +33,18 @@ export function AskAI() {
   const [messages, setMessages] = useState<Msg[]>([intro]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [voiceMode, setVoiceMode] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const { supported: ttsSupported, speaking, speak, stop: stopTTS } = useTTS();
+  const {
+    supported: micSupported,
+    listening,
+    interim,
+    start: startMic,
+    stop: stopMic,
+    toggle: toggleMic,
+  } = useMic((text) => send(text));
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -47,9 +63,27 @@ export function AskAI() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Manos libres: en modo voz, cuando Eathan termina de hablar (y no está
+  // cargando ni escuchando), vuelve a activar el micrófono.
+  useEffect(() => {
+    if (!voiceMode || !open || speaking || loading || listening) return;
+    if (!micSupported) return;
+    const id = setTimeout(() => startMic(), 350);
+    return () => clearTimeout(id);
+  }, [voiceMode, open, speaking, loading, listening, micSupported, startMic]);
+
+  // Al apagar el modo voz o cerrar el panel, corta micrófono y lectura.
+  useEffect(() => {
+    if (!voiceMode || !open) {
+      stopMic();
+      stopTTS();
+    }
+  }, [voiceMode, open, stopMic, stopTTS]);
+
   async function send(text: string) {
     const value = text.trim();
     if (!value || loading) return;
+    stopTTS();
     const next = [...messages, { role: "user" as const, content: value }];
     setMessages(next);
     setInput("");
@@ -65,13 +99,10 @@ export function AskAI() {
         }),
       });
       const data = await res.json();
-      setMessages((m) => [
-        ...m,
-        {
-          role: "assistant",
-          content: data.reply ?? "Ups, no pude responder. Intenta de nuevo.",
-        },
-      ]);
+      const reply: string =
+        data.reply ?? "Ups, no pude responder. Intenta de nuevo.";
+      setMessages((m) => [...m, { role: "assistant", content: reply }]);
+      if (voiceMode && ttsSupported) speak(reply);
     } catch {
       setMessages((m) => [
         ...m,
@@ -121,16 +152,39 @@ export function AskAI() {
           >
             {/* header */}
             <div className="flex items-center gap-3 border-b border-[var(--border)] p-4">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-grad text-white">
+              <span className="relative grid h-9 w-9 place-items-center rounded-full bg-grad text-white">
                 <Sparkle size={18} weight="fill" />
+                {speaking && (
+                  <span className="absolute -inset-0.5 animate-ping rounded-full border border-[var(--accent-cyan)]" />
+                )}
               </span>
-              <div className="leading-tight">
+              <div className="min-w-0 flex-1 leading-tight">
                 <p className="text-sm font-semibold">Eathan</p>
                 <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  IA de Farid · En línea
+                  {listening
+                    ? "Escuchando…"
+                    : speaking
+                      ? "Hablando…"
+                      : "IA de Farid · En línea"}
                 </p>
               </div>
+
+              {(ttsSupported || micSupported) && (
+                <button
+                  onClick={() => setVoiceMode((v) => !v)}
+                  aria-pressed={voiceMode}
+                  aria-label="Modo voz"
+                  className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                    voiceMode
+                      ? "border-[rgba(124,108,255,0.6)] bg-[var(--accent-soft)] text-[var(--text)]"
+                      : "border-[var(--border)] text-[var(--text-dim)] hover:text-[var(--text)]"
+                  }`}
+                >
+                  <Microphone size={14} weight={voiceMode ? "fill" : "regular"} />
+                  Voz
+                </button>
+              )}
             </div>
 
             {/* mensajes */}
@@ -156,6 +210,16 @@ export function AskAI() {
                     }`}
                   >
                     {m.content}
+                    {m.role === "assistant" && i > 0 && ttsSupported && (
+                      <button
+                        onClick={() => (speaking ? stopTTS() : speak(m.content))}
+                        aria-label={speaking ? "Detener lectura" : "Escuchar respuesta"}
+                        className="mt-2 flex items-center gap-1.5 text-xs text-[var(--text-faint)] transition hover:text-[var(--accent-cyan)]"
+                      >
+                        {speaking ? <Stop size={13} weight="fill" /> : <SpeakerHigh size={13} />}
+                        {speaking ? "Detener" : "Escuchar"}
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -193,15 +257,35 @@ export function AskAI() {
 
             {/* input */}
             <div className="border-t border-[var(--border)] p-3">
-              <div className="flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-elev)] py-1 pl-4 pr-1 transition focus-within:border-[rgba(124,108,255,0.6)] focus-within:ring-2 focus-within:ring-[rgba(79,124,255,0.25)]">
+              <div className="flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-elev)] py-1 pl-2 pr-1 transition focus-within:border-[rgba(124,108,255,0.6)] focus-within:ring-2 focus-within:ring-[rgba(79,124,255,0.25)]">
+                {micSupported && (
+                  <button
+                    onClick={toggleMic}
+                    aria-label={listening ? "Detener dictado" : "Hablar por voz"}
+                    aria-pressed={listening}
+                    className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition ${
+                      listening
+                        ? "bg-grad text-white"
+                        : "text-[var(--text-dim)] hover:text-[var(--text)]"
+                    }`}
+                  >
+                    <motion.span
+                      animate={listening ? { scale: [1, 1.15, 1] } : { scale: 1 }}
+                      transition={{ duration: 1, repeat: listening ? Infinity : 0 }}
+                    >
+                      <Microphone size={17} weight={listening ? "fill" : "regular"} />
+                    </motion.span>
+                  </button>
+                )}
                 <input
-                  value={input}
+                  value={listening ? interim : input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && send(input)}
-                  placeholder="Escribe tu pregunta…"
+                  placeholder={listening ? "Escuchando…" : "Escribe o habla…"}
                   aria-label="Escribe tu pregunta para Eathan"
                   autoComplete="off"
-                  className="flex-1 bg-transparent py-2 text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-faint)]"
+                  disabled={listening}
+                  className="flex-1 bg-transparent py-2 text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-faint)] disabled:opacity-70"
                 />
                 <button
                   onClick={() => send(input)}
@@ -212,6 +296,11 @@ export function AskAI() {
                   <PaperPlaneTilt size={16} weight="fill" />
                 </button>
               </div>
+              {voiceMode && (
+                <p className="mt-2 px-2 text-center text-[11px] text-[var(--text-faint)]">
+                  Modo voz activo: habla y Eathan te responde en voz alta.
+                </p>
+              )}
             </div>
           </motion.div>
         )}
