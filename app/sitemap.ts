@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${profile.web}/playground`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...posts.map((p) => ({
       url: `${profile.web}/blog/${p.slug}`,
       lastModified: new Date(p.date),
