@@ -34,6 +34,15 @@ const STATEMENTS: string[] = [
     \`attended\` TINYINT(1) DEFAULT 0,
     \`created_at\` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`,
+  `CREATE TABLE IF NOT EXISTS \`comments\` (
+    \`id\` INT AUTO_INCREMENT PRIMARY KEY,
+    \`slug\` VARCHAR(255) NOT NULL,
+    \`name\` VARCHAR(120) NOT NULL,
+    \`body\` TEXT NOT NULL,
+    \`approved\` TINYINT(1) DEFAULT 0,
+    \`created_at\` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX \`idx_slug_approved\` (\`slug\`, \`approved\`)
+  )`,
   `INSERT IGNORE INTO \`projects\` (\`name\`, \`tag\`, \`desc\`, \`seed\`, \`active\`, \`order\`) VALUES
     ('Xentris.tech', 'Plataforma', 'Producto tecnológico construido sobre IA y automatización.', 'xentris-ai-platform-blue', 1, 1),
     ('Neona.Tech', 'Plataforma', 'Solución digital con núcleo de datos e inteligencia.', 'neona-tech-neural-violet', 1, 2),
@@ -82,11 +91,14 @@ async function handle(req: Request) {
     const [[l]] = (await pool.query(
       "SELECT COUNT(*) AS n FROM `leads`"
     )) as unknown as [{ n: number }[]];
+    const [[c]] = (await pool.query(
+      "SELECT COUNT(*) AS n FROM `comments`"
+    )) as unknown as [{ n: number }[]];
 
     return NextResponse.json({
       ok: true,
       message: "Tablas creadas y seed insertado correctamente.",
-      counts: { projects: p.n, services: s.n, leads: l.n },
+      counts: { projects: p.n, services: s.n, leads: l.n, comments: c.n },
     });
   } catch (e) {
     return NextResponse.json(

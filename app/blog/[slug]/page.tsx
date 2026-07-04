@@ -7,6 +7,8 @@ import { ArticleBody } from "@/components/blog/article-body";
 import { ArticleAI } from "@/components/blog/article-ai";
 import { ListenArticle } from "@/components/blog/listen-article";
 import { ReadingProgress } from "@/components/blog/reading-progress";
+import { ShareBar } from "@/components/blog/share-bar";
+import { Comments } from "@/components/blog/comments";
 import { getAllPosts, getPost, postPlainText } from "@/lib/blog";
 import { seedGradient } from "@/lib/gradient";
 import { profile } from "@/lib/profile";
@@ -66,6 +68,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   if (!post) notFound();
 
   const plain = postPlainText(post);
+  const shareUrl = `${profile.web}/blog/${post.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,6 +129,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
               <ListenArticle text={plain} />
             </div>
           </div>
+
+          <div className="mt-6 border-t border-[var(--border)] pt-5">
+            <ShareBar url={shareUrl} title={post.title} />
+          </div>
         </header>
 
         {/* Portada */}
@@ -161,6 +168,12 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
                 ¿Un proyecto con IA? Hablemos <ArrowRight size={16} weight="bold" />
               </Link>
             </div>
+
+            {/* Compartir + comentarios */}
+            <div className="not-prose mt-10">
+              <ShareBar url={shareUrl} title={post.title} />
+            </div>
+            <Comments slug={post.slug} />
           </article>
 
           {/* Índice sticky (desktop) */}

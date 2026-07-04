@@ -30,3 +30,18 @@ export async function setLeadAttended(id: number, attended: boolean) {
   ]);
   revalidatePath("/admin");
 }
+
+export async function setCommentApproved(id: number, approved: boolean) {
+  if (!(await isAdmin())) throw new Error("No autorizado");
+  await query("UPDATE `comments` SET `approved` = ? WHERE `id` = ?", [
+    approved ? 1 : 0,
+    id,
+  ]);
+  revalidatePath("/admin");
+}
+
+export async function deleteComment(id: number) {
+  if (!(await isAdmin())) throw new Error("No autorizado");
+  await query("DELETE FROM `comments` WHERE `id` = ?", [id]);
+  revalidatePath("/admin");
+}
