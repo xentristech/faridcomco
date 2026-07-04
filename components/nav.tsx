@@ -6,7 +6,7 @@ import { downloadVCard } from "@/lib/vcard";
 
 const links = [
   { href: "/#servicios", label: "Lo que hago" },
-  { href: "/#proyectos", label: "Proyectos" },
+  { href: "/diagnostico", label: "Diagnóstico IA" },
   { href: "/blog", label: "Blog" },
   { href: "/#contacto", label: "Contacto" },
 ];
