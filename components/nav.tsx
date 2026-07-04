@@ -5,10 +5,10 @@ import { profile } from "@/lib/profile";
 import { downloadVCard } from "@/lib/vcard";
 
 const links = [
-  { href: "#servicios", label: "Lo que hago" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#trayectoria", label: "Trayectoria" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#servicios", label: "Lo que hago" },
+  { href: "/#proyectos", label: "Proyectos" },
+  { href: "/blog", label: "Blog" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 // El logo arranca completo arriba y se colapsa a </F> al bajar.
@@ -36,7 +36,7 @@ function CodeLogo() {
 
   return (
     <a
-      href="#top"
+      href="/"
       aria-label={`${profile.shortName} — inicio`}
       className="inline-flex items-center whitespace-nowrap text-[15px] font-semibold tracking-tight sm:text-base"
       style={{ fontFamily: "'JetBrains Mono', var(--font-geist-mono), monospace" }}
