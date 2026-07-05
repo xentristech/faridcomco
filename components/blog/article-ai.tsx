@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Sparkle,
   PaperPlaneTilt,
   Microphone,
   SpeakerHigh,
   Stop,
 } from "@phosphor-icons/react";
 import { useTTS } from "../use-tts";
+import { VoiceOrb } from "../voice-orb";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -154,31 +154,16 @@ export function ArticleAI({
       <div className="spotlight overflow-hidden rounded-[22px] border border-[var(--border-strong)] bg-[rgba(10,12,22,0.72)] shadow-2xl backdrop-blur-xl">
         {/* header */}
         <div className="flex items-center gap-3 border-b border-[var(--border)] p-4">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-grad text-white">
-            <Sparkle size={20} weight="fill" />
-          </span>
+          <VoiceOrb speaking={speaking} listening={listening} size={40} />
           <div className="min-w-0 flex-1 leading-tight">
-            <p className="flex items-center gap-2 text-sm font-semibold">
-              Pregúntale a este artículo
-              {speaking && (
-                <span className="flex items-end gap-0.5" aria-hidden>
-                  {[0, 1, 2, 3].map((d) => (
-                    <span
-                      key={d}
-                      className="w-0.5 rounded-full bg-[var(--accent-cyan)]"
-                      style={{
-                        height: 6 + (d % 2) * 8,
-                        animation: "pulse-soft 0.7s ease-in-out infinite",
-                        animationDelay: `${d * 0.12}s`,
-                      }}
-                    />
-                  ))}
-                </span>
-              )}
-            </p>
+            <p className="text-sm font-semibold">Pregúntale a este artículo</p>
             <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Eathan · IA de Farid, anclada al texto
+              {listening
+                ? "Escuchando…"
+                : speaking
+                  ? "Hablando…"
+                  : "Eathan · IA de Farid, anclada al texto"}
             </p>
           </div>
 

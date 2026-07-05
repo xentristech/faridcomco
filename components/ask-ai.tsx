@@ -6,13 +6,13 @@ import {
   ChatCircleDots,
   X,
   PaperPlaneTilt,
-  Sparkle,
   Microphone,
   SpeakerHigh,
   Stop,
 } from "@phosphor-icons/react";
 import { useTTS } from "./use-tts";
 import { useMic } from "./use-mic";
+import { VoiceOrb } from "./voice-orb";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -152,12 +152,7 @@ export function AskAI() {
           >
             {/* header */}
             <div className="flex items-center gap-3 border-b border-[var(--border)] p-4">
-              <span className="relative grid h-9 w-9 place-items-center rounded-full bg-grad text-white">
-                <Sparkle size={18} weight="fill" />
-                {speaking && (
-                  <span className="absolute -inset-0.5 animate-ping rounded-full border border-[var(--accent-cyan)]" />
-                )}
-              </span>
+              <VoiceOrb speaking={speaking} listening={listening} size={36} />
               <div className="min-w-0 flex-1 leading-tight">
                 <p className="text-sm font-semibold">Eathan</p>
                 <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
