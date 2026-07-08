@@ -110,48 +110,64 @@ export const aida = [
 ] as const;
 
 // ---- Proyectos ----
+// Los primeros con `url` son sitios reales en producción (prueba social + enlace
+// saliente). Los demás son capacidades/servicios sin sitio propio (url: "").
 export const projects = [
   {
-    name: "Xentris.tech",
-    tag: "Plataforma",
-    desc: "Producto tecnológico construido sobre IA y automatización.",
+    name: "Xentris Tech",
+    tag: "Plataforma · IA",
+    desc: "Agencia y producto de IA y automatización que diseño y desarrollo.",
     seed: "xentris-ai-platform-blue",
+    url: "https://xentris.tech",
+  },
+  {
+    name: "Platim.co",
+    tag: "Plataforma web",
+    desc: "Plataforma digital construida a la medida, en producción.",
+    seed: "platim-platform-cyan",
+    url: "https://platim.co",
+  },
+  {
+    name: "Yota Montacargas",
+    tag: "Sitio corporativo",
+    desc: "Sitio web corporativo para empresa de montacargas y logística.",
+    seed: "yota-montacargas-industrial",
+    url: "https://yotamontacargas.com",
   },
   {
     name: "Neona.Tech",
     tag: "Plataforma",
-    desc: "Solución digital con núcleo de datos e inteligencia.",
+    desc: "Plataforma digital con núcleo de datos e inteligencia.",
     seed: "neona-tech-neural-violet",
+    url: "https://neona.tech",
   },
   {
     name: "Trading Pro GPT",
     tag: "Agente IA",
     desc: "Asistente de análisis de mercados potenciado por modelos de lenguaje.",
     seed: "trading-pro-gpt-chart-cyan",
+    url: "",
   },
   {
     name: "Bots con IA",
     tag: "Automatización",
     desc: "Bots conversacionales que atienden, califican y resuelven.",
     seed: "ai-bots-conversation-blue",
-  },
-  {
-    name: "Automatizaciones empresariales",
-    tag: "Operaciones",
-    desc: "Flujos que eliminan trabajo manual y errores repetitivos.",
-    seed: "enterprise-automation-flow",
+    url: "",
   },
   {
     name: "Dashboards de datos",
     tag: "Analytics",
     desc: "Tableros en vivo que vuelven legibles los números del negocio.",
     seed: "data-dashboards-analytics",
+    url: "",
   },
   {
     name: "Integraciones con APIs",
     tag: "Infraestructura",
     desc: "Puentes entre plataformas, pagos, CRMs y modelos de IA.",
     seed: "api-integrations-network",
+    url: "",
   },
 ] as const;
 

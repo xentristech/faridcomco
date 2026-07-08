@@ -1,5 +1,6 @@
 "use client";
 
+import type { ElementType } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { projects } from "@/lib/profile";
@@ -7,8 +8,8 @@ import { Reveal, RevealGroup, RevealItem } from "./reveal";
 import { GlowingEffect } from "@/components/ui/glowing-effect-card";
 
 export function Projects() {
-  const grid = projects.slice(0, 6);
-  const wide = projects[6];
+  const grid = projects.slice(0, -1);
+  const wide = projects[projects.length - 1];
 
   return (
     <section id="proyectos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
@@ -21,9 +22,22 @@ export function Projects() {
       </Reveal>
 
       <RevealGroup className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {grid.map((p) => (
+        {grid.map((p) => {
+          const Card: ElementType = p.url ? "a" : "article";
+          const linkProps = p.url
+            ? {
+                href: p.url,
+                target: "_blank" as const,
+                rel: "noopener",
+                "aria-label": `Ver sitio de ${p.name} (abre en pestaña nueva)`,
+              }
+            : {};
+          return (
           <RevealItem key={p.name}>
-            <article className="spotlight group relative h-full overflow-hidden rounded-[20px] border border-[var(--border)] bg-[var(--surface)] transition-transform duration-300 hover:-translate-y-1.5">
+            <Card
+              {...linkProps}
+              className="spotlight group relative block h-full overflow-hidden rounded-[20px] border border-[var(--border)] bg-[var(--surface)] transition-transform duration-300 hover:-translate-y-1.5"
+            >
               <GlowingEffect
                 spread={50}
                 glow={false}
@@ -57,10 +71,17 @@ export function Projects() {
                 <p className="mt-2 text-sm leading-relaxed text-[var(--text-dim)]">
                   {p.desc}
                 </p>
+                {p.url && (
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[var(--accent-cyan)] transition group-hover:gap-1.5">
+                    Ver sitio
+                    <ArrowUpRight size={13} weight="bold" />
+                  </span>
+                )}
               </div>
-            </article>
+            </Card>
           </RevealItem>
-        ))}
+          );
+        })}
       </RevealGroup>
 
       <Reveal delay={0.1}>
