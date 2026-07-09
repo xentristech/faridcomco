@@ -2,6 +2,12 @@
 //  PERFIL CENTRAL - edita aqui todos tus datos.
 //  Los campos marcados con  // TODO  son placeholders:
 //  reemplazalos con tus enlaces/numero reales.
+//
+//  OJO: el TEXTO que se ve en la web (servicios, proyectos, secciones)
+//  ya NO sale de aqui: vive en lib/content.ts, bilingue (es/en).
+//  Los arrays `services` y `projects` de abajo solo se usan como
+//  respaldo de /api/projects y /api/services cuando la DB no responde
+//  (lib/data.ts). Editarlos NO cambia lo que se ve en la landing.
 // ============================================================
 
 export const profile = {

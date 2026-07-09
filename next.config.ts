@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
     contentDispositionType: "inline",
     remotePatterns: [
       { protocol: "https", hostname: "cdn.simpleicons.org" },
-      { protocol: "https", hostname: "picsum.photos" },
     ],
   },
 };

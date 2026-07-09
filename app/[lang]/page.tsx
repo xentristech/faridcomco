@@ -3,7 +3,8 @@ import { Nav } from "@/components/nav";
 import { HeroFarid } from "@/components/hero-farid";
 import { VCard } from "@/components/vcard";
 import { WhatIDo } from "@/components/what-i-do";
-import { Aida } from "@/components/aida";
+import { AiStack } from "@/components/ai-stack";
+import { DataJourney } from "@/components/data-journey";
 import { Projects } from "@/components/projects";
 import { IdeaDemo } from "@/components/idea-demo";
 import { Credentials } from "@/components/credentials";
@@ -24,7 +25,8 @@ export default function Home() {
         <HeroFarid />
         <VCard />
         <WhatIDo />
-        <Aida />
+        <AiStack />
+        <DataJourney />
         <Projects />
         <IdeaDemo />
         <Credentials />

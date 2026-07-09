@@ -5,7 +5,47 @@ import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
 import { GlowingEffect } from "@/components/ui/glowing-effect-card";
+import { seedGradient } from "@/lib/gradient";
 import { useI18n } from "./i18n";
+
+// Capturas reales de los sitios en producción (public/projects). Los proyectos
+// sin sitio propio caen al gradiente de marca en vez de una foto de stock.
+const SHOTS: Record<string, string> = {
+  "xentris-ai-platform-blue": "/projects/xentris.jpg",
+  "platim-platform-cyan": "/projects/platim.jpg",
+  "yota-montacargas-industrial": "/projects/yota.jpg",
+  "neona-tech-neural-violet": "/projects/neona.jpg",
+};
+
+function ProjectMedia({ seed, sizes }: { seed: string; sizes: string }) {
+  const shot = SHOTS[seed];
+  if (shot) {
+    return (
+      <>
+        <Image
+          src={shot}
+          alt=""
+          aria-hidden
+          fill
+          sizes={sizes}
+          className="object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+        />
+        {/* Scrim sutil: legibilidad del tag sin apagar la captura. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,12,0.45),transparent_40%,rgba(5,6,12,0.35))]" />
+      </>
+    );
+  }
+  return (
+    <>
+      <div
+        aria-hidden
+        className="absolute inset-0 transition duration-500 group-hover:scale-105"
+        style={{ backgroundImage: seedGradient(seed) }}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,12,0.2),rgba(5,6,12,0.75))]" />
+    </>
+  );
+}
 
 export function Projects() {
   const { c } = useI18n();
@@ -32,7 +72,7 @@ export function Projects() {
                 href: p.url,
                 target: "_blank" as const,
                 rel: "noopener",
-                "aria-label": `Ver sitio de ${p.name} (abre en pestaña nueva)`,
+                "aria-label": `${c.projects.viewSite}: ${p.name}`,
               }
             : {};
           return (
@@ -50,16 +90,11 @@ export function Projects() {
                 borderWidth={1}
               />
               <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={`https://picsum.photos/seed/${p.seed}/640/400`}
-                  alt={p.name}
-                  fill
+                <ProjectMedia
+                  seed={p.seed}
                   sizes="(max-width:768px) 100vw, 33vw"
-                  className="object-cover opacity-60 grayscale transition duration-500 group-hover:scale-105 group-hover:opacity-80"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,12,0.25),rgba(5,6,12,0.92))] mix-blend-multiply" />
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(79,124,255,0.28),transparent_60%)]" />
-                <span className="absolute left-4 top-4 rounded-full border border-[var(--border-strong)] bg-[rgba(5,6,12,0.6)] px-3 py-1 text-xs font-medium text-[var(--text-dim)] backdrop-blur">
+                <span className="absolute left-4 top-4 rounded-full border border-[var(--border-strong)] bg-[rgba(5,6,12,0.72)] px-3 py-1 text-xs font-medium text-[var(--text)] backdrop-blur">
                   {p.tag}
                 </span>
               </div>
@@ -107,15 +142,8 @@ export function Projects() {
             </p>
           </div>
           <div className="relative order-1 min-h-[220px] overflow-hidden md:order-2">
-            <Image
-              src={`https://picsum.photos/seed/${wide.seed}/900/600`}
-              alt={wide.name}
-              fill
-              sizes="(max-width:768px) 100vw, 40vw"
-              className="object-cover opacity-55 grayscale transition duration-500 group-hover:scale-105"
-            />
+            <ProjectMedia seed={wide.seed} sizes="(max-width:768px) 100vw, 40vw" />
             <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(5,6,12,0.95),transparent_70%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(300deg,rgba(139,92,246,0.3),transparent_60%)]" />
           </div>
         </article>
       </Reveal>

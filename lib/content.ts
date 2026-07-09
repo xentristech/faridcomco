@@ -72,15 +72,63 @@ const es = {
     ],
   },
 
-  aida: {
+  dataJourney: {
     headPre: "Del dato dormido a la ",
     headGrad: "decisión",
     headPost: ".",
-    steps: [
-      { k: "Atención", t: "Tus datos no deberían dormir en archivos, deberían ayudarte a decidir." },
-      { k: "Interés", t: "Conecto datos, APIs, modelos de IA y software para crear sistemas que automatizan procesos y generan valor." },
-      { k: "Deseo", t: "Desde dashboards hasta agentes inteligentes, convierto ideas complejas en productos funcionales." },
-      { k: "Acción", t: "¿Tienes una idea con IA? Convirtámosla en una solución real." },
+    sub: "Un dato real atravesando el sistema. Esto es, literalmente, lo que hago.",
+    hint: "Toca una etapa para detener el flujo.",
+    footnote: "Ejemplo ilustrativo: el flujo es real, los datos son ficticios.",
+    regenerate: "Otro ejemplo",
+    regenerating: "Generando…",
+    aiBadge: "generado por IA",
+    stages: [
+      { key: "raw", label: "Dato dormido", caption: "Vive en un archivo que nadie abre.", badge: "sin usar" },
+      { key: "ctx", label: "Contexto", caption: "Lo cruzo con el resto de tus sistemas.", badge: "enriquecido" },
+      { key: "model", label: "Modelo", caption: "Un modelo estima qué va a pasar.", badge: "predicho" },
+      { key: "decision", label: "Decisión", caption: "Y termina en una acción, no en un gráfico.", badge: "decidido" },
+    ],
+    cases: [
+      {
+        id: "retencion",
+        audience: "client",
+        payloads: [
+          { title: "pedido_4821.csv", lines: ["cliente: 1043", "monto: 1.250.000", "fecha: 2026-06-14", "estado: —"] },
+          { title: "cliente_1043", lines: ["compras: 7 en 12 meses", "soporte: 3 quejas abiertas", "último contacto: hace 41 días", "ticket medio: alto"] },
+          { title: "predicción", lines: ["riesgo_fuga = 0.87", "confianza = 0.91", "factor: quejas sin resolver"] },
+          { title: "acción recomendada", lines: ["Llamar hoy antes de las 5 p.m.", "Resolver queja #2291", "Oferta de retención: 15%"] },
+        ],
+      },
+      {
+        id: "inventario",
+        audience: "client",
+        payloads: [
+          { title: "inventario_junio.xlsx", lines: ["sku: TRM-88", "stock: 12 u.", "rotación: —", "proveedor: 3 semanas"] },
+          { title: "sku_TRM-88", lines: ["ventas: 9 u./semana", "temporada: alta", "quiebres previos: 2", "lead time: 21 días"] },
+          { title: "predicción", lines: ["quiebre_en = 9 días", "demanda_4sem = 41 u.", "confianza = 0.88"] },
+          { title: "acción recomendada", lines: ["Ordenar 45 u. hoy", "Subir punto de reorden a 20", "Avisar a compras"] },
+        ],
+      },
+      {
+        id: "incidente",
+        audience: "recruiter",
+        payloads: [
+          { title: "api_logs_0312.jsonl", lines: ["requests: 1.2 M", "errores 5xx: 0.4 %", "p95: 240 ms", "trazas: sin correlacionar"] },
+          { title: "servicio_checkout", lines: ["despliegue: hace 40 min", "picos de 5xx tras el deploy", "dependencia: pasarela de pagos", "timeouts: 1.8 s"] },
+          { title: "diagnóstico", lines: ["causa_probable = timeout pasarela", "impacto = 3.100 checkouts", "confianza = 0.84"] },
+          { title: "acción recomendada", lines: ["Rollback del deploy 8f2c1a", "Timeout a 5 s + reintento", "Alertar si 5xx > 0.2 %"] },
+        ],
+      },
+      {
+        id: "activacion",
+        audience: "ally",
+        payloads: [
+          { title: "eventos_app.parquet", lines: ["usuarios: 24.910", "eventos: 3.4 M", "sesiones: sin agrupar", "cohortes: —"] },
+          { title: "cohorte_mayo", lines: ["activación día 1: 38 %", "usan la función clave: 21 %", "retención D30: 12 %", "fricción: onboarding"] },
+          { title: "predicción", lines: ["churn_D30 = 0.71 sin activar", "lift si activan = +34 pts", "confianza = 0.89"] },
+          { title: "acción recomendada", lines: ["Rehacer el paso 2 del onboarding", "Empujar la función clave el día 1", "Medir con A/B a 2 semanas"] },
+        ],
+      },
     ],
   },
 
@@ -100,6 +148,60 @@ const es = {
       { name: "Bots con IA", tag: "Automatización", desc: "Bots conversacionales que atienden, califican y resuelven.", seed: "ai-bots-conversation-blue", url: "" },
       { name: "Dashboards de datos", tag: "Analytics", desc: "Tableros en vivo que vuelven legibles los números del negocio.", seed: "data-dashboards-analytics", url: "" },
       { name: "Integraciones con APIs", tag: "Infraestructura", desc: "Puentes entre plataformas, pagos, CRMs y modelos de IA.", seed: "api-integrations-network", url: "" },
+    ],
+  },
+
+  aiStack: {
+    eyebrow: "El stack",
+    headPre: "Trabajo con lo mejor del ",
+    headGrad: "ecosistema de IA y datos",
+    headPost: ".",
+    sub: "No colecciono logos: sé en qué capa vive cada herramienta y qué construyo en cada una.",
+    hint: "Pasa el cursor o toca una capa.",
+    note: "Marcas de sus respectivos dueños. Las uso como herramientas; no implica patrocinio.",
+    layers: [
+      {
+        key: "orq",
+        label: "Orquestación & agentes",
+        blurb: "Conecto modelos, herramientas y sistemas para que ejecuten tareas solos.",
+        items: [
+          { name: "LangChain", slug: "langchain" },
+          { name: "Make", slug: "make" },
+          { name: "n8n", slug: "n8n" },
+        ],
+      },
+      {
+        key: "mod",
+        label: "Modelos (LLMs)",
+        blurb: "Elijo el modelo por el problema, no por la moda.",
+        items: [
+          { name: "Claude", slug: "claude" },
+          { name: "Gemini", slug: "googlegemini" },
+          { name: "Llama", slug: "meta" },
+          { name: "Mistral", slug: "mistralai" },
+          { name: "Hugging Face", slug: "huggingface" },
+        ],
+      },
+      {
+        key: "ml",
+        label: "Frameworks & ML",
+        blurb: "Entreno y afino modelos cuando un LLM no es la respuesta.",
+        items: [
+          { name: "PyTorch", slug: "pytorch" },
+          { name: "TensorFlow", slug: "tensorflow" },
+          { name: "scikit-learn", slug: "scikitlearn" },
+        ],
+      },
+      {
+        key: "data",
+        label: "Datos",
+        blurb: "Todo empieza aquí: sin datos limpios no hay IA que sirva.",
+        items: [
+          { name: "Python", slug: "python" },
+          { name: "pandas", slug: "pandas" },
+          { name: "NumPy", slug: "numpy" },
+        ],
+      },
     ],
   },
 
@@ -285,15 +387,63 @@ const en: typeof es = {
     ],
   },
 
-  aida: {
+  dataJourney: {
     headPre: "From sleeping data to a ",
     headGrad: "decision",
     headPost: ".",
-    steps: [
-      { k: "Attention", t: "Your data shouldn't sleep in files, it should help you decide." },
-      { k: "Interest", t: "I connect data, APIs, AI models and software to build systems that automate processes and create value." },
-      { k: "Desire", t: "From dashboards to intelligent agents, I turn complex ideas into working products." },
-      { k: "Action", t: "Got an idea with AI? Let's turn it into a real solution." },
+    sub: "A real data point crossing the system. This is, literally, what I do.",
+    hint: "Tap a stage to pause the flow.",
+    footnote: "Illustrative example: the flow is real, the data is fictional.",
+    regenerate: "Another example",
+    regenerating: "Generating…",
+    aiBadge: "AI-generated",
+    stages: [
+      { key: "raw", label: "Sleeping data", caption: "It lives in a file nobody opens.", badge: "unused" },
+      { key: "ctx", label: "Context", caption: "I cross it with the rest of your systems.", badge: "enriched" },
+      { key: "model", label: "Model", caption: "A model estimates what's going to happen.", badge: "predicted" },
+      { key: "decision", label: "Decision", caption: "And it ends in an action, not a chart.", badge: "decided" },
+    ],
+    cases: [
+      {
+        id: "retencion",
+        audience: "client",
+        payloads: [
+          { title: "order_4821.csv", lines: ["customer: 1043", "amount: 1,250,000", "date: 2026-06-14", "status: —"] },
+          { title: "customer_1043", lines: ["purchases: 7 in 12 months", "support: 3 open complaints", "last contact: 41 days ago", "avg ticket: high"] },
+          { title: "prediction", lines: ["churn_risk = 0.87", "confidence = 0.91", "driver: unresolved complaints"] },
+          { title: "recommended action", lines: ["Call today before 5 p.m.", "Resolve complaint #2291", "Retention offer: 15%"] },
+        ],
+      },
+      {
+        id: "inventario",
+        audience: "client",
+        payloads: [
+          { title: "inventory_june.xlsx", lines: ["sku: TRM-88", "stock: 12 units", "turnover: —", "supplier: 3 weeks"] },
+          { title: "sku_TRM-88", lines: ["sales: 9 units/week", "season: high", "past stockouts: 2", "lead time: 21 days"] },
+          { title: "prediction", lines: ["stockout_in = 9 days", "demand_4w = 41 units", "confidence = 0.88"] },
+          { title: "recommended action", lines: ["Order 45 units today", "Raise reorder point to 20", "Notify purchasing"] },
+        ],
+      },
+      {
+        id: "incidente",
+        audience: "recruiter",
+        payloads: [
+          { title: "api_logs_0312.jsonl", lines: ["requests: 1.2 M", "5xx errors: 0.4 %", "p95: 240 ms", "traces: uncorrelated"] },
+          { title: "checkout_service", lines: ["deploy: 40 min ago", "5xx spikes after deploy", "dependency: payment gateway", "timeouts: 1.8 s"] },
+          { title: "diagnosis", lines: ["likely_cause = gateway timeout", "impact = 3,100 checkouts", "confidence = 0.84"] },
+          { title: "recommended action", lines: ["Roll back deploy 8f2c1a", "Timeout to 5 s + retry", "Alert if 5xx > 0.2 %"] },
+        ],
+      },
+      {
+        id: "activacion",
+        audience: "ally",
+        payloads: [
+          { title: "app_events.parquet", lines: ["users: 24,910", "events: 3.4 M", "sessions: ungrouped", "cohorts: —"] },
+          { title: "may_cohort", lines: ["day-1 activation: 38 %", "use the key feature: 21 %", "D30 retention: 12 %", "friction: onboarding"] },
+          { title: "prediction", lines: ["churn_D30 = 0.71 if not activated", "lift if activated = +34 pts", "confidence = 0.89"] },
+          { title: "recommended action", lines: ["Rebuild onboarding step 2", "Push the key feature on day 1", "Measure with a 2-week A/B"] },
+        ],
+      },
     ],
   },
 
@@ -313,6 +463,60 @@ const en: typeof es = {
       { name: "AI Bots", tag: "Automation", desc: "Conversational bots that assist, qualify and resolve.", seed: "ai-bots-conversation-blue", url: "" },
       { name: "Data Dashboards", tag: "Analytics", desc: "Live dashboards that make business numbers readable.", seed: "data-dashboards-analytics", url: "" },
       { name: "API Integrations", tag: "Infrastructure", desc: "Bridges between platforms, payments, CRMs and AI models.", seed: "api-integrations-network", url: "" },
+    ],
+  },
+
+  aiStack: {
+    eyebrow: "The stack",
+    headPre: "I work with the best of the ",
+    headGrad: "AI and data ecosystem",
+    headPost: ".",
+    sub: "I don't collect logos: I know which layer each tool lives in and what I build at each one.",
+    hint: "Hover or tap a layer.",
+    note: "Trademarks belong to their respective owners. I use them as tools; this implies no endorsement.",
+    layers: [
+      {
+        key: "orq",
+        label: "Orchestration & agents",
+        blurb: "I connect models, tools and systems so they get tasks done on their own.",
+        items: [
+          { name: "LangChain", slug: "langchain" },
+          { name: "Make", slug: "make" },
+          { name: "n8n", slug: "n8n" },
+        ],
+      },
+      {
+        key: "mod",
+        label: "Models (LLMs)",
+        blurb: "I pick the model for the problem, not for the hype.",
+        items: [
+          { name: "Claude", slug: "claude" },
+          { name: "Gemini", slug: "googlegemini" },
+          { name: "Llama", slug: "meta" },
+          { name: "Mistral", slug: "mistralai" },
+          { name: "Hugging Face", slug: "huggingface" },
+        ],
+      },
+      {
+        key: "ml",
+        label: "Frameworks & ML",
+        blurb: "I train and fine-tune models when an LLM isn't the answer.",
+        items: [
+          { name: "PyTorch", slug: "pytorch" },
+          { name: "TensorFlow", slug: "tensorflow" },
+          { name: "scikit-learn", slug: "scikitlearn" },
+        ],
+      },
+      {
+        key: "data",
+        label: "Data",
+        blurb: "It all starts here: without clean data there's no AI worth having.",
+        items: [
+          { name: "Python", slug: "python" },
+          { name: "pandas", slug: "pandas" },
+          { name: "NumPy", slug: "numpy" },
+        ],
+      },
     ],
   },
 
