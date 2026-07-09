@@ -3,13 +3,8 @@
 import { useEffect, useState } from "react";
 import { profile } from "@/lib/profile";
 import { downloadVCard } from "@/lib/vcard";
-
-const links = [
-  { href: "/diagnostico", label: "Diagnóstico IA" },
-  { href: "/playground", label: "Playground" },
-  { href: "/blog", label: "Blog" },
-  { href: "/#contacto", label: "Contacto" },
-];
+import { useI18n, useHref } from "./i18n";
+import { LangToggle } from "./lang-toggle";
 
 // El logo arranca completo arriba y se colapsa a </F> al bajar.
 //   = espacio duro para que no se colapse en HTML al partir el texto.
@@ -17,6 +12,8 @@ const FULL = "FARID AI ENGINEER";
 const COLLAPSE_AT = 200; // px de scroll para colapsar del todo
 
 function CodeLogo() {
+  const { c } = useI18n();
+  const href = useHref();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -36,8 +33,8 @@ function CodeLogo() {
 
   return (
     <a
-      href="/"
-      aria-label={`${profile.shortName} — inicio`}
+      href={href("/")}
+      aria-label={`${profile.shortName} — ${c.nav.home}`}
       className="inline-flex items-center whitespace-nowrap text-[15px] font-semibold tracking-tight sm:text-base"
       style={{ fontFamily: "'JetBrains Mono', var(--font-geist-mono), monospace" }}
     >
@@ -64,6 +61,8 @@ function CodeLogo() {
 }
 
 export function Nav() {
+  const { c } = useI18n();
+  const href = useHref();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -85,10 +84,10 @@ export function Nav() {
         <CodeLogo />
 
         <div className="hidden items-center gap-7 md:flex">
-          {links.map((l) => (
+          {c.nav.links.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={l.href.startsWith("/#") ? href("/") + l.href.slice(1) : href(l.href)}
               className="text-sm text-[var(--text-dim)] transition-colors hover:text-[var(--text)]"
             >
               {l.label}
@@ -96,9 +95,12 @@ export function Nav() {
           ))}
         </div>
 
-        <button onClick={downloadVCard} className="btn btn-primary !px-4 !py-2 text-sm">
-          Guardar contacto
-        </button>
+        <div className="flex items-center gap-3">
+          <LangToggle />
+          <button onClick={downloadVCard} className="btn btn-primary !px-4 !py-2 text-sm">
+            {c.nav.saveContact}
+          </button>
+        </div>
       </nav>
     </header>
   );

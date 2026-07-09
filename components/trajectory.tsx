@@ -1,10 +1,12 @@
 "use client";
 
-import { timeline } from "@/lib/profile";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
 import { SkillGalaxy } from "./skill-galaxy";
+import { useI18n } from "./i18n";
 
 export function Trajectory() {
+  const { c } = useI18n();
+  const timeline = c.trajectory.items;
   return (
     <section
       id="trayectoria"
@@ -15,17 +17,18 @@ export function Trajectory() {
         <Reveal className="order-2 lg:order-1">
           <SkillGalaxy />
           <p className="mt-6 text-center text-sm text-[var(--text-faint)]">
-            Toca cada nodo: así se conectan mis disciplinas.
+            {c.trajectory.galaxyHint}
           </p>
         </Reveal>
 
         {/* Timeline */}
         <div className="order-1 lg:order-2">
           <Reveal>
-            <p className="eyebrow mb-4">Trayectoria</p>
+            <p className="eyebrow mb-4">{c.trajectory.eyebrow}</p>
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              De una línea de código a{" "}
-              <span className="text-gradient">productos inteligentes</span>.
+              {c.trajectory.headPre}
+              <span className="text-gradient">{c.trajectory.headGrad}</span>
+              {c.trajectory.headPost}
             </h2>
           </Reveal>
 

@@ -13,7 +13,8 @@
 import React from "react";
 import { WhatsappLogo } from "@phosphor-icons/react";
 import { useAudience } from "./audience-context";
-import { audiences, whatsappUrl, profile } from "@/lib/profile";
+import { whatsappUrl, profile } from "@/lib/profile";
+import { useI18n } from "./i18n";
 import { downloadVCard } from "@/lib/vcard";
 
 class HeroSphere extends React.Component {
@@ -331,14 +332,15 @@ class HeroSphere extends React.Component {
 const PILL = "'JetBrains Mono',monospace";
 
 export function HeroFarid() {
+  const { c } = useI18n();
   const { audience, setAudience } = useAudience();
-  const data = audiences[audience];
+  const data = c.audiences[audience];
 
   // Selector de audiencia — controla el resto del sitio. Bajo el nav, centrado.
   const topSlot = (
     <div
       role="group"
-      aria-label="Elige tu perfil para personalizar el mensaje"
+      aria-label={c.hero.audienceAria}
       style={{
         position: "absolute", top: 76, left: "50%", transform: "translateX(-50%)", zIndex: 6,
         display: "flex", gap: 6, padding: 5, borderRadius: 999,
@@ -346,7 +348,7 @@ export function HeroFarid() {
         backdropFilter: "blur(10px)", maxWidth: "92vw",
       }}
     >
-      {(Object.keys(audiences) as (keyof typeof audiences)[]).map((k) => {
+      {(Object.keys(c.audiences) as (keyof typeof c.audiences)[]).map((k) => {
         const on = k === audience;
         return (
           <button
@@ -363,7 +365,7 @@ export function HeroFarid() {
               boxShadow: on ? "0 8px 22px -10px rgba(124,108,246,0.9)" : "none",
             }}
           >
-            {audiences[k].label}
+            {c.audiences[k].label}
           </button>
         );
       })}
@@ -379,17 +381,17 @@ export function HeroFarid() {
       }}
     >
       <a href="#contacto" className="btn btn-primary">{data.cta}</a>
-      <a href="#proyectos" className="btn btn-ghost">Ver proyectos</a>
+      <a href="#proyectos" className="btn btn-ghost">{c.hero.buttons.projects}</a>
       <a
-        href={whatsappUrl("Hola Farid, vi tu web y quiero conversar sobre un proyecto con IA.")}
+        href={whatsappUrl(c.hero.whatsappMsg)}
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-ghost"
       >
         <WhatsappLogo size={18} weight="fill" />
-        WhatsApp
+        {c.hero.buttons.whatsapp}
       </a>
-      <button onClick={downloadVCard} className="btn btn-ghost">Guardar contacto</button>
+      <button onClick={downloadVCard} className="btn btn-ghost">{c.hero.buttons.saveContact}</button>
     </div>
   );
 
@@ -397,7 +399,7 @@ export function HeroFarid() {
     <HeroSphere
       topSlot={topSlot}
       actionsSlot={actionsSlot}
-      heading={`${profile.name} — ${profile.role}. ${profile.tagline}`}
+      heading={`${profile.name} — ${profile.role}. ${c.hero.tagline}`}
     />
   );
 }

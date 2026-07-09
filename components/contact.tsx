@@ -13,12 +13,15 @@ import {
 import { profile, whatsappUrl, mailtoUrl } from "@/lib/profile";
 import { downloadVCard } from "@/lib/vcard";
 import { Reveal } from "./reveal";
+import { useI18n } from "./i18n";
 
 const mapQuery = encodeURIComponent(
   `${profile.address}, Barranquilla, Colombia`
 );
 
 function ContactForm() {
+  const { c } = useI18n();
+  const f = c.contact.form;
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle"
@@ -46,11 +49,11 @@ function ContactForm() {
         setForm({ name: "", email: "", message: "" });
       } else {
         const data = await res.json().catch(() => ({}));
-        setError(data.error ?? "No se pudo enviar.");
+        setError(data.error ?? f.errGeneric);
         setStatus("error");
       }
     } catch {
-      setError("Error de conexión. Escríbeme por WhatsApp.");
+      setError(f.errConn);
       setStatus("error");
     }
   }
@@ -59,16 +62,16 @@ function ContactForm() {
     return (
       <div className="card flex flex-col items-center gap-3 p-8 text-center">
         <CheckCircle size={40} weight="fill" className="text-emerald-400" />
-        <p className="font-medium">¡Gracias! Recibí tu mensaje.</p>
+        <p className="font-medium">{f.okTitle}</p>
         <p className="text-sm text-[var(--text-dim)]">
-          Te respondo lo antes posible.
+          {f.okSub}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="btn btn-ghost mt-1 !px-4 !py-2 text-sm"
         >
-          Enviar otro
+          {f.sendAnother}
         </button>
       </div>
     );
@@ -82,7 +85,7 @@ function ContactForm() {
             htmlFor="c-name"
             className="mb-1.5 block text-xs uppercase tracking-wider text-[var(--text-faint)]"
           >
-            Nombre
+            {f.name}
           </label>
           <input
             id="c-name"
@@ -92,7 +95,7 @@ function ContactForm() {
             autoComplete="name"
             value={form.name}
             onChange={update("name")}
-            placeholder="Tu nombre…"
+            placeholder={f.namePh}
             className="w-full rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
           />
         </div>
@@ -101,7 +104,7 @@ function ContactForm() {
             htmlFor="c-email"
             className="mb-1.5 block text-xs uppercase tracking-wider text-[var(--text-faint)]"
           >
-            Email
+            {f.email}
           </label>
           <input
             id="c-email"
@@ -112,7 +115,7 @@ function ContactForm() {
             spellCheck={false}
             value={form.email}
             onChange={update("email")}
-            placeholder="tucorreo@ejemplo.com"
+            placeholder={f.emailPh}
             className="w-full rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
           />
         </div>
@@ -122,7 +125,7 @@ function ContactForm() {
           htmlFor="c-message"
           className="mb-1.5 block text-xs uppercase tracking-wider text-[var(--text-faint)]"
         >
-          Mensaje
+          {f.message}
         </label>
         <textarea
           id="c-message"
@@ -131,7 +134,7 @@ function ContactForm() {
           rows={4}
           value={form.message}
           onChange={update("message")}
-          placeholder="Cuéntame sobre tu proyecto…"
+          placeholder={f.messagePh}
           className="w-full resize-y rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
         />
       </div>
@@ -147,7 +150,7 @@ function ContactForm() {
         disabled={status === "loading"}
         className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {status === "loading" ? "Enviando…" : "Enviar mensaje"}
+        {status === "loading" ? f.sending : f.send}
         {status !== "loading" && <PaperPlaneTilt size={18} weight="fill" />}
       </button>
     </form>
@@ -155,13 +158,15 @@ function ContactForm() {
 }
 
 export function Contact() {
+  const { c } = useI18n();
   return (
     <section id="contacto" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal>
-        <p className="eyebrow mb-4">Contacto</p>
+        <p className="eyebrow mb-4">{c.contact.eyebrow}</p>
         <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-          Hablemos de tu próximo{" "}
-          <span className="text-gradient">proyecto con IA</span>.
+          {c.contact.headPre}
+          <span className="text-gradient">{c.contact.headGrad}</span>
+          {c.contact.headPost}
         </h2>
       </Reveal>
 
@@ -176,7 +181,7 @@ export function Contact() {
                 <MapPin size={22} weight="duotone" />
               </span>
               <div>
-                <p className="text-sm text-[var(--text-faint)]">Ubicación</p>
+                <p className="text-sm text-[var(--text-faint)]">{c.contact.locationLabel}</p>
                 <p className="font-medium">{profile.city}</p>
                 <p className="mt-1 flex items-center gap-1.5 text-sm text-[var(--text-dim)]">
                   <House size={15} weight="duotone" />
@@ -188,17 +193,17 @@ export function Contact() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <a
-              href={whatsappUrl("Hola Farid, quiero hablar sobre un proyecto.")}
+              href={whatsappUrl(c.contact.whatsappMsg)}
               target="_blank"
               rel="noopener noreferrer"
               className="spotlight card flex flex-col gap-2 p-6 transition-transform hover:-translate-y-1"
             >
               <WhatsappLogo size={26} weight="fill" className="text-[var(--accent-cyan)]" />
               <span className="font-medium">WhatsApp</span>
-              <span className="text-sm text-[var(--text-dim)]">Respuesta rápida</span>
+              <span className="text-sm text-[var(--text-dim)]">{c.contact.whatsappFast}</span>
             </a>
             <a
-              href={mailtoUrl("Proyecto con IA")}
+              href={mailtoUrl(c.contact.mailSubject)}
               className="spotlight card flex flex-col gap-2 p-6 transition-transform hover:-translate-y-1"
             >
               <EnvelopeSimple size={26} weight="duotone" className="text-[var(--accent)]" />
@@ -211,14 +216,14 @@ export function Contact() {
 
           <button onClick={downloadVCard} className="btn btn-ghost w-full">
             <DownloadSimple size={18} weight="bold" />
-            Guardar mi contacto (.vcf)
+            {c.contact.saveVcf}
           </button>
         </Reveal>
 
         {/* Mapa */}
         <Reveal delay={0.1} className="overflow-hidden rounded-[20px] border border-[var(--border)]">
           <iframe
-            title="Ubicación de Farid en Barranquilla"
+            title={c.contact.mapTitle}
             src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

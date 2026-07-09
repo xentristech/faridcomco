@@ -13,13 +13,14 @@ export type Analysis = {
 };
 
 export async function POST(req: Request) {
-  let body: { text?: string };
+  let body: { text?: string; lang?: string };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
 
+  const lang = body.lang === "en" ? "en" : "es";
   const text = (body.text ?? "").toString().slice(0, 4000).trim();
   if (text.length < 10) {
     return NextResponse.json(
@@ -47,7 +48,18 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `Analizas un texto y devuelves SOLO un JSON válido con esta forma:
+          content:
+            lang === "en"
+              ? `You analyze a text and return ONLY valid JSON with this shape:
+{
+  "language": "the text's language, in English, e.g.: English, Spanish",
+  "summary": "a 1-2 sentence summary, in English",
+  "sentiment": { "label": "Positivo" | "Neutral" | "Negativo", "score": number 0-100 of positivity },
+  "tone": "1 to 3 words: tone/register, e.g.: Professional, Enthusiastic, Critical (in English)",
+  "keywords": ["3 to 6 key words or phrases from the text"]
+}
+Keep the "label" values EXACTLY as Positivo/Neutral/Negativo. No text outside the JSON.`
+              : `Analizas un texto y devuelves SOLO un JSON válido con esta forma:
 {
   "language": "idioma del texto en español, ej: Español, Inglés",
   "summary": "resumen en 1 o 2 frases, en español",

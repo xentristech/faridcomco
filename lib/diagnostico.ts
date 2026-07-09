@@ -69,6 +69,67 @@ export const steps: Step[] = [
   },
 ];
 
+export const stepsEn: Step[] = [
+  {
+    id: "sector",
+    question: "What does your business do?",
+    type: "choice",
+    options: [
+      "E-commerce / store",
+      "Professional services",
+      "Health",
+      "Education",
+      "Real estate",
+      "Finance / insurance",
+      "Restaurant / retail",
+      "Other",
+    ],
+  },
+  {
+    id: "dolor",
+    question: "What's your biggest operational pain today?",
+    type: "choice",
+    options: [
+      "Too much repetitive manual work",
+      "Overwhelmed customer support",
+      "I don't understand my data / I have no reports",
+      "Slow, error-prone processes",
+      "I need to generate more sales",
+      "Everything depends on a single person",
+    ],
+  },
+  {
+    id: "herramientas",
+    question: "What tools do you use today? (optional)",
+    type: "text",
+    placeholder: "E.g.: WhatsApp, Excel, a CRM, Shopify…",
+    optional: true,
+  },
+  {
+    id: "meta",
+    question: "What would you like to achieve in 3 months?",
+    type: "choice",
+    options: [
+      "Automate tasks and save time",
+      "Serve customers 24/7 with a bot",
+      "Have dashboards to decide with data",
+      "Sell more with AI",
+      "Organize and scale my operations",
+    ],
+  },
+  {
+    id: "equipo",
+    question: "How big is your team? (optional)",
+    type: "choice",
+    optional: true,
+    options: ["Just me", "2 to 10", "11 to 50", "More than 50"],
+  },
+];
+
+export function getSteps(locale: string): Step[] {
+  return locale === "en" ? stepsEn : steps;
+}
+
 export type Answers = Record<string, string>;
 
 export type Report = {

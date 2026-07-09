@@ -13,7 +13,12 @@ export const dynamic = "force-dynamic";
 type Msg = { role: "user" | "assistant"; content: string };
 
 export async function POST(req: Request) {
-  let body: { mode?: "chat" | "idea"; message?: string; history?: Msg[] };
+  let body: {
+    mode?: "chat" | "idea";
+    message?: string;
+    history?: Msg[];
+    lang?: string;
+  };
   try {
     body = await req.json();
   } catch {
@@ -21,6 +26,11 @@ export async function POST(req: Request) {
   }
 
   const mode = body.mode === "idea" ? "idea" : "chat";
+  const lang = body.lang === "en" ? "en" : "es";
+  const langRule =
+    lang === "en"
+      ? "\n\nIMPORTANT: Always reply in English."
+      : "\n\nIMPORTANTE: Responde siempre en español.";
   const message = (body.message ?? "").toString().slice(0, 1500).trim();
   if (!message) {
     return NextResponse.json({ error: "Mensaje vacío" }, { status: 400 });
@@ -40,7 +50,7 @@ export async function POST(req: Request) {
       organization: process.env.OPENAI_ORG_ID || undefined,
     });
 
-    const system = mode === "idea" ? IDEA_PROMPT : SYSTEM_PROMPT;
+    const system = (mode === "idea" ? IDEA_PROMPT : SYSTEM_PROMPT) + langRule;
     const history = (body.history ?? [])
       .slice(-6)
       .filter((m) => m && m.content)

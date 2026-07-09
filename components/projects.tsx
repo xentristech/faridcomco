@@ -3,21 +3,24 @@
 import type { ElementType } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react";
-import { projects } from "@/lib/profile";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
 import { GlowingEffect } from "@/components/ui/glowing-effect-card";
+import { useI18n } from "./i18n";
 
 export function Projects() {
+  const { c } = useI18n();
+  const projects = c.projects.items;
   const grid = projects.slice(0, -1);
   const wide = projects[projects.length - 1];
 
   return (
     <section id="proyectos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal>
-        <p className="eyebrow mb-4">Proyectos destacados</p>
+        <p className="eyebrow mb-4">{c.projects.eyebrow}</p>
         <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-          Ideas que ya viven en{" "}
-          <span className="text-gradient">producción</span>.
+          {c.projects.headPre}
+          <span className="text-gradient">{c.projects.headGrad}</span>
+          {c.projects.headPost}
         </h2>
       </Reveal>
 
@@ -73,7 +76,7 @@ export function Projects() {
                 </p>
                 {p.url && (
                   <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[var(--accent-cyan)] transition group-hover:gap-1.5">
-                    Ver sitio
+                    {c.projects.viewSite}
                     <ArrowUpRight size={13} weight="bold" />
                   </span>
                 )}
@@ -100,8 +103,7 @@ export function Projects() {
               {wide.name}
             </h3>
             <p className="mt-3 max-w-md leading-relaxed text-[var(--text-dim)]">
-              {wide.desc} Pagos, CRMs, modelos de IA y servicios externos
-              conectados en un solo flujo confiable.
+              {wide.desc} {c.projects.wideExtra}
             </p>
           </div>
           <div className="relative order-1 min-h-[220px] overflow-hidden md:order-2">

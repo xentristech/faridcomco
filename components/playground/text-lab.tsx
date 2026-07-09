@@ -13,12 +13,8 @@ import {
   TextAlignLeft,
 } from "@phosphor-icons/react";
 import type { Analysis } from "@/app/api/playground/route";
-
-const examples = [
-  "¡Me encantó el servicio! Todo llegó rápido y la atención fue excelente, sin duda vuelvo a comprar.",
-  "El pedido llegó tarde y el producto venía dañado. Muy decepcionado, no lo recomiendo.",
-  "El nuevo modelo integra memoria unificada y acelera la inferencia local para equipos pequeños.",
-];
+import { useI18n } from "../i18n";
+import { localizedHref } from "@/lib/i18n";
 
 const sentimentStyle = {
   Positivo: { icon: Smiley, color: "#34d399", bg: "rgba(52,211,153,0.12)" },
@@ -26,7 +22,51 @@ const sentimentStyle = {
   Negativo: { icon: SmileySad, color: "#fb7185", bg: "rgba(251,113,133,0.12)" },
 } as const;
 
+const L = {
+  es: {
+    examples: [
+      "¡Me encantó el servicio! Todo llegó rápido y la atención fue excelente, sin duda vuelvo a comprar.",
+      "El pedido llegó tarde y el producto venía dañado. Muy decepcionado, no lo recomiendo.",
+      "El nuevo modelo integra memoria unificada y acelera la inferencia local para equipos pequeños.",
+    ],
+    exLabels: ["😍 Reseña feliz", "😠 Queja", "📄 Técnico"],
+    placeholder: "Pega aquí un comentario, un correo, una reseña, un mensaje… lo que sea.",
+    ariaText: "Texto para analizar",
+    analyzing: "Analizando…", analyze: "Analizar con IA",
+    errShort: "Escribe o pega un texto un poco más largo.",
+    errNo: "No se pudo analizar. Intenta de nuevo.",
+    errConn: "Hubo un problema de conexión. Intenta de nuevo.",
+    summary: "Resumen", sentiment: "Sentimiento", posSuffix: "% positivo",
+    tone: "Tono", language: "Idioma: ", keywords: "Palabras clave",
+    ctaPre: "Esto es una muestra de lo que Farid construye: IA aplicada a texto (soporte, reseñas, encuestas, correos). ¿Lo quieres para tu negocio? ",
+    ctaLink: "Hablemos",
+    sentLabel: { Positivo: "Positivo", Neutral: "Neutral", Negativo: "Negativo" } as Record<string, string>,
+  },
+  en: {
+    examples: [
+      "I loved the service! Everything arrived fast and support was excellent, I'll definitely buy again.",
+      "The order arrived late and the product was damaged. Very disappointed, I don't recommend it.",
+      "The new model integrates unified memory and speeds up local inference for small teams.",
+    ],
+    exLabels: ["😍 Happy review", "😠 Complaint", "📄 Technical"],
+    placeholder: "Paste a comment, an email, a review, a message… anything.",
+    ariaText: "Text to analyze",
+    analyzing: "Analyzing…", analyze: "Analyze with AI",
+    errShort: "Type or paste a slightly longer text.",
+    errNo: "Couldn't analyze. Try again.",
+    errConn: "There was a connection problem. Try again.",
+    summary: "Summary", sentiment: "Sentiment", posSuffix: "% positive",
+    tone: "Tone", language: "Language: ", keywords: "Keywords",
+    ctaPre: "This is a taste of what Farid builds: AI applied to text (support, reviews, surveys, emails). Want it for your business? ",
+    ctaLink: "Let's talk",
+    sentLabel: { Positivo: "Positive", Neutral: "Neutral", Negativo: "Negative" } as Record<string, string>,
+  },
+};
+
 export function TextLab() {
+  const { locale } = useI18n();
+  const l = L[locale];
+  const examples = l.examples;
   const [text, setText] = useState("");
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(false);
@@ -35,7 +75,7 @@ export function TextLab() {
   async function analyze(value: string) {
     const v = value.trim();
     if (v.length < 10 || loading) {
-      if (v.length < 10) setError("Escribe o pega un texto un poco más largo.");
+      if (v.length < 10) setError(l.errShort);
       return;
     }
     setLoading(true);
@@ -45,13 +85,13 @@ export function TextLab() {
       const res = await fetch("/api/playground", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: v }),
+        body: JSON.stringify({ text: v, lang: locale }),
       });
       const data = await res.json();
       if (data.analysis) setAnalysis(data.analysis);
-      else setError(data.error ?? "No se pudo analizar. Intenta de nuevo.");
+      else setError(data.error ?? l.errNo);
     } catch {
-      setError("Hubo un problema de conexión. Intenta de nuevo.");
+      setError(l.errConn);
     } finally {
       setLoading(false);
     }
@@ -65,8 +105,8 @@ export function TextLab() {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Pega aquí un comentario, un correo, una reseña, un mensaje… lo que sea."
-          aria-label="Texto para analizar"
+          placeholder={l.placeholder}
+          aria-label={l.ariaText}
           rows={5}
           maxLength={4000}
           className="w-full resize-y rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
@@ -79,7 +119,7 @@ export function TextLab() {
             className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
           >
             <MagnifyingGlass size={17} weight="bold" />
-            {loading ? "Analizando…" : "Analizar con IA"}
+            {loading ? l.analyzing : l.analyze}
           </button>
           <span className="ml-auto text-xs text-[var(--text-faint)]">
             {text.length}/4000
@@ -97,7 +137,7 @@ export function TextLab() {
               }}
               className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs text-[var(--text-dim)] transition hover:border-[rgba(124,108,255,0.5)] hover:text-[var(--text)]"
             >
-              {["😍 Reseña feliz", "😠 Queja", "📄 Técnico"][i]}
+              {l.exLabels[i]}
             </button>
           ))}
         </div>
@@ -131,7 +171,7 @@ export function TextLab() {
               {/* Resumen */}
               <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-elev)] p-4">
                 <p className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-[var(--accent-cyan)]">
-                  <TextAlignLeft size={14} weight="fill" /> Resumen
+                  <TextAlignLeft size={14} weight="fill" /> {l.summary}
                 </p>
                 <p className="text-sm text-[var(--text)]">{analysis.summary}</p>
               </div>
@@ -144,10 +184,10 @@ export function TextLab() {
                 >
                   <p className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--text-dim)]">
                     <s.icon size={16} weight="fill" style={{ color: s.color }} />
-                    Sentimiento
+                    {l.sentiment}
                   </p>
                   <p className="text-lg font-semibold" style={{ color: s.color }}>
-                    {analysis.sentiment.label}
+                    {l.sentLabel[analysis.sentiment.label] ?? analysis.sentiment.label}
                   </p>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--surface-strong)]">
                     <motion.div
@@ -159,7 +199,7 @@ export function TextLab() {
                     />
                   </div>
                   <p className="mt-1 text-right text-[11px] text-[var(--text-faint)]">
-                    {analysis.sentiment.score}% positivo
+                    {analysis.sentiment.score}{l.posSuffix}
                   </p>
                 </div>
 
@@ -167,13 +207,13 @@ export function TextLab() {
                 <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
                   <p className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--text-dim)]">
                     <Sparkle size={15} weight="fill" className="text-[var(--accent-2)]" />
-                    Tono
+                    {l.tone}
                   </p>
                   <p className="text-lg font-semibold text-[var(--text)]">
                     {analysis.tone}
                   </p>
                   <p className="mt-2 flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
-                    <Translate size={14} /> Idioma: {analysis.language}
+                    <Translate size={14} /> {l.language}{analysis.language}
                   </p>
                 </div>
               </div>
@@ -182,7 +222,7 @@ export function TextLab() {
               <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
                 <p className="mb-2 flex items-center gap-1.5 text-xs font-medium text-[var(--text-dim)]">
                   <Hash size={15} weight="bold" className="text-[var(--accent)]" />
-                  Palabras clave
+                  {l.keywords}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {analysis.keywords.map((k) => (
@@ -197,10 +237,9 @@ export function TextLab() {
               </div>
 
               <p className="pt-1 text-center text-[11px] text-[var(--text-faint)]">
-                Esto es una muestra de lo que Farid construye: IA aplicada a texto (soporte,
-                reseñas, encuestas, correos). ¿Lo quieres para tu negocio?{" "}
-                <a href="/#contacto" className="text-[var(--accent-cyan)] hover:underline">
-                  Hablemos
+                {l.ctaPre}
+                <a href={`${localizedHref("/", locale)}#contacto`} className="text-[var(--accent-cyan)] hover:underline">
+                  {l.ctaLink}
                 </a>
                 .
               </p>

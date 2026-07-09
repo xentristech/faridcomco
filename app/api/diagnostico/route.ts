@@ -20,12 +20,15 @@ export async function POST(req: Request) {
     email?: string;
     saveOnly?: boolean;
     titulo?: string;
+    lang?: string;
   };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
+
+  const lang = body.lang === "en" ? "en" : "es";
 
   const answers = body.answers ?? {};
   if (!answers.sector || !answers.dolor) {
@@ -62,7 +65,7 @@ export async function POST(req: Request) {
     }
   }
 
-  const report = await generate(answers);
+  const report = await generate(answers, lang);
 
   // Captura de lead opcional si vino el email junto con la generación.
   let saved = false;
@@ -84,9 +87,13 @@ export async function POST(req: Request) {
   return NextResponse.json({ report, saved });
 }
 
-async function generate(answers: Answers): Promise<Report> {
+async function generate(answers: Answers, lang: "es" | "en"): Promise<Report> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) return localReport(answers);
+  const langRule =
+    lang === "en"
+      ? "\n\nIMPORTANT: Write ALL JSON string values in English."
+      : "\n\nIMPORTANTE: Escribe TODOS los valores del JSON en español.";
 
   try {
     const client = new OpenAI({
@@ -100,7 +107,7 @@ async function generate(answers: Answers): Promise<Report> {
       max_tokens: 600,
       response_format: { type: "json_object" },
       messages: [
-        { role: "system", content: DIAGNOSTICO_SYSTEM },
+        { role: "system", content: DIAGNOSTICO_SYSTEM + langRule },
         { role: "user", content: buildUserPrompt(answers) },
       ],
     });

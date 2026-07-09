@@ -3,8 +3,10 @@
 import { ArrowRight, DownloadSimple } from "@phosphor-icons/react";
 import { downloadVCard } from "@/lib/vcard";
 import { Reveal } from "./reveal";
+import { useI18n } from "./i18n";
 
 export function FinalCta() {
+  const { c } = useI18n();
   return (
     <section className="mx-auto max-w-7xl px-4 pb-28 sm:px-6">
       <Reveal>
@@ -22,20 +24,21 @@ export function FinalCta() {
             }}
           />
           <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
-            Construyamos algo inteligente, útil y{" "}
-            <span className="text-gradient">escalable</span>.
+            {c.finalCta.headPre}
+            <span className="text-gradient">{c.finalCta.headGrad}</span>
+            {c.finalCta.headPost}
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[var(--text-dim)]">
-            Si tienes una idea con IA, la convertimos en una solución real.
+            {c.finalCta.sub}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href="#contacto" className="btn btn-primary">
-              Hablemos
+              {c.finalCta.talk}
               <ArrowRight size={18} />
             </a>
             <button onClick={downloadVCard} className="btn btn-ghost">
               <DownloadSimple size={18} weight="bold" />
-              Guardar contacto
+              {c.finalCta.saveContact}
             </button>
           </div>
         </div>

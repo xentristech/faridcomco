@@ -1,15 +1,18 @@
 "use client";
 
-import { aida } from "@/lib/profile";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
+import { useI18n } from "./i18n";
 
 export function Aida() {
+  const { c } = useI18n();
+  const aida = c.aida.steps;
   return (
     <section className="relative mx-auto max-w-5xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Del dato dormido a la{" "}
-          <span className="text-gradient">decisión</span>.
+          {c.aida.headPre}
+          <span className="text-gradient">{c.aida.headGrad}</span>
+          {c.aida.headPost}
         </h2>
       </Reveal>
 

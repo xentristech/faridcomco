@@ -4,18 +4,20 @@ import Image from "next/image";
 import { SealCheck, ArrowUpRight } from "@phosphor-icons/react";
 import { credentials, profile } from "@/lib/profile";
 import { Reveal } from "./reveal";
+import { useI18n } from "./i18n";
 
 export function Credentials() {
+  const { c } = useI18n();
   return (
     <section className="border-y border-[var(--border)] bg-[var(--bg-elev)]">
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-24">
         <Reveal className="text-center">
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs text-[var(--text-dim)]">
             <SealCheck size={15} weight="fill" className="text-[var(--accent-cyan)]" />
-            Credenciales verificadas
+            {c.credentials.badge}
           </span>
           <h2 className="mx-auto max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
-            Credenciales que respaldan la práctica.
+            {c.credentials.heading}
           </h2>
         </Reveal>
 
@@ -41,7 +43,7 @@ export function Credentials() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-dim)] transition-colors hover:text-[var(--text)]"
           >
-            Ver mis insignias en Credly
+            {c.credentials.credlyLink}
             <ArrowUpRight size={16} />
           </a>
         </Reveal>

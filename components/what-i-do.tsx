@@ -11,9 +11,9 @@ import {
   ChartBar,
   type Icon,
 } from "@phosphor-icons/react";
-import { services } from "@/lib/profile";
 import { Reveal, RevealGroup, RevealItem } from "./reveal";
 import { GlowingEffect } from "@/components/ui/glowing-effect-card";
+import { useI18n } from "./i18n";
 
 const icons: Record<string, Icon> = {
   Brain,
@@ -27,18 +27,20 @@ const icons: Record<string, Icon> = {
 };
 
 export function WhatIDo() {
+  const { c } = useI18n();
   return (
     <section id="servicios" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32">
       <Reveal>
-        <p className="eyebrow mb-4">Lo que hago</p>
+        <p className="eyebrow mb-4">{c.whatIDo.eyebrow}</p>
         <h2 className="max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-          Capacidades que convierto en{" "}
-          <span className="text-gradient">producto</span>.
+          {c.whatIDo.headPre}
+          <span className="text-gradient">{c.whatIDo.headGrad}</span>
+          {c.whatIDo.headPost}
         </h2>
       </Reveal>
 
       <RevealGroup className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {services.map((s, i) => {
+        {c.whatIDo.services.map((s, i) => {
           const Ico = icons[s.icon] ?? Brain;
           const featured = i === 0 || i === 6;
           return (

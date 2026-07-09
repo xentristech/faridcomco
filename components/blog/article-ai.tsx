@@ -10,8 +10,46 @@ import {
 } from "@phosphor-icons/react";
 import { useTTS } from "../use-tts";
 import { VoiceOrb } from "../voice-orb";
+import { useI18n } from "../i18n";
 
 type Msg = { role: "user" | "assistant"; content: string };
+
+const STRINGS = {
+  es: {
+    intro: (title: string) =>
+      `Soy Eathan, la IA de Farid. Leí este artículo ("${title}") completo. Pregúntame lo que quieras y, si prefieres, te lo respondo en voz alta.`,
+    header: "Pregúntale a este artículo",
+    anchored: "Eathan · IA de Farid, anclada al texto",
+    listening: "Escuchando…",
+    speaking: "Hablando…",
+    voiceOn: "Voz on",
+    voiceOff: "Voz off",
+    placeholder: "Pregunta sobre el artículo…",
+    listen: "Escuchar",
+    stop: "Detener",
+    footer: "Respuestas basadas solo en este artículo.",
+    micHint: " Toca el micrófono para preguntar hablando.",
+    errConn: "Hubo un problema de conexión. Intenta de nuevo en un momento.",
+    fail: "Ups, no pude responder. Intenta de nuevo.",
+  },
+  en: {
+    intro: (title: string) =>
+      `I'm Eathan, Farid's AI. I read this whole article ("${title}"). Ask me anything and, if you'd like, I'll answer out loud.`,
+    header: "Ask this article",
+    anchored: "Eathan · Farid's AI, anchored to the text",
+    listening: "Listening…",
+    speaking: "Speaking…",
+    voiceOn: "Voice on",
+    voiceOff: "Voice off",
+    placeholder: "Ask about the article…",
+    listen: "Listen",
+    stop: "Stop",
+    footer: "Answers based only on this article.",
+    micHint: " Tap the microphone to ask by voice.",
+    errConn: "There was a connection problem. Try again in a moment.",
+    fail: "Oops, I couldn't answer. Try again.",
+  },
+};
 
 // Tipo mínimo para la API de reconocimiento de voz (no está en lib.dom).
 type Recognition = {
@@ -36,10 +74,9 @@ export function ArticleAI({
   title: string;
   suggestions: string[];
 }) {
-  const intro: Msg = {
-    role: "assistant",
-    content: `Soy Eathan, la IA de Farid. Leí este artículo ("${title}") completo. Pregúntame lo que quieras sobre el DGX Spark y, si prefieres, te lo respondo en voz alta.`,
-  };
+  const { locale } = useI18n();
+  const T = STRINGS[locale];
+  const intro: Msg = { role: "assistant", content: T.intro(title) };
 
   const [messages, setMessages] = useState<Msg[]>([intro]);
   const [input, setInput] = useState("");
@@ -82,11 +119,10 @@ export function ArticleAI({
       const res = await fetch("/api/blog-ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, message: value, history: next.slice(1, -1) }),
+        body: JSON.stringify({ slug, message: value, history: next.slice(1, -1), lang: locale }),
       });
       const data = await res.json();
-      const reply: string =
-        data.reply ?? "Ups, no pude responder. Intenta de nuevo.";
+      const reply: string = data.reply ?? T.fail;
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
       if (autoRead && ttsSupported) speak(reply);
     } catch {
@@ -94,8 +130,7 @@ export function ArticleAI({
         ...m,
         {
           role: "assistant",
-          content:
-            "Hubo un problema de conexión. Intenta de nuevo en un momento.",
+          content: T.errConn,
         },
       ]);
     } finally {
@@ -156,14 +191,10 @@ export function ArticleAI({
         <div className="flex items-center gap-3 border-b border-[var(--border)] p-4">
           <VoiceOrb speaking={speaking} listening={listening} size={40} />
           <div className="min-w-0 flex-1 leading-tight">
-            <p className="text-sm font-semibold">Pregúntale a este artículo</p>
+            <p className="text-sm font-semibold">{T.header}</p>
             <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              {listening
-                ? "Escuchando…"
-                : speaking
-                  ? "Hablando…"
-                  : "Eathan · IA de Farid, anclada al texto"}
+              {listening ? T.listening : speaking ? T.speaking : T.anchored}
             </p>
           </div>
 
@@ -178,7 +209,7 @@ export function ArticleAI({
               }`}
             >
               <SpeakerHigh size={15} weight={autoRead ? "fill" : "regular"} />
-              Voz {autoRead ? "on" : "off"}
+              {autoRead ? T.voiceOn : T.voiceOff}
             </button>
           )}
         </div>
@@ -210,7 +241,7 @@ export function ArticleAI({
                     className="mt-2 flex items-center gap-1.5 text-xs text-[var(--text-faint)] transition hover:text-[var(--accent-cyan)]"
                   >
                     {speaking ? <Stop size={13} weight="fill" /> : <SpeakerHigh size={13} />}
-                    {speaking ? "Detener" : "Escuchar"}
+                    {speaking ? T.stop : T.listen}
                   </button>
                 )}
               </div>
@@ -283,7 +314,7 @@ export function ArticleAI({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send(input)}
-              placeholder={listening ? "Escuchando…" : "Pregunta sobre el DGX Spark…"}
+              placeholder={listening ? T.listening : T.placeholder}
               aria-label="Escribe tu pregunta sobre el artículo"
               autoComplete="off"
               className="flex-1 bg-transparent py-2 text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-faint)]"
@@ -298,8 +329,8 @@ export function ArticleAI({
             </button>
           </div>
           <p className="mt-2 px-2 text-center text-[11px] text-[var(--text-faint)]">
-            Respuestas basadas solo en este artículo.
-            {micSupported ? " Toca el micrófono para preguntar hablando." : ""}
+            {T.footer}
+            {micSupported ? T.micHint : ""}
           </p>
         </div>
       </div>

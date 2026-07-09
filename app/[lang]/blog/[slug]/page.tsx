@@ -12,6 +12,7 @@ import { Comments } from "@/components/blog/comments";
 import { getAllPosts, getPost, postPlainText } from "@/lib/blog";
 import { seedGradient } from "@/lib/gradient";
 import { profile } from "@/lib/profile";
+import { isLocale, localizedHref, type Locale } from "@/lib/i18n";
 import {
   ArrowLeft,
   Clock,
@@ -26,23 +27,32 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  props: PageProps<"/blog/[slug]">
+  props: PageProps<"/[lang]/blog/[slug]">
 ): Promise<Metadata> {
-  const { slug } = await props.params;
+  const { lang, slug } = await props.params;
+  const locale: Locale = isLocale(lang) ? lang : "es";
   const post = getPost(slug);
   if (!post) return { title: "Artículo no encontrado" };
 
+  const path = `/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.excerpt,
     keywords: post.tags,
-    alternates: { canonical: `/blog/${post.slug}` },
+    alternates: {
+      canonical: localizedHref(path, locale),
+      languages: {
+        es: localizedHref(path, "es"),
+        en: localizedHref(path, "en"),
+        "x-default": localizedHref(path, "es"),
+      },
+    },
     authors: [{ name: profile.name, url: profile.web }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
-      url: `/blog/${post.slug}`,
+      url: localizedHref(path, locale),
       publishedTime: post.date,
       authors: [profile.name],
       tags: post.tags,
@@ -56,14 +66,33 @@ export async function generateMetadata(
 }
 
 // Preguntas sugeridas específicas del artículo para arrancar el chat.
-const SUGGESTIONS = [
-  "¿Qué es la memoria unificada del GB10?",
-  "¿Me conviene frente a una RTX 5090?",
-  "¿Cuánto cuesta y qué trae preinstalado?",
-];
+const CHROME = {
+  es: {
+    back: "Volver al blog",
+    toc: "En este artículo",
+    cta: "¿Un proyecto con IA? Hablemos",
+    suggestions: [
+      "¿Qué es la memoria unificada del GB10?",
+      "¿Me conviene frente a una RTX 5090?",
+      "¿Cuánto cuesta y qué trae preinstalado?",
+    ],
+  },
+  en: {
+    back: "Back to the blog",
+    toc: "In this article",
+    cta: "An AI project? Let's talk",
+    suggestions: [
+      "What is the GB10's unified memory?",
+      "Is it worth it vs. an RTX 5090?",
+      "How much does it cost and what's preinstalled?",
+    ],
+  },
+};
 
-export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
-  const { slug } = await props.params;
+export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]">) {
+  const { lang, slug } = await props.params;
+  const locale: Locale = isLocale(lang) ? lang : "es";
+  const chrome = CHROME[locale];
   const post = getPost(slug);
   if (!post) notFound();
 
@@ -76,7 +105,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    inLanguage: "es",
+    inLanguage: locale,
     keywords: post.tags.join(", "),
     author: { "@type": "Person", name: profile.name, url: profile.web },
     publisher: { "@type": "Person", name: profile.name, url: profile.web },
@@ -96,10 +125,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         {/* Encabezado */}
         <header className="mx-auto max-w-3xl px-4 sm:px-6">
           <Link
-            href="/blog"
+            href={localizedHref("/blog", locale)}
             className="inline-flex items-center gap-1.5 text-sm text-[var(--text-dim)] transition hover:text-[var(--text)]"
           >
-            <ArrowLeft size={16} /> Volver al blog
+            <ArrowLeft size={16} /> {chrome.back}
           </Link>
 
           <p className="eyebrow mt-6">{post.eyebrow}</p>
@@ -150,7 +179,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
             <ArticleBody blocks={post.blocks} />
 
             {/* Chat de IA con voz, anclado a este artículo */}
-            <ArticleAI slug={post.slug} title={post.title} suggestions={SUGGESTIONS} />
+            <ArticleAI slug={post.slug} title={post.title} suggestions={chrome.suggestions} />
 
             {/* CTA */}
             <div className="not-prose mt-14 flex flex-wrap items-center justify-between gap-4 rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-6">
@@ -164,8 +193,8 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
                   </span>
                 ))}
               </div>
-              <Link href="/#contacto" className="btn btn-primary !py-2.5 text-sm">
-                ¿Un proyecto con IA? Hablemos <ArrowRight size={16} weight="bold" />
+              <Link href={`${localizedHref("/", locale)}#contacto`} className="btn btn-primary !py-2.5 text-sm">
+                {chrome.cta} <ArrowRight size={16} weight="bold" />
               </Link>
             </div>
 
@@ -179,10 +208,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           {/* Índice sticky (desktop) */}
           <aside className="hidden lg:block">
             <nav
-              aria-label="En este artículo"
+              aria-label={chrome.toc}
               className="sticky top-24 text-sm"
             >
-              <p className="eyebrow mb-3">En este artículo</p>
+              <p className="eyebrow mb-3">{chrome.toc}</p>
               <ul className="space-y-2 border-l border-[var(--border)]">
                 {post.toc.map((t) => (
                   <li key={t.id}>

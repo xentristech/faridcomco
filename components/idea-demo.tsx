@@ -4,12 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkle, ArrowRight, Lightning } from "@phosphor-icons/react";
 import { Reveal } from "./reveal";
-
-const examples = [
-  "Quiero un bot que atienda WhatsApp de mi tienda",
-  "Predecir qué clientes van a cancelar",
-  "Un dashboard que resuma mis ventas cada día",
-];
+import { useI18n } from "./i18n";
 
 // Markdown minimo: **negritas** + saltos de linea.
 function render(text: string) {
@@ -31,6 +26,8 @@ function render(text: string) {
 }
 
 export function IdeaDemo() {
+  const { c, locale } = useI18n();
+  const t = c.ideaDemo;
   const [idea, setIdea] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,12 +41,12 @@ export function IdeaDemo() {
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode: "idea", message: value }),
+        body: JSON.stringify({ mode: "idea", message: value, lang: locale }),
       });
       const data = await res.json();
-      setResult(data.reply ?? "No pude generar una respuesta. Intenta de nuevo.");
+      setResult(data.reply ?? t.errNoResp);
     } catch {
-      setResult("Hubo un problema de conexión. Intenta de nuevo.");
+      setResult(t.errConn);
     } finally {
       setLoading(false);
     }
@@ -60,11 +57,12 @@ export function IdeaDemo() {
       <Reveal className="text-center">
         <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(124,108,255,0.4)] bg-[rgba(79,124,255,0.12)] px-3 py-1 text-xs font-medium text-[var(--accent-cyan)]">
           <Lightning size={14} weight="fill" />
-          Demo en vivo
+          {t.badge}
         </span>
         <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
-          Escribe una idea y mira cómo la{" "}
-          <span className="text-gradient">IA la convierte en solución</span>.
+          {t.headPre}
+          <span className="text-gradient">{t.headGrad}</span>
+          {t.headPost}
         </h2>
       </Reveal>
 
@@ -75,8 +73,8 @@ export function IdeaDemo() {
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && run(idea)}
-              placeholder="Ej: quiero automatizar las cotizaciones de mi empresa…"
-              aria-label="Describe tu idea para convertirla en una solución con IA"
+              placeholder={t.inputPh}
+              aria-label={t.inputAria}
               autoComplete="off"
               className="flex-1 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-elev)] px-4 py-3 text-sm text-[var(--text)] outline-none transition placeholder:text-[var(--text-faint)] focus:border-[rgba(124,108,255,0.6)] focus:ring-2 focus:ring-[rgba(79,124,255,0.25)]"
             />
@@ -85,14 +83,14 @@ export function IdeaDemo() {
               disabled={loading || !idea.trim()}
               className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {loading ? "Pensando…" : "Convertir"}
+              {loading ? t.thinking : t.convert}
               {!loading && <ArrowRight size={18} />}
             </button>
           </div>
 
           {/* chips de ejemplo */}
           <div className="mt-3 flex flex-wrap gap-2">
-            {examples.map((ex) => (
+            {t.examples.map((ex) => (
               <button
                 key={ex}
                 onClick={() => {
@@ -123,7 +121,7 @@ export function IdeaDemo() {
                 >
                   <div className="mb-2 flex items-center gap-2 text-xs font-medium text-[var(--accent-cyan)]">
                     <Sparkle size={14} weight="fill" />
-                    Propuesta generada
+                    {t.proposal}
                   </div>
                   {loading ? (
                     <div className="space-y-2">

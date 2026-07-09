@@ -9,12 +9,14 @@ export const dynamic = "force-dynamic";
 type Msg = { role: "user" | "assistant"; content: string };
 
 export async function POST(req: Request) {
-  let body: { slug?: string; message?: string; history?: Msg[] };
+  let body: { slug?: string; message?: string; history?: Msg[]; lang?: string };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
+
+  const lang = body.lang === "en" ? "en" : "es";
 
   const post = getPost((body.slug ?? "").toString());
   if (!post) {
@@ -47,7 +49,7 @@ REGLAS:
 - Responde SOLO con base en el CONTENIDO DEL ARTÍCULO de abajo. No inventes datos, cifras ni productos.
 - Si la respuesta no está en el artículo, dilo con honestidad y ofrece la visión general de Farid
   o invita a escribirle (${profile.email}). No te lo inventes.
-- Español latinoamericano, claro y humano. Breve: 2 a 4 frases salvo que pidan detalle.
+- ${lang === "en" ? "Reply ALWAYS in English" : "Español latinoamericano"}, claro y humano. Breve: 2 a 4 frases salvo que pidan detalle.
 - Como esto puede leerse en voz alta, escribe natural: sin markdown, sin listas con viñetas,
   sin URLs largas, sin el guion largo (—). Usa coma, punto o paréntesis.
 

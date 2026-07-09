@@ -1,0 +1,30 @@
+# Farid Enrique "Eathan" Jiménez Campo
+
+> AI Engineer, Data Scientist and Full Stack Developer based in Barranquilla, Colombia. He turns data and AI into smart decisions: automation, AI agents, dashboards and software development. Site is bilingual (Spanish at the root, English under /en).
+
+## Site
+- Home (Spanish): https://farid.com.co
+- Home (English): https://farid.com.co/en
+- Blog: https://farid.com.co/blog
+- Free AI diagnosis (60s tool): https://farid.com.co/diagnostico
+- AI text playground (live demo): https://farid.com.co/playground
+
+## Services
+- Artificial Intelligence, LLMs and copilots integrated into real operations
+- Data Science and Machine Learning
+- Automation and API integration
+- Full Stack Development
+- AI Agents that reason, use tools and execute tasks
+- Smart dashboards that explain data, not just show it
+
+## Projects (in production)
+- Xentris Tech — technology company (software, cloud, AI, digital strategy): https://xentris.tech
+- Platim.co — industrial safety workwear and PPE (B2B, Colombia): https://platim.co
+- Yota Montacargas — forklift sales, rental, parts and service: https://yotamontacargas.com
+- Neona.Tech — AI studio (coming soon): https://neona.tech
+
+## Contact
+- Email: info@farid.com.co
+- LinkedIn: https://www.linkedin.com/in/farideathan/
+- GitHub: https://github.com/xentristech
+- Credly (verified badges): https://www.credly.com/users/farid-jimenez

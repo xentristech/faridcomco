@@ -16,19 +16,21 @@ import {
 import { profile, whatsappUrl, mailtoUrl } from "@/lib/profile";
 import { buildVCard, downloadVCard } from "@/lib/vcard";
 import { Reveal } from "./reveal";
+import { useI18n } from "./i18n";
 
 type Row = { icon: Icon; label: string; value: string; href: string };
 
-const rows: Row[] = [
-  { icon: EnvelopeSimple, label: "Email", value: profile.email, href: mailtoUrl("Hola Farid") },
-  { icon: WhatsappLogo, label: "WhatsApp", value: profile.whatsappLabel, href: whatsappUrl() },
-  { icon: Globe, label: "Web", value: profile.webLabel, href: profile.web },
-  { icon: LinkedinLogo, label: "LinkedIn", value: "Perfil profesional", href: profile.linkedin },
-  { icon: GithubLogo, label: "GitHub", value: "Repositorios", href: profile.github },
-  { icon: SealCheck, label: "Credly", value: "Insignias verificadas", href: profile.credly },
-];
-
 export function VCard() {
+  const { c } = useI18n();
+  const v = c.vcard;
+  const rows: Row[] = [
+    { icon: EnvelopeSimple, label: v.rows.email, value: profile.email, href: mailtoUrl(v.mailSubject) },
+    { icon: WhatsappLogo, label: v.rows.whatsapp, value: profile.whatsappLabel, href: whatsappUrl() },
+    { icon: Globe, label: v.rows.web, value: profile.webLabel, href: profile.web },
+    { icon: LinkedinLogo, label: v.rows.linkedin, value: v.values.linkedin, href: profile.linkedin },
+    { icon: GithubLogo, label: v.rows.github, value: v.values.github, href: profile.github },
+    { icon: SealCheck, label: v.rows.credly, value: v.values.credly, href: profile.credly },
+  ];
   const [qr, setQr] = useState<string>("");
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export function VCard() {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold tracking-tight">
-                    Farid Enrique “Eathan” Jiménez Campo
+                    {profile.name}
                   </h2>
                   <p className="text-sm text-[var(--accent)]">{profile.role}</p>
                 </div>
@@ -93,7 +95,7 @@ export function VCard() {
 
               <button onClick={downloadVCard} className="btn btn-primary mt-6 w-full sm:w-auto">
                 <DownloadSimple size={18} weight="bold" />
-                Descargar contacto (.vcf)
+                {v.download}
               </button>
             </div>
 
@@ -112,7 +114,7 @@ export function VCard() {
                   {qr ? (
                     <Image
                       src={qr}
-                      alt="Código QR para guardar el contacto de Farid"
+                      alt={v.qrAlt}
                       width={170}
                       height={170}
                       unoptimized
@@ -124,7 +126,7 @@ export function VCard() {
                 </div>
               </div>
               <p className="max-w-[200px] text-center text-sm text-[var(--text-dim)]">
-                Escanea para guardar mi contacto al instante.
+                {v.qrCaption}
               </p>
             </div>
           </div>

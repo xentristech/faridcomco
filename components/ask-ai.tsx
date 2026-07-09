@@ -13,24 +13,17 @@ import {
 import { useTTS } from "./use-tts";
 import { useMic } from "./use-mic";
 import { VoiceOrb } from "./voice-orb";
+import { useI18n } from "./i18n";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const intro: Msg = {
-  role: "assistant",
-  content:
-    "¡Hola! Soy Eathan, la IA de Farid (su gemelo digital). Pregúntame sobre sus servicios de IA, proyectos, automatización o cómo trabajar con él. Puedes escribirme o hablarme por voz.",
-};
-
-const suggestions = [
-  "¿Cómo te llamas?",
-  "¿Qué servicios ofrece Farid?",
-  "¿Dónde veo su trabajo?",
-];
-
 export function AskAI() {
+  const { c, locale } = useI18n();
+  const t = c.askAI;
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([intro]);
+  const [messages, setMessages] = useState<Msg[]>([
+    { role: "assistant", content: t.intro },
+  ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [voiceMode, setVoiceMode] = useState(false);
@@ -96,6 +89,7 @@ export function AskAI() {
           mode: "chat",
           message: value,
           history: next.slice(1, -1),
+          lang: locale,
         }),
       });
       const data = await res.json();
@@ -106,11 +100,7 @@ export function AskAI() {
     } catch {
       setMessages((m) => [
         ...m,
-        {
-          role: "assistant",
-          content:
-            "Hubo un problema de conexión. Escríbele directo por WhatsApp o email.",
-        },
+        { role: "assistant", content: t.errConn },
       ]);
     } finally {
       setLoading(false);
@@ -133,7 +123,7 @@ export function AskAI() {
         ) : (
           <>
             <ChatCircleDots size={20} weight="fill" />
-            <span className="hidden sm:inline">Habla con Eathan</span>
+            <span className="hidden sm:inline">{t.fab}</span>
           </>
         )}
       </motion.button>
@@ -154,14 +144,10 @@ export function AskAI() {
             <div className="flex items-center gap-3 border-b border-[var(--border)] p-4">
               <VoiceOrb speaking={speaking} listening={listening} size={36} />
               <div className="min-w-0 flex-1 leading-tight">
-                <p className="text-sm font-semibold">Eathan</p>
+                <p className="text-sm font-semibold">{t.title}</p>
                 <p className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  {listening
-                    ? "Escuchando…"
-                    : speaking
-                      ? "Hablando…"
-                      : "IA de Farid · En línea"}
+                  {listening ? t.listening : speaking ? t.speaking : t.online}
                 </p>
               </div>
 
@@ -177,7 +163,7 @@ export function AskAI() {
                   }`}
                 >
                   <Microphone size={14} weight={voiceMode ? "fill" : "regular"} />
-                  Voz
+                  {t.voice}
                 </button>
               )}
             </div>
@@ -212,7 +198,7 @@ export function AskAI() {
                         className="mt-2 flex items-center gap-1.5 text-xs text-[var(--text-faint)] transition hover:text-[var(--accent-cyan)]"
                       >
                         {speaking ? <Stop size={13} weight="fill" /> : <SpeakerHigh size={13} />}
-                        {speaking ? "Detener" : "Escuchar"}
+                        {speaking ? t.stop : t.listen}
                       </button>
                     )}
                   </div>
@@ -237,7 +223,7 @@ export function AskAI() {
 
               {messages.length === 1 && !loading && (
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {suggestions.map((s) => (
+                  {t.suggestions.map((s) => (
                     <button
                       key={s}
                       onClick={() => send(s)}
@@ -276,7 +262,7 @@ export function AskAI() {
                   value={listening ? interim : input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && send(input)}
-                  placeholder={listening ? "Escuchando…" : "Escribe o habla…"}
+                  placeholder={listening ? t.listeningPh : t.inputPh}
                   aria-label="Escribe tu pregunta para Eathan"
                   autoComplete="off"
                   disabled={listening}
@@ -293,7 +279,7 @@ export function AskAI() {
               </div>
               {voiceMode && (
                 <p className="mt-2 px-2 text-center text-[11px] text-[var(--text-faint)]">
-                  Modo voz activo: habla y Eathan te responde en voz alta.
+                  {t.voiceHint}
                 </p>
               )}
             </div>

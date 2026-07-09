@@ -1,24 +1,18 @@
 "use client";
 
 import { useState } from "react";
-
-const nodes = [
-  { label: "IA", desc: "El cerebro: modelos y razonamiento." },
-  { label: "APIs", desc: "El sistema nervioso: todo conectado." },
-  { label: "Automatización", desc: "Los reflejos: procesos que corren solos." },
-  { label: "Datos", desc: "La memoria: la base de cada decisión." },
-  { label: "Software", desc: "El cuerpo: el producto que se usa." },
-  { label: "Negocios", desc: "El propósito: valor real y medible." },
-];
+import { useI18n } from "./i18n";
 
 export function SkillGalaxy() {
+  const { c } = useI18n();
+  const nodes = c.skillGalaxy.nodes;
   const [active, setActive] = useState(0);
   const R = 120;
 
   return (
     <div
       role="group"
-      aria-label="Mis disciplinas: toca cada nodo para ver cómo se conectan"
+      aria-label={c.skillGalaxy.groupAria}
       className="relative mx-auto aspect-square w-full max-w-[420px]"
     >
       {/* anillos */}

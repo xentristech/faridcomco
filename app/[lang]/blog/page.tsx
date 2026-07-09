@@ -4,25 +4,62 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { getAllPosts } from "@/lib/blog";
 import { seedGradient } from "@/lib/gradient";
+import { isLocale, localizedHref, type Locale } from "@/lib/i18n";
 import { ArrowUpRight, Clock, CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Ideas sobre inteligencia artificial, datos e ingeniería, por Farid (Eathan). Análisis técnico sin humo.",
-  alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Blog — Farid · Eathan",
-    description:
-      "Ideas sobre inteligencia artificial, datos e ingeniería. Análisis técnico sin humo.",
-    type: "website",
-    url: "/blog",
+const T = {
+  es: {
+    metaTitle: "Blog",
+    metaDesc:
+      "Ideas sobre inteligencia artificial, datos e ingeniería, por Farid (Eathan). Análisis técnico sin humo.",
+    eyebrow: "El blog",
+    h1pre: "Ideas sobre ",
+    h1grad: "IA, datos e ingeniería",
+    sub: "Análisis técnico sin humo. Lo que aprendo construyendo con inteligencia artificial, contado claro.",
+  },
+  en: {
+    metaTitle: "Blog",
+    metaDesc:
+      "Ideas on artificial intelligence, data and engineering, by Farid (Eathan). Technical analysis, no fluff.",
+    eyebrow: "The blog",
+    h1pre: "Ideas on ",
+    h1grad: "AI, data & engineering",
+    sub: "Technical analysis, no fluff. What I learn building with artificial intelligence, told clearly.",
   },
 };
 
-export default function BlogIndex() {
+export async function generateMetadata(
+  props: PageProps<"/[lang]/blog">
+): Promise<Metadata> {
+  const { lang } = await props.params;
+  const locale: Locale = isLocale(lang) ? lang : "es";
+  const t = T[locale];
+  return {
+    title: t.metaTitle,
+    description: t.metaDesc,
+    alternates: {
+      canonical: localizedHref("/blog", locale),
+      languages: {
+        es: localizedHref("/blog", "es"),
+        en: localizedHref("/blog", "en"),
+        "x-default": localizedHref("/blog", "es"),
+      },
+    },
+    openGraph: {
+      title: `${t.metaTitle} — Farid · Eathan`,
+      description: t.metaDesc,
+      type: "website",
+      url: localizedHref("/blog", locale),
+    },
+  };
+}
+
+export default async function BlogIndex(props: PageProps<"/[lang]/blog">) {
+  const { lang } = await props.params;
+  const locale: Locale = isLocale(lang) ? lang : "es";
+  const t = T[locale];
   const posts = getAllPosts();
 
   return (
@@ -30,21 +67,19 @@ export default function BlogIndex() {
       <Nav />
       <main id="main" className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
         <header className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">El blog</p>
+          <p className="eyebrow">{t.eyebrow}</p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            Ideas sobre <span className="text-gradient">IA, datos e ingeniería</span>
+            {t.h1pre}
+            <span className="text-gradient">{t.h1grad}</span>
           </h1>
-          <p className="mt-4 text-[var(--text-dim)]">
-            Análisis técnico sin humo. Lo que aprendo construyendo con inteligencia
-            artificial, contado claro.
-          </p>
+          <p className="mt-4 text-[var(--text-dim)]">{t.sub}</p>
         </header>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
           {posts.map((post) => (
             <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={localizedHref(`/blog/${post.slug}`, locale)}
               className="spotlight group flex flex-col overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] transition"
             >
               <div
