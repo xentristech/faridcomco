@@ -60,7 +60,7 @@ export default async function BlogIndex(props: PageProps<"/[lang]/blog">) {
   const { lang } = await props.params;
   const locale: Locale = isLocale(lang) ? lang : "es";
   const t = T[locale];
-  const posts = getAllPosts();
+  const posts = getAllPosts(locale);
 
   return (
     <>

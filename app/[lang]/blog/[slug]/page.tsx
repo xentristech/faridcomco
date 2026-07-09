@@ -31,8 +31,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { lang, slug } = await props.params;
   const locale: Locale = isLocale(lang) ? lang : "es";
-  const post = getPost(slug);
-  if (!post) return { title: "Artículo no encontrado" };
+  const post = getPost(slug, locale);
+  if (!post) {
+    return { title: locale === "en" ? "Article not found" : "Artículo no encontrado" };
+  }
 
   const path = `/blog/${post.slug}`;
   return {
@@ -93,7 +95,7 @@ export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]
   const { lang, slug } = await props.params;
   const locale: Locale = isLocale(lang) ? lang : "es";
   const chrome = CHROME[locale];
-  const post = getPost(slug);
+  const post = getPost(slug, locale);
   if (!post) notFound();
 
   const plain = postPlainText(post);

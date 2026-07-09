@@ -2,8 +2,13 @@
 //  BLOG - contenido estructurado (una sola fuente de verdad).
 //  Cada post se guarda como bloques: el mismo dato alimenta
 //  el render (identidad de marca Farid/Eathan) y la IA del
-//  artículo (/api/blog-ask). Para agregar un post nuevo,
-//  añade otro objeto a `posts`.
+//  artículo (/api/blog-ask).
+//
+//  BILINGÜE: cada post existe en `postsEs` y `postsEn` con el
+//  MISMO `slug`, los mismos `id` de encabezado y la misma `seed`.
+//  Eso mantiene emparejadas /blog/x y /en/blog/x para el hreflang
+//  y hace que los anclas del índice funcionen en ambos idiomas.
+//  Para agregar un post, añádelo a las DOS listas.
 // ============================================================
 
 export type Block =
@@ -36,11 +41,10 @@ export type Post = {
   blocks: Block[];
 };
 
-export const posts: Post[] = [
+export const postsEs: Post[] = [
   {
     slug: "nvidia-dgx-spark-supercomputadora-personal-de-ia",
-    title:
-      "NVIDIA DGX Spark: la primera supercomputadora personal de IA",
+    title: "NVIDIA DGX Spark: la primera supercomputadora personal de IA",
     excerpt:
       "El mismo stack de software de los centros de datos NVIDIA en un dispositivo del tamaño de una consola. Un cambio de paradigma para developers e investigadores.",
     eyebrow: "Hardware IA · NVIDIA",
@@ -49,16 +53,7 @@ export const posts: Post[] = [
     date: "2026-07-01",
     dateLabel: "Julio 2026",
     readTime: "8 min",
-    tags: [
-      "NVIDIA",
-      "IA local",
-      "Blackwell",
-      "LLM",
-      "Hardware",
-      "Inferencia",
-      "DGX",
-      "ML",
-    ],
+    tags: ["NVIDIA", "IA local", "Blackwell", "LLM", "Hardware", "Inferencia", "DGX", "ML"],
     seed: "dgx-spark-blackwell-neural",
     toc: [
       { id: "que-es", label: "Qué es el DGX Spark" },
@@ -83,16 +78,11 @@ export const posts: Post[] = [
         text: "El resultado práctico es que puedes correr un modelo de **200 mil millones de parámetros en FP4** completamente en memoria, sin cuantización agresiva ni offloading a disco.",
       },
 
-      {
-        type: "h2",
-        id: "por-que-importa",
-        text: "Por qué importa para developers",
-      },
+      { type: "h2", id: "por-que-importa", text: "Por qué importa para developers" },
       {
         type: "figure",
         seed: "dgx-spark-desktop-footprint",
-        caption:
-          "El DGX Spark ocupa menos espacio que la mayoría de laptops gaming.",
+        caption: "El DGX Spark ocupa menos espacio que la mayoría de laptops gaming.",
       },
       {
         type: "p",
@@ -144,60 +134,16 @@ export const posts: Post[] = [
       { type: "h2", id: "comparativa", text: "Comparativa con alternativas" },
       {
         type: "table",
-        head: [
-          "Dispositivo",
-          "Memoria GPU",
-          "Potencia IA",
-          "Precio aprox.",
-          "Stack IA",
-        ],
+        head: ["Dispositivo", "Memoria GPU", "Potencia IA", "Precio aprox.", "Stack IA"],
         rows: [
           {
             highlight: true,
-            cells: [
-              "NVIDIA DGX Spark",
-              "128 GB unificada",
-              "1 PFLOP FP4",
-              "~$3,000 USD",
-              "CUDA-X completo",
-            ],
+            cells: ["NVIDIA DGX Spark", "128 GB unificada", "1 PFLOP FP4", "~$3,000 USD", "CUDA-X completo"],
           },
-          {
-            cells: [
-              "Mac Studio M4 Ultra",
-              "192 GB unificada",
-              "~400 TOPS",
-              "~$4,000 USD",
-              "MLX / CoreML",
-            ],
-          },
-          {
-            cells: [
-              "PC con RTX 5080",
-              "16 GB GDDR7",
-              "~836 TOPS",
-              "~$2,000 USD",
-              "CUDA parcial",
-            ],
-          },
-          {
-            cells: [
-              "PC con RTX 5090",
-              "32 GB GDDR7",
-              "~3,352 TOPS",
-              "~$3,500 USD",
-              "CUDA completo",
-            ],
-          },
-          {
-            cells: [
-              "AWS p4d.24xlarge / hr",
-              "320 GB HBM2e",
-              "2.5 PFLOPS",
-              "~$32 USD/hr",
-              "CUDA completo",
-            ],
-          },
+          { cells: ["Mac Studio M4 Ultra", "192 GB unificada", "~400 TOPS", "~$4,000 USD", "MLX / CoreML"] },
+          { cells: ["PC con RTX 5080", "16 GB GDDR7", "~836 TOPS", "~$2,000 USD", "CUDA parcial"] },
+          { cells: ["PC con RTX 5090", "32 GB GDDR7", "~3,352 TOPS", "~$3,500 USD", "CUDA completo"] },
+          { cells: ["AWS p4d.24xlarge / hr", "320 GB HBM2e", "2.5 PFLOPS", "~$32 USD/hr", "CUDA completo"] },
         ],
       },
       {
@@ -228,16 +174,156 @@ export const posts: Post[] = [
   },
 ];
 
+export const postsEn: Post[] = [
+  {
+    slug: "nvidia-dgx-spark-supercomputadora-personal-de-ia",
+    title: "NVIDIA DGX Spark: the first personal AI supercomputer",
+    excerpt:
+      "The same software stack that runs NVIDIA's data centers, in a device the size of a game console. A shift in what developers and researchers can do locally.",
+    eyebrow: "AI Hardware · NVIDIA",
+    category: "AI Hardware",
+    author: "Farid · Eathan",
+    date: "2026-07-01",
+    dateLabel: "July 2026",
+    readTime: "8 min",
+    tags: ["NVIDIA", "Local AI", "Blackwell", "LLM", "Hardware", "Inference", "DGX", "ML"],
+    seed: "dgx-spark-blackwell-neural",
+    toc: [
+      { id: "que-es", label: "What the DGX Spark is" },
+      { id: "por-que-importa", label: "Why it matters for developers" },
+      { id: "software", label: "The software stack" },
+      { id: "hardware", label: "Hardware and connectivity" },
+      { id: "comparativa", label: "Compared to the alternatives" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "What the DGX Spark is" },
+      {
+        type: "p",
+        text: "NVIDIA introduced the DGX Spark as the compact version of its DGX line, the same one powering the training clusters of the big labs. The difference is the form factor: instead of an 8U rack in a data center, the Spark sits on a desk and runs off a single power cable.",
+      },
+      {
+        type: "p",
+        text: "At its core is the **GB10 Grace Blackwell Superchip**, which packs into a single SoC a Blackwell GPU with 128 GB of unified LPDDR5X memory and a 20-core ARM Grace CPU. That unified memory is the technically interesting part: GPU and CPU share the same memory bank at 273 GB/s of bandwidth, removing the PCI transfer bottleneck that limits conventional setups.",
+      },
+      {
+        type: "p",
+        text: "In practice, that means you can run a **200-billion-parameter model in FP4** entirely in memory, with no aggressive quantization and no offloading to disk.",
+      },
+
+      { type: "h2", id: "por-que-importa", text: "Why it matters for developers" },
+      {
+        type: "figure",
+        seed: "dgx-spark-desktop-footprint",
+        caption: "The DGX Spark takes up less desk space than most gaming laptops.",
+      },
+      {
+        type: "p",
+        text: "The full NVIDIA AI Enterprise ecosystem runs on the Spark. That includes NIM (NVIDIA Inference Microservices), the RAG stack with cuRVS, the RAPIDS acceleration libraries for Python, and native support for the main frameworks: PyTorch, JAX, TensorRT-LLM.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "What actually changes:",
+        text: "workflows that used to require an A100 instance on AWS or GCP can now run locally, with minimal latency and no cost per token. For iterative experiments with LLMs or vision models, that is a real operational shift.",
+      },
+      {
+        type: "p",
+        text: "If you work with open-weight models like Llama 3.1 405B, Mistral Large, DeepSeek R1 or Qwen 2.5 72B, the Spark has enough memory to run them without dropping to 8-bit quantization. Models from 7B to 70B run with plenty of headroom, which lets you do batch inference or keep several models loaded at once.",
+      },
+      {
+        type: "quote",
+        text: "One PFLOP of FP4 compute in a consumer device that fits under a monitor is a technical statement, not a marketing spec.",
+      },
+
+      { type: "h2", id: "software", text: "The software stack" },
+      {
+        type: "p",
+        text: "The value proposition isn't only the hardware. NVIDIA ships the Spark with full access to its NIM microservices catalog, which includes pre-packaged models optimized for inference on Blackwell architectures. Initial setup is a graphical wizard that configures the system in under 10 minutes.",
+      },
+      { type: "h3", text: "What comes preinstalled" },
+      {
+        type: "ul",
+        items: [
+          "Ubuntu 22.04 LTS with CUDA 12.x drivers",
+          "NVIDIA Container Runtime for Docker",
+          "NVIDIA AI Workbench, the integrated development environment",
+          "Direct access to the NGC catalog (NVIDIA GPU Cloud)",
+          "Support for Ollama and LM Studio as lightweight alternatives",
+        ],
+      },
+      { type: "h3", text: "Interoperability" },
+      {
+        type: "p",
+        text: "The Spark has two NVLink-C2C ports that let you pair it with another Spark to scale up to 256 GB of shared unified memory. It also connects directly to the **DGX Station B200** for hybrid local + server pipelines without changing your application code, since both share the same CUDA-X stack.",
+      },
+
+      { type: "h2", id: "hardware", text: "Hardware and connectivity" },
+      {
+        type: "p",
+        text: "The chassis is compact and fully passive for the first 100W of load. Under sustained load it kicks in a low-noise internal cooling system. Ports include USB-C Thunderbolt 4, HDMI 2.1, 1GbE Ethernet, and the two proprietary NVLink ports for node-to-node expansion.",
+      },
+
+      { type: "h2", id: "comparativa", text: "Compared to the alternatives" },
+      {
+        type: "table",
+        head: ["Device", "GPU memory", "AI compute", "Approx. price", "AI stack"],
+        rows: [
+          {
+            highlight: true,
+            cells: ["NVIDIA DGX Spark", "128 GB unified", "1 PFLOP FP4", "~$3,000 USD", "Full CUDA-X"],
+          },
+          { cells: ["Mac Studio M4 Ultra", "192 GB unified", "~400 TOPS", "~$4,000 USD", "MLX / CoreML"] },
+          { cells: ["PC with RTX 5080", "16 GB GDDR7", "~836 TOPS", "~$2,000 USD", "Partial CUDA"] },
+          { cells: ["PC with RTX 5090", "32 GB GDDR7", "~3,352 TOPS", "~$3,500 USD", "Full CUDA"] },
+          { cells: ["AWS p4d.24xlarge / hr", "320 GB HBM2e", "2.5 PFLOPS", "~$32 USD/hr", "Full CUDA"] },
+        ],
+      },
+      {
+        type: "p",
+        text: "The comparison against cloud is where the Spark's economic argument gets clearest. At $32/hr on AWS, the breakeven against the Spark's price lands around 100 hours of GPU time. For any project of moderate intensity, that's a matter of weeks.",
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "A real limitation:",
+        text: "the DGX Spark runs Ubuntu/Linux on ARM64. If your workflow depends on MetaTrader 5, native Windows applications, or any x86 software, you'll need to keep a separate Windows machine. The Spark does not replace a general-purpose workstation.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "The DGX Spark is a niche product with a very clear niche: researchers, ML engineers and small teams that need serious local inference capacity without managing cloud infrastructure. For that profile, the offer is hard to ignore.",
+      },
+      {
+        type: "p",
+        text: "For a developer who already has a Windows workstation with an RTX 5080 or 5090 and uses Ollama for local inference, the Spark works better as a companion than as a replacement: it adds 128 GB of unified memory for large models while the workstation stays the main development machine.",
+      },
+      {
+        type: "p",
+        text: "What NVIDIA pulled off technically with the GB10 is real. One PFLOP of FP4 compute under 170W in a desktop form factor has no precedent. If the price comes down, or if your use case means running 100B+ models regularly, the argument gets a lot stronger.",
+      },
+    ],
+  },
+];
+
 // ---- Helpers ----
-export function getAllPosts(): Post[] {
-  return [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+// El locale es opcional y por defecto español, para no romper a quien no lo pase
+// (sitemap.ts, /api/comments) donde el idioma del contenido no importa.
+const byLocale: Record<string, Post[]> = { es: postsEs, en: postsEn };
+
+function listFor(locale?: string): Post[] {
+  return byLocale[locale ?? "es"] ?? postsEs;
 }
 
-export function getPost(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+export function getAllPosts(locale?: string): Post[] {
+  return [...listFor(locale)].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-// Texto plano del artículo (para anclar la IA y para lectura en voz alta).
+export function getPost(slug: string, locale?: string): Post | undefined {
+  return listFor(locale).find((p) => p.slug === slug);
+}
+
 export function postPlainText(post: Post): string {
   const parts: string[] = [post.title, post.excerpt];
   for (const b of post.blocks) {

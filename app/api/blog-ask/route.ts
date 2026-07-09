@@ -18,7 +18,9 @@ export async function POST(req: Request) {
 
   const lang = body.lang === "en" ? "en" : "es";
 
-  const post = getPost((body.slug ?? "").toString());
+  // Carga el artículo EN EL IDIOMA DE LA PÁGINA: así la IA cita el texto que el
+  // visitante está leyendo, no una traducción distinta.
+  const post = getPost((body.slug ?? "").toString(), lang);
   if (!post) {
     return NextResponse.json({ error: "Artículo no encontrado" }, { status: 404 });
   }
