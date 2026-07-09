@@ -22,6 +22,7 @@
 - Platim.co — industrial safety workwear and PPE (B2B, Colombia): https://platim.co
 - Yota Montacargas — forklift sales, rental, parts and service: https://yotamontacargas.com
 - Neona.Tech — AI studio (coming soon): https://neona.tech
+- DominioGPT — AI tool that generates brand domain names and checks availability in real time: https://dominio.neona.tech
 
 ## Contact
 - Email: info@farid.com.co

@@ -15,6 +15,7 @@ const SHOTS: Record<string, string> = {
   "platim-platform-cyan": "/projects/platim.jpg",
   "yota-montacargas-industrial": "/projects/yota.jpg",
   "neona-tech-neural-violet": "/projects/neona.jpg",
+  "dominiogpt-ai-domains": "/projects/dominiogpt.jpg",
 };
 
 function ProjectMedia({ seed, sizes }: { seed: string; sizes: string }) {
