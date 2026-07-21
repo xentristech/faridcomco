@@ -27,8 +27,8 @@ export const profile = {
   address: "Calle 54 #39-08 Casa 1",
 
   // WhatsApp en formato internacional, solo digitos para el enlace wa.me
-  whatsapp: "573000000000", // TODO: tu numero real, ej. 573001234567
-  whatsappLabel: "+57 300 000 0000", // TODO: como se muestra
+  whatsapp: "19177645565",
+  whatsappLabel: "+1 (917) 764-5565",
 
   // Redes / credenciales
   linkedin: "https://www.linkedin.com/in/farideathan/",
