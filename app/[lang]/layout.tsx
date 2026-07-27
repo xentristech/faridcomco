@@ -5,6 +5,7 @@ import { profile } from "@/lib/profile";
 import { locales, isLocale, localizedHref, type Locale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import { I18nProvider } from "@/components/i18n";
+import { WhatsAppFab } from "@/components/whatsapp-fab";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -152,6 +153,7 @@ export default async function RootLayout({
         </a>
         <div className="grain" aria-hidden />
         <I18nProvider locale={lang}>{children}</I18nProvider>
+        <WhatsAppFab locale={lang} />
       </body>
     </html>
   );
