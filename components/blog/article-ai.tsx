@@ -87,7 +87,7 @@ export function ArticleAI({
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const recRef = useRef<Recognition | null>(null);
-  const { supported: ttsSupported, speaking, speak, stop } = useTTS();
+  const { supported: ttsSupported, speaking, speak, stop } = useTTS(locale);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({

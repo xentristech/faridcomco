@@ -13,6 +13,17 @@ import { isLocale, matchLocale } from "@/lib/i18n";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // CV interactivo con URL limpia: sirve el HTML estático del CV (public/cv).
+  // Va primero para que /en/cv no lo capture el passthrough de /en de abajo.
+  if (pathname === "/cv" || pathname === "/en/cv") {
+    const url = request.nextUrl.clone();
+    url.pathname =
+      pathname === "/en/cv"
+        ? "/cv/farid-jimenez-cv-en.html"
+        : "/cv/farid-jimenez-cv-es.html";
+    return NextResponse.rewrite(url);
+  }
+
   // El español es canónico SIN prefijo: si alguien entra a /es, lo mandamos a la raíz.
   if (pathname === "/es" || pathname.startsWith("/es/")) {
     const url = request.nextUrl.clone();

@@ -157,7 +157,7 @@ export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]
               </div>
             </div>
             <div className="sm:ml-auto">
-              <ListenArticle text={plain} />
+              <ListenArticle text={plain} lang={locale} />
             </div>
           </div>
 

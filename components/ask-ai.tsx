@@ -29,7 +29,7 @@ export function AskAI() {
   const [voiceMode, setVoiceMode] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const { supported: ttsSupported, speaking, speak, stop: stopTTS } = useTTS();
+  const { supported: ttsSupported, speaking, speak, stop: stopTTS } = useTTS(locale);
   const {
     supported: micSupported,
     listening,

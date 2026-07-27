@@ -3,9 +3,15 @@
 import { SpeakerHigh, Stop, Waveform } from "@phosphor-icons/react";
 import { useTTS } from "../use-tts";
 
-// Botón que lee el artículo completo en voz alta (Web Speech API).
-export function ListenArticle({ text }: { text: string }) {
-  const { supported, speaking, speak, stop } = useTTS();
+// Botón que lee el artículo completo en voz alta (voz de OpenAI, con respaldo del navegador).
+export function ListenArticle({
+  text,
+  lang = "es",
+}: {
+  text: string;
+  lang?: "es" | "en";
+}) {
+  const { supported, speaking, speak, stop } = useTTS(lang);
   if (!supported) return null;
 
   return (

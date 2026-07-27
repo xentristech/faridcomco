@@ -11,7 +11,7 @@
 // ============================================================
 
 import React from "react";
-import { WhatsappLogo, FilePdf } from "@phosphor-icons/react";
+import { WhatsappLogo, ReadCvLogo } from "@phosphor-icons/react";
 import { useAudience } from "./audience-context";
 import { whatsappUrl, profile } from "@/lib/profile";
 import { useI18n } from "./i18n";
@@ -336,11 +336,8 @@ export function HeroFarid() {
   const { audience, setAudience } = useAudience();
   const data = c.audiences[audience];
 
-  // CV descargable (PDF de una hoja generado desde el HTML del CV, en public/cv).
-  const cvHref =
-    locale === "en" ? "/cv/farid-jimenez-cv-en.pdf" : "/cv/farid-jimenez-cv-es.pdf";
-  const cvFile =
-    locale === "en" ? "Farid-Jimenez-CV.pdf" : "Farid-Jimenez-Hoja-de-Vida.pdf";
+  // CV interactivo (HTML con chat de IA) en URL limpia; desde ahí se descarga el PDF.
+  const cvHref = locale === "en" ? "/en/cv" : "/cv";
 
   // Selector de audiencia — controla el resto del sitio. Bajo el nav, centrado.
   const topSlot = (
@@ -398,9 +395,9 @@ export function HeroFarid() {
         {c.hero.buttons.whatsapp}
       </a>
       <button onClick={downloadVCard} className="btn btn-ghost">{c.hero.buttons.saveContact}</button>
-      <a href={cvHref} download={cvFile} className="btn btn-ghost">
-        <FilePdf size={18} weight="fill" />
-        {c.hero.buttons.downloadCv}
+      <a href={cvHref} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+        <ReadCvLogo size={18} weight="fill" />
+        {c.hero.buttons.viewCv}
       </a>
     </div>
   );
