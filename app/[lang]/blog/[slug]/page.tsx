@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/nav";
@@ -58,11 +59,13 @@ export async function generateMetadata(
       publishedTime: post.date,
       authors: [profile.name],
       tags: post.tags,
+      images: post.image ? [{ url: `${profile.web}${post.image}` }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
+      images: post.image ? [`${profile.web}${post.image}`] : undefined,
     },
   };
 }
@@ -168,11 +171,24 @@ export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]
 
         {/* Portada */}
         <div className="mx-auto mt-10 max-w-5xl px-4 sm:px-6">
-          <div
-            className="aspect-[21/9] w-full rounded-[24px] border border-[var(--border)]"
-            style={{ backgroundImage: seedGradient(post.seed) }}
-            aria-hidden
-          />
+          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[24px] border border-[var(--border)]">
+            {post.image ? (
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-cover"
+              />
+            ) : (
+              <div
+                className="absolute inset-0"
+                style={{ backgroundImage: seedGradient(post.seed) }}
+                aria-hidden
+              />
+            )}
+          </div>
         </div>
 
         {/* Cuerpo + índice */}
@@ -181,7 +197,11 @@ export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]
             <ArticleBody blocks={post.blocks} />
 
             {/* Chat de IA con voz, anclado a este artículo */}
-            <ArticleAI slug={post.slug} title={post.title} suggestions={chrome.suggestions} />
+            <ArticleAI
+              slug={post.slug}
+              title={post.title}
+              suggestions={post.suggestions ?? chrome.suggestions}
+            />
 
             {/* CTA */}
             <div className="not-prose mt-14 flex flex-wrap items-center justify-between gap-4 rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-6">

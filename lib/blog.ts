@@ -18,7 +18,7 @@ export type Block =
   | { type: "ul"; items: string[] }
   | { type: "callout"; variant: "info" | "warn"; label?: string; text: string }
   | { type: "quote"; text: string }
-  | { type: "figure"; seed: string; caption: string }
+  | { type: "figure"; seed: string; caption: string; image?: string; chip?: string }
   | {
       type: "table";
       head: string[];
@@ -36,12 +36,163 @@ export type Post = {
   dateLabel: string;
   readTime: string;
   tags: string[];
-  seed: string; // semilla para el gradiente de portada
+  seed: string; // semilla para el gradiente de portada (respaldo si no hay foto)
+  image?: string; // foto de portada opcional (ruta en /public); si falta, se usa el gradiente
+  suggestions?: string[]; // preguntas sugeridas para el chat de IA del artículo
   toc: { id: string; label: string }[];
   blocks: Block[];
 };
 
 export const postsEs: Post[] = [
+  {
+    slug: "openjarvis-ia-personal-que-corre-en-tu-maquina",
+    title: "OpenJarvis: la IA personal que corre en tu propia máquina",
+    excerpt:
+      "Stanford liberó un framework open source para construir agentes de IA que viven en tu equipo, no en la nube. Privacidad, costo cero por token y agentes con memoria. Esto es lo bueno.",
+    eyebrow: "IA local · Open source",
+    category: "IA local",
+    author: "Farid · Eathan",
+    date: "2026-08-02",
+    dateLabel: "Agosto 2026",
+    readTime: "7 min",
+    tags: ["OpenJarvis", "IA local", "Agentes", "Ollama", "Stanford", "Privacidad", "Open source", "LLM"],
+    seed: "openjarvis-local-first-neural",
+    suggestions: [
+      "¿Qué es OpenJarvis en una frase?",
+      "¿Por qué correr la IA en local y no en la nube?",
+      "¿Qué necesito para instalarlo?",
+    ],
+    toc: [
+      { id: "que-es", label: "Qué es OpenJarvis" },
+      { id: "por-que", label: "La idea: inteligencia por vatio" },
+      { id: "componentes", label: "Los cinco componentes" },
+      { id: "agentes", label: "Agentes y skills" },
+      { id: "instalar", label: "Cómo se instala" },
+      { id: "lo-bueno", label: "Por qué es bueno" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "Qué es OpenJarvis" },
+      {
+        type: "p",
+        text: "OpenJarvis es un framework **open source** (licencia Apache 2.0) para construir **agentes de IA personales que corren en tu propia máquina**, no en la nube. Su lema lo resume bien: \"Personal AI, on personal devices\". La nube deja de ser el default y pasa a ser opcional.",
+      },
+      {
+        type: "p",
+        text: "Lo desarrolló **Stanford**, entre los laboratorios Hazy Research y Scaling Intelligence Lab, y su versión 1.0 salió en 2026 con soporte nativo para **Ollama**. La apuesta es simple: invertir la ecuación actual, donde casi toda la IA \"personal\" en realidad depende de servidores ajenos.",
+      },
+      {
+        type: "figure",
+        seed: "openjarvis-local-first",
+        chip: "OpenJarvis",
+        caption: "Local-first: los modelos, la memoria y los agentes viven en tu equipo; la nube es opcional.",
+      },
+
+      { type: "h2", id: "por-que", text: "La idea: inteligencia por vatio" },
+      {
+        type: "p",
+        text: "OpenJarvis nace de una investigación de Stanford llamada **Intelligence Per Watt** (inteligencia por vatio). El hallazgo clave es contundente: los modelos y aceleradores locales ya resuelven con precisión el **88.7% de las consultas de chat y razonamiento de un solo turno**, y a latencias interactivas. Además, la eficiencia de \"inteligencia\" mejoró **5.3× entre 2023 y 2025**.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Lo que cambia de fondo:",
+        text: "OpenJarvis trata la energía, los FLOPs, la latencia y el costo en dólares como restricciones de primera clase, al mismo nivel que la precisión. No es solo \"¿responde bien?\", sino \"¿responde bien, rápido, barato y sin salir de tu equipo?\".",
+      },
+      {
+        type: "p",
+        text: "La consecuencia práctica es directa: para la mayoría de tareas cotidianas ya no necesitas mandar tus datos a un servidor de terceros ni pagar por token. Es el complemento de software natural para el hardware de IA local del que ya hablé con el DGX Spark.",
+      },
+
+      { type: "h2", id: "componentes", text: "Los cinco componentes" },
+      {
+        type: "p",
+        text: "El framework se arma con cinco primitivas componibles. Esa separación es lo que permite cambiar un modelo o un motor de inferencia sin reescribir tu agente.",
+      },
+      {
+        type: "table",
+        head: ["Componente", "Qué hace"],
+        rows: [
+          { cells: ["Intelligence", "Selección y catálogo de modelos locales."] },
+          { cells: ["Engine", "Motores de inferencia (Ollama, vLLM, SGLang, llama.cpp) con autodetección de hardware."] },
+          { cells: ["Agents", "Ocho tipos de agente con razonamiento multipaso y uso de herramientas."] },
+          { cells: ["Tools & Memory", "Búsqueda web, ejecución de código, archivos, memoria persistente y servidores MCP."] },
+          { cells: ["Learning", "Mejora automática a partir de las trazas locales de uso."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "Corre sobre casi cualquier acelerador (Apple Silicon, NVIDIA, AMD, NPUs o CPU) y expone una **API compatible con OpenAI**. En la práctica, cualquier app que ya hable ese formato puede apuntar a tu máquina en lugar de a la nube.",
+      },
+
+      { type: "h2", id: "agentes", text: "Agentes y skills" },
+      {
+        type: "p",
+        text: "Trae ocho agentes listos para usar en tres modos de ejecución: **bajo demanda, programados y continuos**. Entre ellos: un digest matutino con audio, investigación profunda con citas, un monitor continuo con memoria, un orquestador que elige herramientas por su cuenta, y agentes ReAct, CodeAct y de chat simple.",
+      },
+      {
+        type: "p",
+        text: "Los **skills** son herramientas que los agentes descubren e invocan solos cuando las necesitan. Se pueden importar desde Hermes Agent (unos 150 skills), OpenClaw (alrededor de 13,700 skills de la comunidad) o cualquier repo de GitHub que siga el estándar agentskills.io.",
+      },
+      {
+        type: "quote",
+        text: "El valor no es un chatbot más: es correr agentes con memoria y herramientas en tu propio hardware, sin que tus datos salgan de casa.",
+      },
+
+      { type: "h2", id: "instalar", text: "Cómo se instala" },
+      {
+        type: "p",
+        text: "Hay instaladores de escritorio nativos (construidos con Tauri) para **macOS** (DMG universal, Apple Silicon e Intel), **Windows 10+** (EXE) y **Linux** (DEB, RPM y AppImage).",
+      },
+      { type: "h3", text: "Lo que necesitas" },
+      {
+        type: "ul",
+        items: [
+          "Python 3.10 a 3.13 y Node.js 18+",
+          "Ollama (o un motor de inferencia compatible)",
+          "Un script quickstart que instala dependencias, Ollama y un modelo inicial en unos 3 minutos",
+        ],
+      },
+      {
+        type: "p",
+        text: "Más allá del escritorio, hay una **CLI**, un **SDK de Python** (la clase `Jarvis`) y un servidor de API en el puerto 8000. También integra Google Drive, Gmail, Calendar y Tasks vía OAuth, para agentes que trabajan con tus propios datos.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Por qué es bueno" },
+      {
+        type: "p",
+        text: "Lo interesante de OpenJarvis no es un truco aislado, sino la suma:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Privacidad real**: tus conversaciones y archivos no salen del equipo.",
+          "**Costo cero por token**: la nube es opcional, no una factura mensual.",
+          "**Funciona offline**: útil sin conexión o con datos sensibles.",
+          "**Eficiencia medible**: energía y costo tratados como métricas, no como notas al pie.",
+          "**Flexibilidad**: multi-backend y API compatible con OpenAI.",
+          "**Extensible**: un ecosistema grande de skills reutilizables.",
+          "**Abierto y con respaldo académico**: Apache 2.0 y ciencia de Stanford detrás.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "El límite real:",
+        text: "todo depende de tu hardware. Los modelos muy grandes (100B+ de parámetros) siguen pidiendo mucha memoria, y para cargas pesadas la nube todavía gana en potencia bruta. OpenJarvis brilla como el cerebro cotidiano en local, no como reemplazo total de un clúster.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "OpenJarvis es la capa de software que le faltaba al hardware de IA local. Si el DGX Spark puso la potencia en tu escritorio, OpenJarvis pone encima los agentes, la memoria y las herramientas para aprovecharla sin depender de una API de pago.",
+      },
+      {
+        type: "p",
+        text: "Si te importa la privacidad, el costo o simplemente experimentar con agentes de verdad sin exponer tus datos, vale mucho la pena probarlo. Es, además, una señal clara de hacia dónde va la IA personal: de vuelta a tu propia máquina.",
+      },
+    ],
+  },
   {
     slug: "nvidia-dgx-spark-supercomputadora-personal-de-ia",
     title: "NVIDIA DGX Spark: la primera supercomputadora personal de IA",
@@ -55,6 +206,12 @@ export const postsEs: Post[] = [
     readTime: "8 min",
     tags: ["NVIDIA", "IA local", "Blackwell", "LLM", "Hardware", "Inferencia", "DGX", "ML"],
     seed: "dgx-spark-blackwell-neural",
+    image: "/blog/dgx-spark-portada.jpg",
+    suggestions: [
+      "¿Qué es la memoria unificada del GB10?",
+      "¿Me conviene frente a una RTX 5090?",
+      "¿Cuánto cuesta y qué trae preinstalado?",
+    ],
     toc: [
       { id: "que-es", label: "Qué es el DGX Spark" },
       { id: "por-que-importa", label: "Por qué importa para developers" },
@@ -82,6 +239,7 @@ export const postsEs: Post[] = [
       {
         type: "figure",
         seed: "dgx-spark-desktop-footprint",
+        image: "/blog/dgx-spark-escritorio.jpg",
         caption: "El DGX Spark ocupa menos espacio que la mayoría de laptops gaming.",
       },
       {
@@ -108,6 +266,12 @@ export const postsEs: Post[] = [
         type: "p",
         text: "La propuesta de valor no es solo el hardware. NVIDIA empaqueta el Spark con acceso completo a su catálogo de NIM microservices, que incluye modelos preempaquetados y optimizados para inferencia en arquitecturas Blackwell. El setup inicial es un asistente gráfico que configura el sistema en menos de 10 minutos.",
       },
+      {
+        type: "figure",
+        seed: "dgx-spark-software-stack",
+        image: "/blog/dgx-spark-software.jpg",
+        caption: "El panel de NVIDIA para gestionar modelos, memoria y GPU corre directo en el Spark.",
+      },
       { type: "h3", text: "Lo que viene preinstalado" },
       {
         type: "ul",
@@ -126,6 +290,12 @@ export const postsEs: Post[] = [
       },
 
       { type: "h2", id: "hardware", text: "Hardware y conectividad" },
+      {
+        type: "figure",
+        seed: "dgx-spark-gb10-internals",
+        image: "/blog/dgx-spark-hardware.jpg",
+        caption: "El Superchip GB10 Grace Blackwell y la vista despiezada del chasis del Spark.",
+      },
       {
         type: "p",
         text: "El chasis es compacto y completamente pasivo en los primeros 100W de carga. Para cargas sostenidas activa un sistema de refrigeración interno de bajo ruido. Los puertos incluyen USB-C Thunderbolt 4, HDMI 2.1, Ethernet 1GbE, y los dos puertos propietarios NVLink para expansión entre nodos.",
@@ -176,6 +346,155 @@ export const postsEs: Post[] = [
 
 export const postsEn: Post[] = [
   {
+    slug: "openjarvis-ia-personal-que-corre-en-tu-maquina",
+    title: "OpenJarvis: the personal AI that runs on your own machine",
+    excerpt:
+      "Stanford released an open-source framework to build AI agents that live on your device, not in the cloud. Privacy, zero cost per token and agents with memory. Here's the good part.",
+    eyebrow: "Local AI · Open source",
+    category: "Local AI",
+    author: "Farid · Eathan",
+    date: "2026-08-02",
+    dateLabel: "August 2026",
+    readTime: "7 min",
+    tags: ["OpenJarvis", "Local AI", "Agents", "Ollama", "Stanford", "Privacy", "Open source", "LLM"],
+    seed: "openjarvis-local-first-neural",
+    suggestions: [
+      "What is OpenJarvis in one sentence?",
+      "Why run AI locally instead of in the cloud?",
+      "What do I need to install it?",
+    ],
+    toc: [
+      { id: "que-es", label: "What OpenJarvis is" },
+      { id: "por-que", label: "The idea: intelligence per watt" },
+      { id: "componentes", label: "The five building blocks" },
+      { id: "agentes", label: "Agents and skills" },
+      { id: "instalar", label: "How you install it" },
+      { id: "lo-bueno", label: "Why it's good" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "What OpenJarvis is" },
+      {
+        type: "p",
+        text: "OpenJarvis is an **open-source** framework (Apache 2.0 license) for building **personal AI agents that run on your own machine**, not in the cloud. Its tagline says it well: \"Personal AI, on personal devices.\" The cloud stops being the default and becomes optional.",
+      },
+      {
+        type: "p",
+        text: "It was built at **Stanford**, across the Hazy Research and Scaling Intelligence labs, and its 1.0 release landed in 2026 with native support for **Ollama**. The bet is simple: flip today's equation, where most \"personal\" AI actually depends on someone else's servers.",
+      },
+      {
+        type: "figure",
+        seed: "openjarvis-local-first",
+        chip: "OpenJarvis",
+        caption: "Local-first: models, memory and agents live on your device; the cloud is optional.",
+      },
+
+      { type: "h2", id: "por-que", text: "The idea: intelligence per watt" },
+      {
+        type: "p",
+        text: "OpenJarvis grows out of a Stanford study called **Intelligence Per Watt**. The key finding is blunt: local models and local accelerators already accurately handle **88.7% of single-turn chat and reasoning queries**, and at interactive latencies. On top of that, intelligence efficiency improved **5.3× between 2023 and 2025**.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "What really changes:",
+        text: "OpenJarvis treats energy, FLOPs, latency and dollar cost as first-class constraints, on par with accuracy. It's not just \"does it answer well?\" but \"does it answer well, fast, cheap and without leaving your machine?\".",
+      },
+      {
+        type: "p",
+        text: "The practical consequence is direct: for most everyday tasks you no longer need to send your data to a third-party server or pay per token. It's the natural software companion for the local AI hardware I already covered with the DGX Spark.",
+      },
+
+      { type: "h2", id: "componentes", text: "The five building blocks" },
+      {
+        type: "p",
+        text: "The framework is assembled from five composable primitives. That separation is what lets you swap a model or an inference engine without rewriting your agent.",
+      },
+      {
+        type: "table",
+        head: ["Component", "What it does"],
+        rows: [
+          { cells: ["Intelligence", "Local model selection and catalog."] },
+          { cells: ["Engine", "Inference runtimes (Ollama, vLLM, SGLang, llama.cpp) with hardware auto-detection."] },
+          { cells: ["Agents", "Eight agent types with multi-step reasoning and tool use."] },
+          { cells: ["Tools & Memory", "Web search, code execution, files, persistent memory and MCP servers."] },
+          { cells: ["Learning", "Automatic improvement from local usage traces."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "It runs on almost any accelerator (Apple Silicon, NVIDIA, AMD, NPUs or CPU) and exposes an **OpenAI-compatible API**. In practice, any app that already speaks that format can point at your machine instead of the cloud.",
+      },
+
+      { type: "h2", id: "agentes", text: "Agents and skills" },
+      {
+        type: "p",
+        text: "It ships eight ready-to-use agents across three execution modes: **on-demand, scheduled and continuous**. Among them: a morning digest with audio, deep research with citations, a continuous monitor with memory, an orchestrator that picks tools on its own, and ReAct, CodeAct and simple-chat agents.",
+      },
+      {
+        type: "p",
+        text: "**Skills** are tools that agents discover and invoke on their own when needed. You can import them from Hermes Agent (around 150 skills), OpenClaw (about 13,700 community skills) or any GitHub repo that follows the agentskills.io standard.",
+      },
+      {
+        type: "quote",
+        text: "The value isn't one more chatbot: it's running agents with memory and tools on your own hardware, without your data ever leaving home.",
+      },
+
+      { type: "h2", id: "instalar", text: "How you install it" },
+      {
+        type: "p",
+        text: "There are native desktop installers (built with Tauri) for **macOS** (universal DMG, Apple Silicon and Intel), **Windows 10+** (EXE) and **Linux** (DEB, RPM and AppImage).",
+      },
+      { type: "h3", text: "What you need" },
+      {
+        type: "ul",
+        items: [
+          "Python 3.10 to 3.13 and Node.js 18+",
+          "Ollama (or a compatible inference engine)",
+          "A quickstart script that installs dependencies, Ollama and a starter model in about 3 minutes",
+        ],
+      },
+      {
+        type: "p",
+        text: "Beyond the desktop, there's a **CLI**, a **Python SDK** (the `Jarvis` class) and an API server on port 8000. It also integrates Google Drive, Gmail, Calendar and Tasks via OAuth, for agents that work with your own data.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Why it's good" },
+      {
+        type: "p",
+        text: "What's interesting about OpenJarvis isn't one isolated trick, but the sum of parts:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Real privacy**: your conversations and files never leave the machine.",
+          "**Zero cost per token**: the cloud is optional, not a monthly bill.",
+          "**Works offline**: useful with no connection or with sensitive data.",
+          "**Measurable efficiency**: energy and cost treated as metrics, not footnotes.",
+          "**Flexibility**: multi-backend and an OpenAI-compatible API.",
+          "**Extensible**: a large ecosystem of reusable skills.",
+          "**Open and academically backed**: Apache 2.0 with Stanford science behind it.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "The real limit:",
+        text: "everything depends on your hardware. Very large models (100B+ parameters) still demand a lot of memory, and for heavy workloads the cloud still wins on raw power. OpenJarvis shines as the everyday brain running locally, not as a full replacement for a cluster.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "OpenJarvis is the software layer that local AI hardware was missing. If the DGX Spark put the power on your desk, OpenJarvis puts the agents, memory and tools on top to actually use it without depending on a paid API.",
+      },
+      {
+        type: "p",
+        text: "If you care about privacy, cost, or simply want to experiment with real agents without exposing your data, it's well worth trying. It's also a clear signal of where personal AI is heading: back onto your own machine.",
+      },
+    ],
+  },
+  {
     slug: "nvidia-dgx-spark-supercomputadora-personal-de-ia",
     title: "NVIDIA DGX Spark: the first personal AI supercomputer",
     excerpt:
@@ -188,6 +507,12 @@ export const postsEn: Post[] = [
     readTime: "8 min",
     tags: ["NVIDIA", "Local AI", "Blackwell", "LLM", "Hardware", "Inference", "DGX", "ML"],
     seed: "dgx-spark-blackwell-neural",
+    image: "/blog/dgx-spark-portada.jpg",
+    suggestions: [
+      "What is the GB10's unified memory?",
+      "Is it worth it vs. an RTX 5090?",
+      "How much does it cost and what's preinstalled?",
+    ],
     toc: [
       { id: "que-es", label: "What the DGX Spark is" },
       { id: "por-que-importa", label: "Why it matters for developers" },
@@ -215,6 +540,7 @@ export const postsEn: Post[] = [
       {
         type: "figure",
         seed: "dgx-spark-desktop-footprint",
+        image: "/blog/dgx-spark-escritorio.jpg",
         caption: "The DGX Spark takes up less desk space than most gaming laptops.",
       },
       {
@@ -241,6 +567,12 @@ export const postsEn: Post[] = [
         type: "p",
         text: "The value proposition isn't only the hardware. NVIDIA ships the Spark with full access to its NIM microservices catalog, which includes pre-packaged models optimized for inference on Blackwell architectures. Initial setup is a graphical wizard that configures the system in under 10 minutes.",
       },
+      {
+        type: "figure",
+        seed: "dgx-spark-software-stack",
+        image: "/blog/dgx-spark-software.jpg",
+        caption: "NVIDIA's dashboard for managing models, memory and GPU runs right on the Spark.",
+      },
       { type: "h3", text: "What comes preinstalled" },
       {
         type: "ul",
@@ -259,6 +591,12 @@ export const postsEn: Post[] = [
       },
 
       { type: "h2", id: "hardware", text: "Hardware and connectivity" },
+      {
+        type: "figure",
+        seed: "dgx-spark-gb10-internals",
+        image: "/blog/dgx-spark-hardware.jpg",
+        caption: "The GB10 Grace Blackwell Superchip and an exploded view of the Spark's chassis.",
+      },
       {
         type: "p",
         text: "The chassis is compact and fully passive for the first 100W of load. Under sustained load it kicks in a low-noise internal cooling system. Ports include USB-C Thunderbolt 4, HDMI 2.1, 1GbE Ethernet, and the two proprietary NVLink ports for node-to-node expansion.",

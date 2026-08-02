@@ -103,7 +103,7 @@ function localArticleAnswer(article: string, question: string): string {
     .filter((s) => s.length > 30);
 
   if (terms.length === 0 || sentences.length === 0) {
-    return "Puedo responderte sobre el DGX Spark: qué es, por qué importa, su stack de software, la comparativa de hardware o la conclusión. ¿Sobre cuál te cuento?";
+    return "Puedo responderte sobre este artículo: pregúntame por cualquier parte del texto y te resumo lo que dice.";
   }
 
   const scored = sentences
@@ -118,7 +118,7 @@ function localArticleAnswer(article: string, question: string): string {
     .map((x) => x.s);
 
   if (scored.length === 0) {
-    return "Eso no lo cubre este artículo. El texto se enfoca en el DGX Spark: su chip GB10, la memoria unificada de 128 GB, el stack de software y la comparativa con RTX y cloud. ¿Quieres que te resuma alguno de esos puntos?";
+    return "Eso no aparece en este artículo. Pregúntame sobre algo que sí cubra el texto y te lo resumo con gusto.";
   }
 
   return scored.join(" ");

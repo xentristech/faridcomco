@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Block } from "@/lib/blog";
 import { seedGradient } from "@/lib/gradient";
 import { Info, Warning, Quotes } from "@phosphor-icons/react/dist/ssr";
@@ -83,13 +84,25 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
           case "figure":
             return (
               <figure key={i} className="article-figure">
-                <div
-                  className="article-figure-art"
-                  style={{ backgroundImage: seedGradient(b.seed) }}
-                  aria-hidden
-                >
-                  <span className="article-figure-chip">DGX&nbsp;Spark</span>
-                </div>
+                {b.image ? (
+                  <div className="article-figure-art overflow-hidden">
+                    <Image
+                      src={b.image}
+                      alt={b.caption}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 768px"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="article-figure-art"
+                    style={{ backgroundImage: seedGradient(b.seed) }}
+                    aria-hidden
+                  >
+                    {b.chip && <span className="article-figure-chip">{b.chip}</span>}
+                  </div>
+                )}
                 <figcaption>{b.caption}</figcaption>
               </figure>
             );

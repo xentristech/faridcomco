@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
@@ -83,10 +84,20 @@ export default async function BlogIndex(props: PageProps<"/[lang]/blog">) {
               className="spotlight group flex flex-col overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] transition"
             >
               <div
-                className="relative aspect-[16/9] w-full"
-                style={{ backgroundImage: seedGradient(post.seed) }}
+                className="relative aspect-[16/9] w-full overflow-hidden"
+                style={post.image ? undefined : { backgroundImage: seedGradient(post.seed) }}
               >
-                <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                {post.image && (
+                  <Image
+                    src={post.image}
+                    alt=""
+                    aria-hidden
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                )}
+                <span className="absolute left-4 top-4 z-10 rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                   {post.category}
                 </span>
               </div>
