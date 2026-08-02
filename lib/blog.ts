@@ -45,6 +45,157 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "computacion-cuantica-ibm-interactuar-desde-tu-navegador",
+    title: "Computación cuántica: IBM te deja tocar una de verdad desde el navegador",
+    excerpt:
+      "Desde 2016 IBM permite a cualquiera ejecutar código en una computadora cuántica real por la nube. Diez años después, con procesadores como Nighthawk y una hoja de ruta a 2029, esto es lo que puedes hacer hoy.",
+    eyebrow: "Cuántica · IBM",
+    category: "Computación cuántica",
+    author: "Farid · Eathan",
+    date: "2026-08-02",
+    dateLabel: "Agosto 2026",
+    readTime: "8 min",
+    tags: ["Computación cuántica", "IBM Quantum", "Qubits", "Qiskit", "Nighthawk", "Ventaja cuántica", "Hardware", "Tecnología"],
+    seed: "ibm-quantum-cloud-superposition",
+    suggestions: [
+      "¿Qué es un qubit en palabras simples?",
+      "¿Cómo pruebo una computadora cuántica gratis?",
+      "¿Qué es la ventaja cuántica y qué llega en 2029?",
+    ],
+    toc: [
+      { id: "que-es", label: "Qué es una computadora cuántica" },
+      { id: "interactuar", label: "Lo que IBM creó" },
+      { id: "estado", label: "Dónde está IBM hoy" },
+      { id: "hoja-de-ruta", label: "La hoja de ruta a 2029" },
+      { id: "probarlo", label: "Cómo puedes probarlo tú" },
+      { id: "lo-bueno", label: "Por qué esto es enorme" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "Qué es una computadora cuántica" },
+      {
+        type: "p",
+        text: "Una computadora normal procesa **bits**: cada uno es 0 o 1. Una computadora cuántica usa **qubits**, que gracias a la superposición pueden representar 0 y 1 al mismo tiempo, y mediante el entrelazamiento se correlacionan de formas imposibles para un bit clásico. El efecto práctico es que el espacio de cómputo crece de forma exponencial con cada qubit que agregas.",
+      },
+      {
+        type: "p",
+        text: "El problema es que los qubits son **frágiles**: pierden su estado con el mínimo ruido (decoherencia). Mantenerlos estables y corregir sus errores es el gran reto de la ingeniería cuántica, y es justo ahí donde IBM está apostando fuerte.",
+      },
+      {
+        type: "figure",
+        seed: "ibm-quantum-superposition",
+        chip: "IBM Quantum",
+        caption: "Un qubit no es 0 o 1: mientras calcula, es una combinación de ambos. Ahí está su poder.",
+      },
+
+      { type: "h2", id: "interactuar", text: "Lo que IBM creó: interactuar con una de verdad" },
+      {
+        type: "p",
+        text: "Aquí está lo que probablemente tenías en mente. El **4 de mayo de 2016**, IBM puso la primera computadora cuántica en la nube: por primera vez, cualquier persona del mundo podía ejecutar programas en una máquina cuántica **real** de 5 qubits desde su navegador, sin tener una en casa. Ese servicio se llama **IBM Quantum Platform** (antes IBM Quantum Experience).",
+      },
+      {
+        type: "p",
+        text: "El acceso se maneja con **Qiskit**, el kit de desarrollo open source de IBM, en Python. Con unas pocas líneas de código escribes un circuito cuántico, lo envías a un procesador real y recibes los resultados. En 2026 ese servicio cumplió **una década** democratizando la computación cuántica.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Lo importante:",
+        text: "no es un simulador. Tu código corre en hardware cuántico físico, enfriado a casi el cero absoluto dentro de un centro de datos de IBM. Y hay un plan gratuito (Open Plan) pensado para aprender y experimentar.",
+      },
+
+      { type: "h2", id: "estado", text: "Dónde está IBM hoy" },
+      {
+        type: "p",
+        text: "En 2026, **todas** las computadoras cuánticas de IBM superan los 100 qubits. El procesador **Heron r3** llega a **156 qubits** con tasas de error alrededor de 1.17×10⁻³, y IBM opera la flota más grande del mundo de máquinas de 100+ qubits (ya demostró incluso chips de hasta 1,121 qubits).",
+      },
+      {
+        type: "p",
+        text: "En noviembre de 2025, en su conferencia de desarrolladores, IBM presentó dos procesadores nuevos que marcan el siguiente salto:",
+      },
+      {
+        type: "table",
+        head: ["Procesador", "Qué aporta"],
+        rows: [
+          {
+            highlight: true,
+            cells: ["Nighthawk (120 qubits)", "218 acopladores sintonizables y circuitos ~30% más complejos; escala de 5,000 puertas hoy a 15,000 hacia 2028."],
+          },
+          { cells: ["Loon (~112 qubits)", "Primer chip con todas las piezas para la corrección de errores: acopladores de largo alcance, cableado 3D y reinicio rápido de qubits."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "También mejoró el software: Qiskit ahora ejecuta **circuitos dinámicos** con un 24% más de precisión a escala de 100+ qubits, expone una C-API para integrarse con supercómputo clásico, y abarató la mitigación de errores más de 100 veces. Además logró un decodificador de errores en tiempo real por debajo de **480 nanosegundos**, unas 10 veces más rápido que la competencia.",
+      },
+
+      { type: "h2", id: "hoja-de-ruta", text: "La hoja de ruta a 2029" },
+      {
+        type: "p",
+        text: "Algo raro en este campo: IBM publica un plan con fechas y hardware concreto.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**2026**: demostrar **ventaja cuántica** verificada por la comunidad, con un Quantum Advantage Tracker abierto.",
+          "**2028**: construir **Starling**, un supercomputador cuántico modular con corrección de errores.",
+          "**2029**: Starling disponible y tolerante a fallos, con unos 200 qubits lógicos capaces de correr 100 millones de puertas, desde un nuevo centro de datos cuántico en Poughkeepsie, Nueva York.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "Un matiz honesto:",
+        text: "\"ventaja cuántica\" no significa que reemplace tu laptop. Significa resolver problemas específicos (química, materiales, optimización) mejor que cualquier supercomputadora clásica. Para casi todo lo demás, lo clásico sigue ganando.",
+      },
+
+      { type: "h2", id: "probarlo", text: "Cómo puedes probarlo tú" },
+      {
+        type: "p",
+        text: "Lo mejor de todo: no necesitas un doctorado ni un laboratorio para empezar.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Crea una cuenta gratuita en IBM Quantum Platform.",
+          "Instala Qiskit (un `pip install qiskit`) o usa el editor web.",
+          "Escribe un circuito de un par de qubits, envíalo a una máquina real y compáralo con el simulador.",
+          "Aprende desde cero con los cursos gratuitos de IBM, como la Qiskit Global Summer School.",
+        ],
+      },
+      {
+        type: "quote",
+        text: "Programar una computadora cuántica real, hoy, cabe en unas pocas líneas de código y en una cuenta gratuita. Eso era ciencia ficción hace diez años.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Por qué esto es enorme" },
+      {
+        type: "p",
+        text: "Más allá del hype, esto es lo que hace especial el enfoque de IBM:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Acceso real y abierto**: hardware cuántico físico para cualquiera, gratis para empezar.",
+          "**Hoja de ruta entregada**: fechas y procesadores reales, no solo promesas.",
+          "**Ecosistema maduro**: Qiskit, documentación, cursos y una comunidad de una década.",
+          "**Transparencia**: la ventaja cuántica se verifica en comunidad, no por marketing.",
+          "**Se suma a lo clásico**: computación cuántico-céntrica que trabaja con el supercómputo, no lo reemplaza.",
+        ],
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "La computación cuántica dejó de ser ciencia ficción de laboratorio: hoy puedes tocar una computadora cuántica real desde tu navegador, gratis, en unos diez minutos. Eso es, en el fondo, lo que IBM construyó y lleva una década perfeccionando.",
+      },
+      {
+        type: "p",
+        text: "Y si 2029 llega como lo planean, con Starling tolerante a fallos, pasaremos de \"experimentar\" a \"resolver problemas que hoy son imposibles\". Vale la pena aprender a programar en cuántico ahora, mientras el campo todavía es joven y hay espacio para entender de verdad.",
+      },
+    ],
+  },
+  {
     slug: "openjarvis-ia-personal-que-corre-en-tu-maquina",
     title: "OpenJarvis: la IA personal que corre en tu propia máquina",
     excerpt:
@@ -345,6 +496,157 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "computacion-cuantica-ibm-interactuar-desde-tu-navegador",
+    title: "Quantum computing: IBM lets you touch a real one from your browser",
+    excerpt:
+      "Since 2016 IBM has let anyone run code on a real quantum computer over the cloud. Ten years on, with processors like Nighthawk and a roadmap to 2029, here's what you can do today.",
+    eyebrow: "Quantum · IBM",
+    category: "Quantum computing",
+    author: "Farid · Eathan",
+    date: "2026-08-02",
+    dateLabel: "August 2026",
+    readTime: "8 min",
+    tags: ["Quantum computing", "IBM Quantum", "Qubits", "Qiskit", "Nighthawk", "Quantum advantage", "Hardware", "Technology"],
+    seed: "ibm-quantum-cloud-superposition",
+    suggestions: [
+      "What is a qubit in simple terms?",
+      "How do I try a quantum computer for free?",
+      "What is quantum advantage and what arrives by 2029?",
+    ],
+    toc: [
+      { id: "que-es", label: "What a quantum computer is" },
+      { id: "interactuar", label: "What IBM built" },
+      { id: "estado", label: "Where IBM stands today" },
+      { id: "hoja-de-ruta", label: "The roadmap to 2029" },
+      { id: "probarlo", label: "How you can try it yourself" },
+      { id: "lo-bueno", label: "Why this is huge" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "What a quantum computer is" },
+      {
+        type: "p",
+        text: "A regular computer processes **bits**: each one is a 0 or a 1. A quantum computer uses **qubits**, which thanks to superposition can represent 0 and 1 at the same time, and through entanglement correlate in ways impossible for a classical bit. The practical effect is that the computing space grows exponentially with every qubit you add.",
+      },
+      {
+        type: "p",
+        text: "The catch is that qubits are **fragile**: they lose their state at the slightest noise (decoherence). Keeping them stable and correcting their errors is the great challenge of quantum engineering, and that is exactly where IBM is betting hard.",
+      },
+      {
+        type: "figure",
+        seed: "ibm-quantum-superposition",
+        chip: "IBM Quantum",
+        caption: "A qubit isn't 0 or 1: while it computes, it's a blend of both. That's where its power comes from.",
+      },
+
+      { type: "h2", id: "interactuar", text: "What IBM built: interacting with a real one" },
+      {
+        type: "p",
+        text: "Here's what you probably had in mind. On **May 4, 2016**, IBM put the first quantum computer on the cloud: for the first time, anyone in the world could run programs on a **real** 5-qubit quantum machine from their browser, without owning one. That service is called **IBM Quantum Platform** (formerly IBM Quantum Experience).",
+      },
+      {
+        type: "p",
+        text: "Access is handled with **Qiskit**, IBM's open-source development kit, in Python. In just a few lines of code you write a quantum circuit, send it to a real processor and get the results back. In 2026 that service turned **ten years old**, democratizing quantum computing.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "What matters:",
+        text: "it's not a simulator. Your code runs on physical quantum hardware, cooled to near absolute zero inside an IBM data center. And there's a free plan (Open Plan) meant for learning and experimenting.",
+      },
+
+      { type: "h2", id: "estado", text: "Where IBM stands today" },
+      {
+        type: "p",
+        text: "In 2026, **every** IBM quantum computer exceeds 100 qubits. The **Heron r3** processor reaches **156 qubits** with error rates around 1.17×10⁻³, and IBM runs the world's largest fleet of 100+ qubit machines (it has even demonstrated chips of up to 1,121 qubits).",
+      },
+      {
+        type: "p",
+        text: "In November 2025, at its developer conference, IBM unveiled two new processors that mark the next leap:",
+      },
+      {
+        type: "table",
+        head: ["Processor", "What it brings"],
+        rows: [
+          {
+            highlight: true,
+            cells: ["Nighthawk (120 qubits)", "218 tunable couplers and circuits ~30% more complex; scaling from 5,000 gates today to 15,000 by 2028."],
+          },
+          { cells: ["Loon (~112 qubits)", "First chip with every building block for error correction: long-range couplers, 3D wiring and fast qubit reset."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "The software improved too: Qiskit now runs **dynamic circuits** with 24% more accuracy at the 100+ qubit scale, exposes a C-API to integrate with classical supercomputing, and cut error mitigation cost by more than 100 times. It also achieved a real-time error decoder under **480 nanoseconds**, roughly 10 times faster than the competition.",
+      },
+
+      { type: "h2", id: "hoja-de-ruta", text: "The roadmap to 2029" },
+      {
+        type: "p",
+        text: "Something rare in this field: IBM publishes a plan with dates and concrete hardware.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**2026**: demonstrate community-verified **quantum advantage**, with an open Quantum Advantage Tracker.",
+          "**2028**: build **Starling**, a modular, error-corrected quantum supercomputer.",
+          "**2029**: Starling available and fault-tolerant, with about 200 logical qubits able to run 100 million gates, from a new quantum data center in Poughkeepsie, New York.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "An honest caveat:",
+        text: "\"quantum advantage\" doesn't mean it replaces your laptop. It means solving specific problems (chemistry, materials, optimization) better than any classical supercomputer. For almost everything else, classical still wins.",
+      },
+
+      { type: "h2", id: "probarlo", text: "How you can try it yourself" },
+      {
+        type: "p",
+        text: "The best part: you don't need a PhD or a lab to start.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Create a free account on IBM Quantum Platform.",
+          "Install Qiskit (a single `pip install qiskit`) or use the web editor.",
+          "Write a two-qubit circuit, send it to a real machine and compare it against the simulator.",
+          "Learn from scratch with IBM's free courses, like the Qiskit Global Summer School.",
+        ],
+      },
+      {
+        type: "quote",
+        text: "Programming a real quantum computer today fits in a few lines of code and a free account. That was science fiction ten years ago.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Why this is huge" },
+      {
+        type: "p",
+        text: "Beyond the hype, this is what makes IBM's approach special:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Real, open access**: physical quantum hardware for anyone, free to start.",
+          "**A delivered roadmap**: dates and real processors, not just promises.",
+          "**A mature ecosystem**: Qiskit, documentation, courses and a decade-old community.",
+          "**Transparency**: quantum advantage verified by the community, not by marketing.",
+          "**It adds to classical**: quantum-centric computing that works with supercomputing, not against it.",
+        ],
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "Quantum computing has stopped being lab-only science fiction: today you can touch a real quantum computer from your browser, for free, in about ten minutes. That, at its core, is what IBM built and has spent a decade refining.",
+      },
+      {
+        type: "p",
+        text: "And if 2029 lands as planned, with a fault-tolerant Starling, we'll move from \"experimenting\" to \"solving problems that are impossible today\". It's worth learning to program quantum now, while the field is still young and there's room to truly understand it.",
+      },
+    ],
+  },
   {
     slug: "openjarvis-ia-personal-que-corre-en-tu-maquina",
     title: "OpenJarvis: the personal AI that runs on your own machine",
