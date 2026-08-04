@@ -148,6 +148,13 @@ export const projects = [
     url: "https://neona.tech",
   },
   {
+    name: "AutoSGSST",
+    tag: "App con IA · SG-SST",
+    desc: "Automatiza el SG-SST con visión por computadora y voz: convierte fotos y entrevistas en informes legales en Word, PDF y audio.",
+    seed: "autosgsst-safety-ai-vision",
+    url: "https://autosgsst.xentris.tech",
+  },
+  {
     name: "Trading Pro GPT",
     tag: "Agente IA",
     desc: "Asistente de análisis de mercados potenciado por modelos de lenguaje.",

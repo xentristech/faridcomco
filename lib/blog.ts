@@ -45,6 +45,197 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "de-la-app-al-agente-ia-que-lee-documentos-y-genera-informes",
+    title: "De la app al agente: la IA que lee documentos, ve imágenes y redacta tus informes",
+    excerpt:
+      "Durante quince años, hacer software fue meter una app en el smartphone. Ahora los agentes de IA hacen el trabajo: leen documentos, analizan fotos y entregan el informe en PDF. AutoSGSST, de Xentris Tech, lo lleva al SG-SST en Colombia.",
+    eyebrow: "IA aplicada · Automatización",
+    category: "IA aplicada",
+    author: "Farid · Eathan",
+    date: "2026-08-04",
+    dateLabel: "Agosto 2026",
+    readTime: "9 min",
+    tags: ["Agentes de IA", "Automatización", "AutoSGSST", "Xentris Tech", "SG-SST", "Visión por computadora", "Colombia", "IA aplicada"],
+    seed: "autosgsst-agentes-ia-informes",
+    suggestions: [
+      "¿Qué diferencia a un agente de IA de una app normal?",
+      "¿Cómo genera AutoSGSST un informe legal desde una foto?",
+      "¿Qué es el SG-SST y por qué es obligatorio en Colombia?",
+    ],
+    toc: [
+      { id: "que-cambia", label: "Lo que cambió en el software" },
+      { id: "agentes", label: "Qué hace distinto a un agente" },
+      { id: "leer-ver", label: "Leer documentos, ver imágenes" },
+      { id: "informes", label: "Del dato al PDF, sin teclear" },
+      { id: "autosgsst", label: "El caso AutoSGSST" },
+      { id: "xentris", label: "Cómo Xentris entró a automatizar" },
+      { id: "colombia", label: "Una propuesta de valor para Colombia" },
+      { id: "lo-bueno", label: "Por qué esto importa" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-cambia", text: "Lo que cambió en el software" },
+      {
+        type: "p",
+        text: "Durante quince años, hacer software significó casi lo mismo: diseñar una aplicación, meterla en el smartphone y esperar a que la persona la abriera, tocara botones y llenara formularios. La app era el producto, pero el trabajo seguía siendo tuyo: tú capturabas los datos, tú redactabas, tú armabas el documento.",
+      },
+      {
+        type: "p",
+        text: "La inteligencia artificial cambió la ecuación. Hoy el software puede **hacer el trabajo**, no solo mostrarte dónde hacerlo. En vez de abrir una pantalla y llenar campos, le entregas evidencia (una foto, una conversación, un documento) y recibes el resultado terminado. La app deja de ser el destino y se convierte en la puerta a un **agente** que ejecuta la tarea por ti.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "El cambio de fondo:",
+        text: "antes automatizábamos el clic (menús y formularios más rápidos). Ahora automatizamos el criterio: leer, interpretar y redactar. Eso es lo que vuelve distinto a este momento.",
+      },
+
+      { type: "h2", id: "agentes", text: "Qué hace distinto a un agente" },
+      {
+        type: "p",
+        text: "Un agente de IA no es un chatbot que responde preguntas. Es un sistema que **recibe un objetivo, reúne el contexto que necesita, decide los pasos y produce un entregable**. Puede leer un PDF, mirar una imagen, consultar una norma, transcribir un audio y, con todo eso, escribir un informe coherente.",
+      },
+      {
+        type: "p",
+        text: "La diferencia con una app tradicional está en quién carga el trabajo pesado:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**App clásica:** tú entiendes el problema, tú redactas; la app solo guarda y ordena.",
+          "**Agente:** tú entregas la evidencia; el agente entiende, redacta y ordena; tú revisas y apruebas.",
+          "**El humano no desaparece:** decide, corrige y firma. El agente elimina el trabajo mecánico, no el juicio experto.",
+        ],
+      },
+
+      { type: "h2", id: "leer-ver", text: "Leer documentos, ver imágenes" },
+      {
+        type: "p",
+        text: "Dos capacidades hicieron posible este salto. La primera es que los modelos hoy **leen documentos** como lo haría una persona: entienden un contrato, una norma o una hoja de inspección y extraen lo que importa, sin plantillas rígidas. La segunda es la **visión por computadora**: el modelo mira una foto y reconoce qué hay en ella.",
+      },
+      {
+        type: "p",
+        text: "Junta las dos y tienes un asistente que recibe la realidad tal como es (una foto tomada con el celular, una entrevista hablada, un archivo desordenado) y la convierte en información estructurada. Ya no necesitas traducir el mundo a un formulario: el agente lo hace por ti.",
+      },
+
+      { type: "h2", id: "informes", text: "Del dato al PDF, sin teclear" },
+      {
+        type: "p",
+        text: "El último eslabón es la salida. Un agente no termina su trabajo en una pantalla: **genera el documento**. Toma la información que interpretó y la vuelca en un informe con la estructura que exige el negocio o la ley, listo para descargar en Word, Excel, PDF o incluso audio.",
+      },
+      {
+        type: "p",
+        text: "Ese es el flujo que define a esta nueva generación de aplicaciones: **entrada libre (foto, voz, documento) → interpretación con IA → entregable formal**. La persona pasa de mecanógrafo a supervisor.",
+      },
+      {
+        type: "figure",
+        seed: "autosgsst-hero-foto-informe",
+        image: "/blog/autosgsst-hero.jpg",
+        chip: "AutoSGSST",
+        caption: "AutoSGSST resume la idea en una frase: de la foto al informe legal de SST.",
+      },
+
+      { type: "h2", id: "autosgsst", text: "El caso AutoSGSST" },
+      {
+        type: "p",
+        text: "**AutoSGSST** (autosgsst.xentris.tech) es un ejemplo real, en producción, de todo lo anterior aplicado a un dolor muy concreto: el **SG-SST**, el Sistema de Gestión de Seguridad y Salud en el Trabajo que la ley colombiana exige a toda empresa. Documentarlo a mano es lento, repetitivo y fácil de dejar incompleto.",
+      },
+      {
+        type: "p",
+        text: "La promesa es directa: **de la foto al informe legal**. Inspeccionas con la cámara o haces una entrevista por voz, la IA analiza la evidencia y redacta el informe completo (hallazgos, causas, acciones y plan) listo para descargar en Word, PDF o audio. No es un formulario más rápido: es el documento hecho.",
+      },
+      {
+        type: "p",
+        text: "Hoy tiene 8 de 10 módulos en servicio, y cada uno es un agente especializado:",
+      },
+      {
+        type: "table",
+        head: ["Módulo", "Lo que hace el agente"],
+        rows: [
+          { cells: ["Plan de trabajo anual", "Arma el plan del SG-SST con objetivos, metas, indicadores y cronograma PHVA a 12 meses."] },
+          { cells: ["Inducciones en SST", "Genera el temario según el cargo y el sector, con evaluación y compromisos."] },
+          { cells: ["Programa de capacitación", "Programa anual con objetivos, responsables y cronograma."] },
+          { cells: ["Análisis de puesto (ASPT)", "Describes la tarea y devuelve peligros, medidas, EPP y procedimiento seguro."] },
+          { cells: ["Inspecciones de EPP", "Subes una foto y la visión arma el checklist: casco, guantes, gafas, botas, protector auditivo."], highlight: true },
+          { cells: ["Investigación de accidentes", "Entrevista por voz; redacta hallazgos, causas y plan de acción."] },
+          { cells: ["Auditoría interna", "Informe contra la Resolución 0312, con fortalezas y recomendaciones."] },
+          { cells: ["Acciones correctivas", "Desde los hallazgos, genera el registro con causa, responsables, fechas y verificación."] },
+        ],
+      },
+      {
+        type: "figure",
+        seed: "autosgsst-modulos-agentes",
+        image: "/blog/autosgsst-modulos.jpg",
+        chip: "AutoSGSST",
+        caption: "Cada módulo es un agente especializado en una parte del SG-SST.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Para probarlo:",
+        text: "hay una prueba gratuita de 3 días con todos los módulos y sin tarjeta. Es la forma más rápida de ver el flujo completo, de la evidencia al documento.",
+      },
+
+      { type: "h2", id: "xentris", text: "Cómo Xentris entró a automatizar" },
+      {
+        type: "p",
+        text: "Aquí está la parte que más me interesa como ingeniero. La tecnología sola no hace un buen producto de cumplimiento: hace falta saber **qué** debe decir un informe legal para que sirva ante una auditoría. Por eso AutoSGSST no nació en un vacío técnico.",
+      },
+      {
+        type: "p",
+        text: "**Xentris Tech** (xentris.tech) construyó la plataforma junto a **Rafael Soto** (rafael.xentris.tech), consultor HSEQ con más de 20 años en seguridad y salud en el trabajo en energía, petróleo y gas e industria. Es el modelo que funciona: **experiencia humana de dominio + agentes de IA**. La IA se entrenó con la legislación colombiana de SST y con el criterio de alguien que ha vivido las auditorías por dentro.",
+      },
+      {
+        type: "quote",
+        text: "No es otro software de SST. Es un sistema inteligente.",
+      },
+      {
+        type: "p",
+        text: "Esa es la diferencia entre digitalizar un formulario y automatizar el criterio. Xentris tomó el conocimiento de un consultor y lo convirtió en un agente que responde, redacta y documenta como lo haría él, disponible 24/7.",
+      },
+
+      { type: "h2", id: "colombia", text: "Una propuesta de valor para Colombia" },
+      {
+        type: "p",
+        text: "En Colombia el SG-SST no es opcional. El **Decreto 1072 de 2015** y la **Resolución 0312 de 2019** obligan a las empresas, sin importar su tamaño, a implementar y documentar su sistema de seguridad, y a sostenerlo para auditorías, la RUC o certificaciones como ISO 45001. Para miles de pymes eso significa contratar consultoría cara o quedar expuestas a sanciones.",
+      },
+      {
+        type: "p",
+        text: "La propuesta de valor de AutoSGSST es cerrar esa brecha: poner el criterio de un consultor experto al alcance de cualquier empresa, a costo de software y no de horas de asesoría. Es tecnología pensada desde y para el contexto colombiano, no una plantilla importada.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Por qué esto importa" },
+      {
+        type: "p",
+        text: "Más allá del SG-SST, AutoSGSST es una muestra de hacia dónde va el software útil:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**El trabajo tedioso se delega.** Redactar, ordenar y dar formato deja de consumir horas humanas.",
+          "**El conocimiento experto se escala.** Un solo consultor ya no atiende a diez empresas; su criterio, vuelto agente, atiende a mil.",
+          "**La entrada se vuelve natural.** Una foto o una conversación reemplazan formularios interminables.",
+          "**El entregable es formal.** Lo que sale es un documento legal, no una pantalla que todavía hay que pasar en limpio.",
+          "**El humano sube de nivel.** Pasa de llenar campos a decidir y aprobar.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Ese patrón (evidencia libre, agente que interpreta, documento terminado) se puede llevar a contratos, salud, contabilidad, legal o logística. AutoSGSST es la prueba de que ya funciona en producción, con una necesidad real y regulada.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "La era de la app en el smartphone no se acabó, pero dejó de ser el techo. Lo que viene son agentes que leen, ven y redactan: software que hace el trabajo y te deja el criterio. AutoSGSST lo demuestra en un terreno donde el error se paga caro, y lo hace desde Colombia, uniendo la experiencia de un consultor con la potencia de la IA.",
+      },
+      {
+        type: "p",
+        text: "Si quieres verlo funcionando, entra a autosgsst.xentris.tech y prueba el flujo completo. Y si en tu empresa hay un proceso que todavía se hace a mano (leer, interpretar, documentar), probablemente ya es automatizable. De eso se trata este momento.",
+      },
+    ],
+  },
+  {
     slug: "computacion-cuantica-ibm-interactuar-desde-tu-navegador",
     title: "Computación cuántica: IBM te deja tocar una de verdad desde el navegador",
     excerpt:
@@ -496,6 +687,197 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "de-la-app-al-agente-ia-que-lee-documentos-y-genera-informes",
+    title: "From app to agent: the AI that reads documents, sees images and writes your reports",
+    excerpt:
+      "For fifteen years, building software meant putting an app on a smartphone. Now AI agents do the work: they read documents, analyze photos and hand you the report as a PDF. AutoSGSST, by Xentris Tech, brings this to workplace-safety compliance in Colombia.",
+    eyebrow: "Applied AI · Automation",
+    category: "Applied AI",
+    author: "Farid · Eathan",
+    date: "2026-08-04",
+    dateLabel: "August 2026",
+    readTime: "9 min",
+    tags: ["AI agents", "Automation", "AutoSGSST", "Xentris Tech", "OSH", "Computer vision", "Colombia", "Applied AI"],
+    seed: "autosgsst-agentes-ia-informes",
+    suggestions: [
+      "How is an AI agent different from a normal app?",
+      "How does AutoSGSST turn a photo into a legal report?",
+      "What is SG-SST and why is it mandatory in Colombia?",
+    ],
+    toc: [
+      { id: "que-cambia", label: "What changed in software" },
+      { id: "agentes", label: "What makes an agent different" },
+      { id: "leer-ver", label: "Reading documents, seeing images" },
+      { id: "informes", label: "From data to PDF, no typing" },
+      { id: "autosgsst", label: "The AutoSGSST case" },
+      { id: "xentris", label: "How Xentris got into automation" },
+      { id: "colombia", label: "A value proposition for Colombia" },
+      { id: "lo-bueno", label: "Why this matters" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-cambia", text: "What changed in software" },
+      {
+        type: "p",
+        text: "For fifteen years, building software meant roughly the same thing: design an app, put it on a smartphone and wait for the person to open it, tap buttons and fill out forms. The app was the product, but the work was still yours: you captured the data, you wrote the text, you assembled the document.",
+      },
+      {
+        type: "p",
+        text: "Artificial intelligence changed the equation. Today software can **do the work**, not just show you where to do it. Instead of opening a screen and filling fields, you hand it evidence (a photo, a conversation, a document) and get the finished result back. The app stops being the destination and becomes the door to an **agent** that carries out the task for you.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The deeper shift:",
+        text: "we used to automate the click (faster menus and forms). Now we automate the judgment: reading, interpreting and writing. That is what makes this moment different.",
+      },
+
+      { type: "h2", id: "agentes", text: "What makes an agent different" },
+      {
+        type: "p",
+        text: "An AI agent is not a chatbot that answers questions. It is a system that **takes a goal, gathers the context it needs, decides the steps and produces a deliverable**. It can read a PDF, look at an image, check a regulation, transcribe an audio clip and, with all of that, write a coherent report.",
+      },
+      {
+        type: "p",
+        text: "The difference with a traditional app is who carries the heavy lifting:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Classic app:** you understand the problem, you write; the app only stores and organizes.",
+          "**Agent:** you hand over the evidence; the agent understands, writes and organizes; you review and approve.",
+          "**The human doesn't disappear:** they decide, correct and sign off. The agent removes the mechanical work, not the expert judgment.",
+        ],
+      },
+
+      { type: "h2", id: "leer-ver", text: "Reading documents, seeing images" },
+      {
+        type: "p",
+        text: "Two capabilities made this leap possible. The first is that models now **read documents** the way a person would: they understand a contract, a regulation or an inspection sheet and extract what matters, with no rigid templates. The second is **computer vision**: the model looks at a photo and recognizes what's in it.",
+      },
+      {
+        type: "p",
+        text: "Put the two together and you get an assistant that takes reality as it is (a photo shot on a phone, a spoken interview, a messy file) and turns it into structured information. You no longer need to translate the world into a form: the agent does it for you.",
+      },
+
+      { type: "h2", id: "informes", text: "From data to PDF, no typing" },
+      {
+        type: "p",
+        text: "The final link is the output. An agent doesn't finish its work on a screen: it **generates the document**. It takes the information it interpreted and pours it into a report with the structure the business or the law requires, ready to download as Word, Excel, PDF or even audio.",
+      },
+      {
+        type: "p",
+        text: "That is the flow that defines this new generation of applications: **free input (photo, voice, document) → AI interpretation → formal deliverable**. The person goes from typist to supervisor.",
+      },
+      {
+        type: "figure",
+        seed: "autosgsst-hero-foto-informe",
+        image: "/blog/autosgsst-hero.jpg",
+        chip: "AutoSGSST",
+        caption: "AutoSGSST sums up the idea in one line: from the photo to the legal safety report.",
+      },
+
+      { type: "h2", id: "autosgsst", text: "The AutoSGSST case" },
+      {
+        type: "p",
+        text: "**AutoSGSST** (autosgsst.xentris.tech) is a real, in-production example of all of the above applied to a very concrete pain: **SG-SST**, the occupational safety and health management system that Colombian law requires of every company. Documenting it by hand is slow, repetitive and easy to leave incomplete.",
+      },
+      {
+        type: "p",
+        text: "The promise is direct: **from the photo to the legal report**. You inspect with the camera or run a voice interview, the AI analyzes the evidence and writes the full report (findings, causes, actions and plan) ready to download as Word, PDF or audio. It's not a faster form: it's the finished document.",
+      },
+      {
+        type: "p",
+        text: "It currently has 8 of 10 modules in service, and each one is a specialized agent:",
+      },
+      {
+        type: "table",
+        head: ["Module", "What the agent does"],
+        rows: [
+          { cells: ["Annual work plan", "Builds the SG-SST plan with objectives, targets, indicators and a 12-month PDCA schedule."] },
+          { cells: ["Safety inductions", "Generates the syllabus by role and sector, with assessment and commitments."] },
+          { cells: ["Training program", "Annual program with objectives, owners and schedule."] },
+          { cells: ["Job hazard analysis", "You describe the task and it returns hazards, controls, PPE and safe procedure."] },
+          { cells: ["PPE inspections", "You upload a photo and vision builds the checklist: helmet, gloves, goggles, boots, ear protection."], highlight: true },
+          { cells: ["Accident investigation", "Voice interview; it writes findings, causes and action plan."] },
+          { cells: ["Internal audit", "Report against Resolution 0312, with strengths and recommendations."] },
+          { cells: ["Corrective actions", "From the findings, it generates the log with cause, owners, dates and verification."] },
+        ],
+      },
+      {
+        type: "figure",
+        seed: "autosgsst-modulos-agentes",
+        image: "/blog/autosgsst-modulos.jpg",
+        chip: "AutoSGSST",
+        caption: "Each module is an agent specialized in one part of the safety system.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "To try it:",
+        text: "there's a free 3-day trial with every module and no credit card. It's the fastest way to see the full flow, from evidence to document.",
+      },
+
+      { type: "h2", id: "xentris", text: "How Xentris got into automation" },
+      {
+        type: "p",
+        text: "Here's the part I find most interesting as an engineer. Technology alone doesn't make a good compliance product: you need to know **what** a legal report must say for it to hold up in an audit. That's why AutoSGSST wasn't born in a technical vacuum.",
+      },
+      {
+        type: "p",
+        text: "**Xentris Tech** (xentris.tech) built the platform together with **Rafael Soto** (rafael.xentris.tech), an HSEQ consultant with 20+ years in occupational safety across energy, oil & gas and industry. It's the model that works: **human domain expertise + AI agents**. The AI was trained on Colombian safety legislation and on the judgment of someone who has lived audits from the inside.",
+      },
+      {
+        type: "quote",
+        text: "It's not just another safety software. It's an intelligent system.",
+      },
+      {
+        type: "p",
+        text: "That's the difference between digitizing a form and automating judgment. Xentris took a consultant's knowledge and turned it into an agent that answers, writes and documents the way he would, available 24/7.",
+      },
+
+      { type: "h2", id: "colombia", text: "A value proposition for Colombia" },
+      {
+        type: "p",
+        text: "In Colombia, SG-SST isn't optional. **Decree 1072 of 2015** and **Resolution 0312 of 2019** require companies, regardless of size, to implement and document their safety system, and to sustain it for audits, the RUC or certifications like ISO 45001. For thousands of small businesses, that means hiring expensive consulting or staying exposed to penalties.",
+      },
+      {
+        type: "p",
+        text: "AutoSGSST's value proposition is to close that gap: put an expert consultant's judgment within reach of any company, at the cost of software rather than hours of advice. It's technology built from and for the Colombian context, not an imported template.",
+      },
+
+      { type: "h2", id: "lo-bueno", text: "Why this matters" },
+      {
+        type: "p",
+        text: "Beyond SG-SST, AutoSGSST is a glimpse of where useful software is headed:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Tedious work gets delegated.** Writing, organizing and formatting stop eating human hours.",
+          "**Expert knowledge scales.** One consultant no longer serves ten companies; their judgment, turned into an agent, serves a thousand.",
+          "**Input becomes natural.** A photo or a conversation replaces endless forms.",
+          "**The deliverable is formal.** What comes out is a legal document, not a screen you still have to write up.",
+          "**The human levels up.** They go from filling fields to deciding and approving.",
+        ],
+      },
+      {
+        type: "p",
+        text: "That pattern (free evidence, an agent that interprets, a finished document) can be carried to contracts, health, accounting, legal or logistics. AutoSGSST is proof that it already works in production, on a real, regulated need.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "The era of the app on a smartphone isn't over, but it's no longer the ceiling. What comes next are agents that read, see and write: software that does the work and leaves you the judgment. AutoSGSST proves it in a field where mistakes are costly, and it does so from Colombia, pairing a consultant's experience with the power of AI.",
+      },
+      {
+        type: "p",
+        text: "If you want to see it working, go to autosgsst.xentris.tech and try the full flow. And if there's a process in your company that's still done by hand (reading, interpreting, documenting), it's probably already automatable. That's what this moment is about.",
+      },
+    ],
+  },
   {
     slug: "computacion-cuantica-ibm-interactuar-desde-tu-navegador",
     title: "Quantum computing: IBM lets you touch a real one from your browser",
