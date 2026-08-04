@@ -248,6 +248,7 @@ export const postsEs: Post[] = [
     readTime: "8 min",
     tags: ["Computación cuántica", "IBM Quantum", "Qubits", "Qiskit", "Nighthawk", "Ventaja cuántica", "Hardware", "Tecnología"],
     seed: "ibm-quantum-cloud-superposition",
+    image: "/blog/ibmq-hero.jpg",
     suggestions: [
       "¿Qué es un qubit en palabras simples?",
       "¿Cómo pruebo una computadora cuántica gratis?",
@@ -355,6 +356,13 @@ export const postsEs: Post[] = [
         ],
       },
       {
+        type: "figure",
+        seed: "ibm-quantum-platform-hello-world",
+        image: "/blog/ibmq-hello-world.jpg",
+        chip: "IBM Quantum",
+        caption: "La IBM Quantum Platform desde el navegador: instalas Qiskit (pip install qiskit), corres tu primer circuito y consigues 10 minutos gratis al mes en procesadores reales de más de 100 qubits.",
+      },
+      {
         type: "quote",
         text: "Programar una computadora cuántica real, hoy, cabe en unas pocas líneas de código y en una cuenta gratuita. Eso era ciencia ficción hace diez años.",
       },
@@ -399,6 +407,7 @@ export const postsEs: Post[] = [
     readTime: "7 min",
     tags: ["OpenJarvis", "IA local", "Agentes", "Ollama", "Stanford", "Privacidad", "Open source", "LLM"],
     seed: "openjarvis-local-first-neural",
+    image: "/blog/openjarvis-hero.jpg",
     suggestions: [
       "¿Qué es OpenJarvis en una frase?",
       "¿Por qué correr la IA en local y no en la nube?",
@@ -494,6 +503,13 @@ export const postsEs: Post[] = [
           "Ollama (o un motor de inferencia compatible)",
           "Un script quickstart que instala dependencias, Ollama y un modelo inicial en unos 3 minutos",
         ],
+      },
+      {
+        type: "figure",
+        seed: "openjarvis-quickstart-ollama",
+        image: "/blog/openjarvis-quickstart.jpg",
+        chip: "OpenJarvis",
+        caption: "Un solo script (quickstart.sh) clona el repo, levanta Ollama con un modelo local y abre el chat en tu navegador. La nube sigue siendo opcional.",
       },
       {
         type: "p",
@@ -891,6 +907,7 @@ export const postsEn: Post[] = [
     readTime: "8 min",
     tags: ["Quantum computing", "IBM Quantum", "Qubits", "Qiskit", "Nighthawk", "Quantum advantage", "Hardware", "Technology"],
     seed: "ibm-quantum-cloud-superposition",
+    image: "/blog/ibmq-hero.jpg",
     suggestions: [
       "What is a qubit in simple terms?",
       "How do I try a quantum computer for free?",
@@ -998,6 +1015,13 @@ export const postsEn: Post[] = [
         ],
       },
       {
+        type: "figure",
+        seed: "ibm-quantum-platform-hello-world",
+        image: "/blog/ibmq-hello-world.jpg",
+        chip: "IBM Quantum",
+        caption: "The IBM Quantum Platform in the browser: install Qiskit (pip install qiskit), run your first circuit and get 10 free minutes per month on real 100+ qubit processors.",
+      },
+      {
         type: "quote",
         text: "Programming a real quantum computer today fits in a few lines of code and a free account. That was science fiction ten years ago.",
       },
@@ -1042,6 +1066,7 @@ export const postsEn: Post[] = [
     readTime: "7 min",
     tags: ["OpenJarvis", "Local AI", "Agents", "Ollama", "Stanford", "Privacy", "Open source", "LLM"],
     seed: "openjarvis-local-first-neural",
+    image: "/blog/openjarvis-hero.jpg",
     suggestions: [
       "What is OpenJarvis in one sentence?",
       "Why run AI locally instead of in the cloud?",
@@ -1137,6 +1162,13 @@ export const postsEn: Post[] = [
           "Ollama (or a compatible inference engine)",
           "A quickstart script that installs dependencies, Ollama and a starter model in about 3 minutes",
         ],
+      },
+      {
+        type: "figure",
+        seed: "openjarvis-quickstart-ollama",
+        image: "/blog/openjarvis-quickstart.jpg",
+        chip: "OpenJarvis",
+        caption: "A single script (quickstart.sh) clones the repo, spins up Ollama with a local model and opens the chat in your browser. The cloud stays optional.",
       },
       {
         type: "p",
