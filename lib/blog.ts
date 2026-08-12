@@ -57,6 +57,7 @@ export const postsEs: Post[] = [
     readTime: "8 min",
     tags: ["IBM", "Bob 2.0", "Agentes de IA", "Ingeniería de software", "Modernización", "COBOL", "Automatización", "Empresa"],
     seed: "ibm-bob-2-agentic-dev-partner",
+    image: "/blog/bob-hero.jpg",
     suggestions: [
       "¿Qué diferencia a Bob 2.0 de un copiloto de código?",
       "¿Qué es la arquitectura de tres capas de Bob?",
@@ -136,6 +137,13 @@ export const postsEs: Post[] = [
           "**Workflows:** le dan «columna vertebral» a los procesos repetibles —el motor corre los pasos en orden, guarda el estado, maneja errores y todo queda auditable.",
           "**Bobalytics:** analítica integrada que muestra cuánto consume la IA, dónde y a qué costo.",
         ],
+      },
+      {
+        type: "figure",
+        seed: "ibm-bob-2-build-with-agents",
+        image: "/blog/bob-agents.jpg",
+        chip: "IBM Bob",
+        caption: "Bob lanzando subagentes en paralelo: cada uno busca en un directorio distinto y devuelve solo lo que importa. Así mantiene el contexto limpio y el costo bajo, incluso en proyectos grandes.",
       },
       {
         type: "callout",
@@ -880,6 +888,7 @@ export const postsEn: Post[] = [
     readTime: "8 min",
     tags: ["IBM", "Bob 2.0", "AI agents", "Software engineering", "Modernization", "COBOL", "Automation", "Enterprise"],
     seed: "ibm-bob-2-agentic-dev-partner",
+    image: "/blog/bob-hero-en.jpg",
     suggestions: [
       "How is Bob 2.0 different from a code copilot?",
       "What is Bob's three-tier architecture?",
@@ -959,6 +968,13 @@ export const postsEn: Post[] = [
           "**Workflows:** they give a «backbone» to repeatable processes —the engine runs the steps in order, holds state, handles errors and keeps it all auditable.",
           "**Bobalytics:** built-in analytics showing how much the AI consumes, where and at what cost.",
         ],
+      },
+      {
+        type: "figure",
+        seed: "ibm-bob-2-build-with-agents",
+        image: "/blog/bob-agents-en.jpg",
+        chip: "IBM Bob",
+        caption: "Bob spawning subagents in parallel: each one searches a different directory and returns only what matters. That's how it keeps context clean and cost low, even on large projects.",
       },
       {
         type: "callout",
