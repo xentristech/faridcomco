@@ -45,6 +45,170 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "ibm-bob-2-el-socio-de-desarrollo-agentico",
+    title: "Saludar a Bob 2.0: cuando IBM cambia el autocompletado por un socio de desarrollo agéntico",
+    excerpt:
+      "IBM presentó Bob 2.0: no un mejor autocompletado, sino un socio de desarrollo agéntico que planea, programa, prueba y moderniza software empresarial de punta a punta —con las barandas de gobernanza y costo que una empresa exige. Esto es lo que significa el salto, y por qué confirma hacia dónde va la automatización con agentes.",
+    eyebrow: "Agentes de IA · Ingeniería",
+    category: "Agentes de IA",
+    author: "Farid · Eathan",
+    date: "2026-08-12",
+    dateLabel: "Agosto 2026",
+    readTime: "8 min",
+    tags: ["IBM", "Bob 2.0", "Agentes de IA", "Ingeniería de software", "Modernización", "COBOL", "Automatización", "Empresa"],
+    seed: "ibm-bob-2-agentic-dev-partner",
+    suggestions: [
+      "¿Qué diferencia a Bob 2.0 de un copiloto de código?",
+      "¿Qué es la arquitectura de tres capas de Bob?",
+      "¿Cómo moderniza Bob código viejo como COBOL?",
+    ],
+    toc: [
+      { id: "que-es", label: "Saludar a Bob 2.0" },
+      { id: "socio", label: "De copiloto a socio de desarrollo" },
+      { id: "arquitectura", label: "Cómo está armado por dentro" },
+      { id: "multi-agente", label: "Muchos agentes a la vez" },
+      { id: "modos", label: "Agente, Plan y Ask" },
+      { id: "modernizacion", label: "Modernizar COBOL, IBM i y Java" },
+      { id: "empresa", label: "Por qué es para empresas" },
+      { id: "farid", label: "Lo que veo desde acá" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "Saludar a Bob 2.0" },
+      {
+        type: "p",
+        text: "El 12 de agosto de 2026, IBM publicó un artículo con un título casi cariñoso: *«Say hello to IBM Bob 2.0»*. Bob es el socio de desarrollo de software con IA de IBM, y la versión 2 no es un parche: reescribió la arquitectura completa. No es un mejor autocompletado. Es un agente que toma un objetivo de software y lo lleva de la planeación al código, a las pruebas, al despliegue y hasta a la modernización de sistemas heredados.",
+      },
+      {
+        type: "p",
+        text: "Lo interesante es quién lo dice. IBM es la casa del mainframe, del COBOL, del software empresarial que corre bancos y aseguradoras. Que ese jugador —el más conservador del rubro— apueste de lleno por los agentes dice mucho del momento. Bob 2.0 se probó con más de 100,000 desarrolladores de IBM antes de salir.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "El titular real:",
+        text: "no es «otro asistente de código». Es un socio de desarrollo agéntico de punta a punta, con las barandas —gobernanza, seguridad y control de costo— que una empresa de verdad exige.",
+      },
+
+      { type: "h2", id: "socio", text: "De copiloto a socio de desarrollo" },
+      {
+        type: "p",
+        text: "Durante años, «IA para programar» significó autocompletar: un copiloto que sugiere la siguiente línea mientras tú manejas el volante. Bob 2.0 cambia el marco de referencia. Y lo dice sin rodeos su propio líder de producto.",
+      },
+      {
+        type: "quote",
+        text: "La vara de la IA empresarial ya no es un mejor asistente de código. Es un socio de desarrollo agéntico de punta a punta. — Neel Sundaresan, GM de Automatización e IA, IBM.",
+      },
+      {
+        type: "p",
+        text: "La diferencia es de fondo. Un copiloto sugiere y tú ejecutas. Un socio recibe el objetivo, reúne por su cuenta el contexto de todo el repositorio, decide los pasos, ejecuta las herramientas que necesita y te entrega el resultado para revisar. El humano sigue mandando: decide, corrige y aprueba. Pero el trabajo mecánico deja de ser tuyo.",
+      },
+
+      { type: "h2", id: "arquitectura", text: "Cómo está armado por dentro" },
+      {
+        type: "p",
+        text: "Bob 2.0 reescribió su arquitectura en tres capas bien separadas. No es un detalle técnico menor: es lo que permite que un solo motor de razonamiento sirva a muchas interfaces sin duplicar lógica.",
+      },
+      {
+        type: "table",
+        head: ["Capa", "Qué hace"],
+        rows: [
+          { cells: ["El Agente", "El bucle agéntico central: razona y genera el código."], highlight: true },
+          { cells: ["El Harness", "La infraestructura compartida: autenticación, registro y telemetría."] },
+          { cells: ["Los Clientes", "Las interfaces (IDE y demás), sin lógica duplicada."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "Sobre esa base montaron mejoras concretas: soporte para servidores MCP (Model Context Protocol) para conectar herramientas externas, un *rollback* que rastrea directamente el estado de los archivos, una interfaz más limpia que oculta las llamadas intermedias a herramientas, y multitarea en segundo plano sin bloquear la sesión mientras trabaja.",
+      },
+
+      { type: "h2", id: "multi-agente", text: "Muchos agentes a la vez" },
+      {
+        type: "p",
+        text: "El mayor salto de la versión 2 es que Bob dejó de ser un solo agente haciendo todo en un mismo contexto. Ahora coordina **subagentes** que trabajan en contextos aislados. En lugar de saturar una sola ventana de contexto —lento y caro—, delega el trabajo complejo y mantiene el costo a raya.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Llamadas a herramientas en paralelo:** el modelo puede pedir y ejecutar varias herramientas en un mismo turno, no de a una.",
+          "**Subagentes en contextos aislados:** cada tarea pesada vive en su propio espacio; menos ruido, menos costo.",
+          "**Workflows:** le dan «columna vertebral» a los procesos repetibles —el motor corre los pasos en orden, guarda el estado, maneja errores y todo queda auditable.",
+          "**Bobalytics:** analítica integrada que muestra cuánto consume la IA, dónde y a qué costo.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "La idea clave:",
+        text: "un workflow convierte «pídele a la IA que lo intente» en un proceso repetible con estado y manejo de errores. Eso es lo que separa una demo de algo que una empresa puede correr en producción.",
+      },
+
+      { type: "h2", id: "modos", text: "Agente, Plan y Ask" },
+      {
+        type: "p",
+        text: "Bob 2.0 tiene tres modos para pedirle las cosas, según cuánto quieras que actúe:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Ask:** pregunta y entiende el código sin tocar nada. Ideal para explorar un repositorio ajeno.",
+          "**Plan:** arma un plan de los pasos antes de ejecutar. Tú lo revisas y apruebas.",
+          "**Agent:** ejecuta el trabajo de punta a punta, con las herramientas que haga falta.",
+        ],
+      },
+
+      { type: "h2", id: "modernizacion", text: "Modernizar COBOL, IBM i y Java" },
+      {
+        type: "p",
+        text: "Aquí es donde se nota el ADN de IBM. Junto con Bob 2.0 lanzaron paquetes premium con workflows especializados para modernizar sistemas heredados —el trabajo más difícil y, a la vez, el más valioso del mundo empresarial.",
+      },
+      {
+        type: "table",
+        head: ["Paquete", "Para qué sirve"],
+        rows: [
+          { cells: ["IBM Z", "COBOL, PL/I y análisis de JCL en el mainframe."], highlight: true },
+          { cells: ["IBM i", "Sistema de archivos remoto y herramientas propias de IBM i."] },
+          { cells: ["Java", "Migración a Java 25 y refactorización a gran escala."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "Ese es el punto exacto: mover código de treinta años que corre un banco es justo la clase de tarea para la que sirve un agente bien gobernado. No es magia creativa; es criterio aplicado a gran escala, con trazabilidad de cada paso.",
+      },
+
+      { type: "h2", id: "empresa", text: "Por qué es para empresas" },
+      {
+        type: "p",
+        text: "El diferenciador de Bob 2.0 no es solo lo que puede hacer, sino las barandas. Gobernanza, seguridad y control de costo integrados en cada paso; workflows auditables; y Bobalytics para que un equipo vea qué consume la IA. Es la respuesta a la pregunta que frena a las empresas grandes: «¿cómo dejo a un agente tocar mi código sin perder el control?».",
+      },
+      {
+        type: "p",
+        text: "Los detalles cuentan la misma historia: se probó con más de 100,000 desarrolladores internos, la configuración existente se migra sola y el único paso para actualizar es instalarlo. IBM no está haciendo un experimento; está estandarizando una forma de trabajar.",
+      },
+
+      { type: "h2", id: "farid", text: "Lo que veo desde acá" },
+      {
+        type: "p",
+        text: "Bob 2.0 confirma algo que repito en este blog: el software pasa de **herramienta** a **agente**. Dejas de abrir una pantalla para hacer el trabajo tú; le entregas un objetivo y el agente lo ejecuta. Lo notable no es la idea —es quién la firma. Cuando IBM, el jugador más empresarial que existe, lo pone como estándar, deja de ser tendencia y pasa a ser piso.",
+      },
+      {
+        type: "p",
+        text: "Y hay un detalle que me toca de cerca: esa separación Agente / Harness / Clientes es exactamente como están construidos los agentes con los que trabajo todos los días. El mismo principio escala desde mis proyectos de automatización —AutoSGSST leyendo una foto y redactando un informe legal de SST— hasta modernizar un mainframe. Cambia el tamaño, no la idea.",
+      },
+      {
+        type: "p",
+        text: "Para Colombia y Latinoamérica la lección es liberadora: no hay que ser IBM para aplicar esto. Un agente que lee documentos, decide los pasos y entrega el resultado está al alcance de un equipo local. Esa es, exactamente, la apuesta que hacemos en Xentris Tech.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "Bob 2.0 no es noticia solo porque IBM sacó una herramienta. Es una señal: el estándar de la industria ya no es «un mejor asistente», sino «un socio agéntico». Quien empiece hoy a automatizar con agentes —lea documentos, decida pasos y entregue— está del lado correcto del cambio. Bob es la versión empresarial de una idea que ya cabe en un proyecto local.",
+      },
+    ],
+  },
+  {
     slug: "de-la-app-al-agente-ia-que-lee-documentos-y-genera-informes",
     title: "De la app al agente: la IA que lee documentos, ve imágenes y redacta tus informes",
     excerpt:
@@ -138,7 +302,7 @@ export const postsEs: Post[] = [
       { type: "h2", id: "autosgsst", text: "El caso AutoSGSST" },
       {
         type: "p",
-        text: "**AutoSGSST** (autosgsst.xentris.tech) es un ejemplo real, en producción, de todo lo anterior aplicado a un dolor muy concreto: el **SG-SST**, el Sistema de Gestión de Seguridad y Salud en el Trabajo que la ley colombiana exige a toda empresa. Documentarlo a mano es lento, repetitivo y fácil de dejar incompleto.",
+        text: "**AutoSGSST** (autosgsst.vercel.app) es un ejemplo real, en producción, de todo lo anterior aplicado a un dolor muy concreto: el **SG-SST**, el Sistema de Gestión de Seguridad y Salud en el Trabajo que la ley colombiana exige a toda empresa. Documentarlo a mano es lento, repetitivo y fácil de dejar incompleto.",
       },
       {
         type: "p",
@@ -231,7 +395,7 @@ export const postsEs: Post[] = [
       },
       {
         type: "p",
-        text: "Si quieres verlo funcionando, entra a autosgsst.xentris.tech y prueba el flujo completo. Y si en tu empresa hay un proceso que todavía se hace a mano (leer, interpretar, documentar), probablemente ya es automatizable. De eso se trata este momento.",
+        text: "Si quieres verlo funcionando, entra a autosgsst.vercel.app y prueba el flujo completo. Y si en tu empresa hay un proceso que todavía se hace a mano (leer, interpretar, documentar), probablemente ya es automatizable. De eso se trata este momento.",
       },
     ],
   },
@@ -704,6 +868,170 @@ export const postsEs: Post[] = [
 
 export const postsEn: Post[] = [
   {
+    slug: "ibm-bob-2-el-socio-de-desarrollo-agentico",
+    title: "Say hello to Bob 2.0: when IBM trades autocomplete for an agentic development partner",
+    excerpt:
+      "IBM unveiled Bob 2.0: not a better autocomplete, but an agentic development partner that plans, codes, tests and modernizes enterprise software end to end —with the governance and cost guardrails an enterprise demands. Here's what the leap means, and why it confirms where agent-driven automation is headed.",
+    eyebrow: "AI agents · Engineering",
+    category: "AI agents",
+    author: "Farid · Eathan",
+    date: "2026-08-12",
+    dateLabel: "August 2026",
+    readTime: "8 min",
+    tags: ["IBM", "Bob 2.0", "AI agents", "Software engineering", "Modernization", "COBOL", "Automation", "Enterprise"],
+    seed: "ibm-bob-2-agentic-dev-partner",
+    suggestions: [
+      "How is Bob 2.0 different from a code copilot?",
+      "What is Bob's three-tier architecture?",
+      "How does Bob modernize legacy code like COBOL?",
+    ],
+    toc: [
+      { id: "que-es", label: "Say hello to Bob 2.0" },
+      { id: "socio", label: "From copilot to development partner" },
+      { id: "arquitectura", label: "How it's built inside" },
+      { id: "multi-agente", label: "Many agents at once" },
+      { id: "modos", label: "Agent, Plan and Ask" },
+      { id: "modernizacion", label: "Modernizing COBOL, IBM i and Java" },
+      { id: "empresa", label: "Why it's built for enterprises" },
+      { id: "farid", label: "What I see from here" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "Say hello to Bob 2.0" },
+      {
+        type: "p",
+        text: "On August 12, 2026, IBM published a post with an almost affectionate title: *«Say hello to IBM Bob 2.0»*. Bob is IBM's AI software development partner, and version 2 isn't a patch: it rewrote the whole architecture. It's not a better autocomplete. It's an agent that takes a software goal and carries it from planning to code, to testing, to deployment and even to modernizing legacy systems.",
+      },
+      {
+        type: "p",
+        text: "The interesting part is who's saying it. IBM is the home of the mainframe, of COBOL, of the enterprise software that runs banks and insurers. That this player —the most conservative in the field— is going all in on agents says a lot about the moment. Bob 2.0 was tested with more than 100,000 IBM developers before release.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The real headline:",
+        text: "it isn't «another coding assistant». It's an end-to-end agentic development partner, with the guardrails —governance, security and cost control— a real enterprise demands.",
+      },
+
+      { type: "h2", id: "socio", text: "From copilot to development partner" },
+      {
+        type: "p",
+        text: "For years, «AI for coding» meant autocomplete: a copilot suggesting the next line while you hold the wheel. Bob 2.0 changes the frame of reference. And its own product leader says so plainly.",
+      },
+      {
+        type: "quote",
+        text: "The bar for enterprise AI is no longer a better coding assistant. It's an end-to-end agentic development partner. — Neel Sundaresan, GM of Automation and AI, IBM.",
+      },
+      {
+        type: "p",
+        text: "The difference is fundamental. A copilot suggests and you execute. A partner takes the goal, gathers the context of the whole repository on its own, decides the steps, runs the tools it needs and hands you the result to review. The human still leads: you decide, correct and approve. But the mechanical work stops being yours.",
+      },
+
+      { type: "h2", id: "arquitectura", text: "How it's built inside" },
+      {
+        type: "p",
+        text: "Bob 2.0 rewrote its architecture into three cleanly separated layers. That's not a minor technical detail: it's what lets a single reasoning engine serve many interfaces without duplicating logic.",
+      },
+      {
+        type: "table",
+        head: ["Layer", "What it does"],
+        rows: [
+          { cells: ["The Agent", "The central agentic loop: it reasons and generates the code."], highlight: true },
+          { cells: ["The Harness", "The shared infrastructure: authentication, logging and telemetry."] },
+          { cells: ["The Clients", "The interfaces (IDE and others), with zero duplicated logic."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "On that base they layered concrete improvements: support for MCP (Model Context Protocol) servers to plug in external tools, a rollback that directly tracks file state, a cleaner UI that hides intermediate tool calls, and background multitasking that doesn't lock the session while it works.",
+      },
+
+      { type: "h2", id: "multi-agente", text: "Many agents at once" },
+      {
+        type: "p",
+        text: "The biggest leap in version 2 is that Bob stopped being a single agent doing everything in one context. It now coordinates **subagents** working in isolated contexts. Instead of bloating a single context window —slow and expensive—, it delegates the complex work and keeps cost in check.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Parallel tool calling:** the model can request and run several tools in a single turn, not one at a time.",
+          "**Subagents in isolated contexts:** each heavy task lives in its own space; less noise, less cost.",
+          "**Workflows:** they give a «backbone» to repeatable processes —the engine runs the steps in order, holds state, handles errors and keeps it all auditable.",
+          "**Bobalytics:** built-in analytics showing how much the AI consumes, where and at what cost.",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The key idea:",
+        text: "a workflow turns «ask the AI to try» into a repeatable process with state and error handling. That's what separates a demo from something an enterprise can actually run in production.",
+      },
+
+      { type: "h2", id: "modos", text: "Agent, Plan and Ask" },
+      {
+        type: "p",
+        text: "Bob 2.0 has three modes to ask for things, depending on how much you want it to act:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Ask:** ask and understand the code without touching anything. Great for exploring someone else's repo.",
+          "**Plan:** it lays out the steps before executing. You review and approve.",
+          "**Agent:** it runs the work end to end, with whatever tools it needs.",
+        ],
+      },
+
+      { type: "h2", id: "modernizacion", text: "Modernizing COBOL, IBM i and Java" },
+      {
+        type: "p",
+        text: "This is where IBM's DNA shows. Alongside Bob 2.0 they shipped premium packages with specialized workflows for modernizing legacy systems —the hardest, and also the most valuable, work in the enterprise world.",
+      },
+      {
+        type: "table",
+        head: ["Package", "What it's for"],
+        rows: [
+          { cells: ["IBM Z", "COBOL, PL/I and JCL analysis on the mainframe."], highlight: true },
+          { cells: ["IBM i", "Remote file system and IBM i-specific tooling."] },
+          { cells: ["Java", "Migration to Java 25 and large-scale refactoring."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "That's the exact point: moving thirty-year-old code that runs a bank is precisely the kind of task a well-governed agent is for. It's not creative magic; it's judgment applied at scale, with every step traceable.",
+      },
+
+      { type: "h2", id: "empresa", text: "Why it's built for enterprises" },
+      {
+        type: "p",
+        text: "Bob 2.0's differentiator isn't only what it can do, it's the guardrails. Governance, security and cost control embedded at every step; auditable workflows; and Bobalytics so a team sees what the AI consumes. It's the answer to the question that holds big companies back: «how do I let an agent touch my code without losing control?».",
+      },
+      {
+        type: "p",
+        text: "The details tell the same story: it was tested with over 100,000 internal developers, existing settings migrate automatically and the only step to upgrade is installing it. IBM isn't running an experiment; it's standardizing a way of working.",
+      },
+
+      { type: "h2", id: "farid", text: "What I see from here" },
+      {
+        type: "p",
+        text: "Bob 2.0 confirms something I keep repeating on this blog: software is shifting from **tool** to **agent**. You stop opening a screen to do the work yourself; you hand over a goal and the agent executes it. What's remarkable isn't the idea —it's who's signing it. When IBM, the most enterprise player there is, sets it as the standard, it stops being a trend and becomes the floor.",
+      },
+      {
+        type: "p",
+        text: "And there's a detail that hits close to home: that Agent / Harness / Clients split is exactly how the agents I work with every day are built. The same principle scales from my automation projects —AutoSGSST reading a photo and writing a legal OSH report— all the way to modernizing a mainframe. The size changes, not the idea.",
+      },
+      {
+        type: "p",
+        text: "For Colombia and Latin America the lesson is liberating: you don't have to be IBM to apply this. An agent that reads documents, decides the steps and delivers the result is within reach of a local team. That is, exactly, the bet we're making at Xentris Tech.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "Bob 2.0 isn't news just because IBM shipped a tool. It's a signal: the industry standard is no longer «a better assistant», but «an agentic partner». Whoever starts automating with agents today —reading documents, deciding steps and delivering— is on the right side of the shift. Bob is the enterprise version of an idea that already fits in a local project.",
+      },
+    ],
+  },
+  {
     slug: "de-la-app-al-agente-ia-que-lee-documentos-y-genera-informes",
     title: "From app to agent: the AI that reads documents, sees images and writes your reports",
     excerpt:
@@ -797,7 +1125,7 @@ export const postsEn: Post[] = [
       { type: "h2", id: "autosgsst", text: "The AutoSGSST case" },
       {
         type: "p",
-        text: "**AutoSGSST** (autosgsst.xentris.tech) is a real, in-production example of all of the above applied to a very concrete pain: **SG-SST**, the occupational safety and health management system that Colombian law requires of every company. Documenting it by hand is slow, repetitive and easy to leave incomplete.",
+        text: "**AutoSGSST** (autosgsst.vercel.app) is a real, in-production example of all of the above applied to a very concrete pain: **SG-SST**, the occupational safety and health management system that Colombian law requires of every company. Documenting it by hand is slow, repetitive and easy to leave incomplete.",
       },
       {
         type: "p",
@@ -890,7 +1218,7 @@ export const postsEn: Post[] = [
       },
       {
         type: "p",
-        text: "If you want to see it working, go to autosgsst.xentris.tech and try the full flow. And if there's a process in your company that's still done by hand (reading, interpreting, documenting), it's probably already automatable. That's what this moment is about.",
+        text: "If you want to see it working, go to autosgsst.vercel.app and try the full flow. And if there's a process in your company that's still done by hand (reading, interpreting, documenting), it's probably already automatable. That's what this moment is about.",
       },
     ],
   },

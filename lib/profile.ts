@@ -152,7 +152,7 @@ export const projects = [
     tag: "App con IA · SG-SST",
     desc: "Automatiza el SG-SST con visión por computadora y voz: convierte fotos y entrevistas en informes legales en Word, PDF y audio.",
     seed: "autosgsst-safety-ai-vision",
-    url: "https://autosgsst.xentris.tech",
+    url: "https://autosgsst.vercel.app",
   },
   {
     name: "Trading Pro GPT",
