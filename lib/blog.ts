@@ -45,6 +45,157 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "orquestadores-de-agentes-ia-un-agente-no-basta",
+    title: "Un agente no basta: cómo los orquestadores reparten el trabajo entre varios agentes de IA",
+    excerpt:
+      "Un solo agente de IA se satura: su contexto se ensucia y empeora. El orquestador es el director que reparte el trabajo entre varios agentes —cada uno en su frente, cada resultado verificado— para resolver tareas que un solo hilo no haría bien. Los patrones reales, cuándo usarlos y cuándo NO, con Bob, Claude Code y AutoSGSST como prueba.",
+    eyebrow: "Agentes de IA · Arquitectura",
+    category: "Agentes de IA",
+    author: "Farid · Eathan",
+    date: "2026-08-19",
+    dateLabel: "Agosto 2026",
+    readTime: "8 min",
+    tags: ["Agentes de IA", "Orquestación", "Multi-agente", "Subagentes", "Workflows", "LangGraph", "CrewAI", "Xentris Tech"],
+    seed: "orquestadores-agentes-ia",
+    suggestions: [
+      "¿Qué es un orquestador de agentes?",
+      "¿Cuándo NO conviene orquestar en paralelo?",
+      "¿Qué es la verificación adversaria de hallazgos?",
+    ],
+    toc: [
+      { id: "problema", label: "Un agente no basta" },
+      { id: "que-es", label: "Qué es un orquestador" },
+      { id: "patrones", label: "Los patrones que se usan" },
+      { id: "dos-niveles", label: "Los dos niveles" },
+      { id: "practica", label: "Cómo se ve en la práctica" },
+      { id: "regla", label: "La regla que evita quemar plata" },
+      { id: "farid", label: "Lo que veo desde acá" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "problema", text: "Un agente no basta" },
+      {
+        type: "p",
+        text: "Un agente de IA es potente, pero tiene un límite físico: su **ventana de contexto**. Es la memoria de trabajo con la que razona. Si le pides que audite un proyecto con doscientos archivos, o que investigue diez frentes a la vez, esa memoria se satura: el modelo empieza a olvidar lo del principio, a mezclar cosas y a empeorar justo cuando la tarea se pone grande. Más contexto no es más inteligencia; muchas veces es lo contrario.",
+      },
+      {
+        type: "p",
+        text: "La solución no es un agente más grande. Es **varios agentes bien dirigidos**. Y quien los dirige es el orquestador.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "La idea de fondo:",
+        text: "en vez de meterle todo a un solo hilo, repartes el trabajo. Cada subagente ve solo su pedazo, devuelve la conclusión —no el volcado entero— y el hilo principal se mantiene limpio, rápido y barato.",
+      },
+
+      { type: "h2", id: "que-es", text: "Qué es un orquestador de agentes" },
+      {
+        type: "p",
+        text: "Un orquestador es el componente que **coordina a varios agentes para resolver una tarea que uno solo no haría bien**. No hace el trabajo especializado: decide quién actúa, en qué orden, en paralelo o en serie, y qué hacer con lo que cada uno devuelve. Es la diferencia entre un músico solista y un director de orquesta.",
+      },
+      {
+        type: "quote",
+        text: "El director no toca los instrumentos. Decide quién toca y cuándo. Eso, exactamente, es un orquestador de agentes.",
+      },
+      {
+        type: "p",
+        text: "El humano sigue mandando: define el objetivo, revisa y aprueba. Pero el trabajo mecánico de repartir, ejecutar y juntar resultados deja de ser suyo. El orquestador lo hace por él, y lo hace a una escala que un solo agente no alcanza.",
+      },
+
+      { type: "h2", id: "patrones", text: "Los patrones que de verdad se usan" },
+      {
+        type: "p",
+        text: "Orquestar no es una sola técnica; es un puñado de patrones que se combinan según la tarea. Estos son los que aparecen una y otra vez:",
+      },
+      {
+        type: "table",
+        head: ["Patrón", "Qué hace"],
+        rows: [
+          { cells: ["Router / dispatcher", "Clasifica la petición y la manda al agente o skill correcto (¿esto es soporte, ventas o legal?)."], highlight: true },
+          { cells: ["Orquestador–obrero", "Un jefe descompone la tarea y reparte a N obreros que trabajan en paralelo."] },
+          { cells: ["Fan-out paralelo", "Lanza muchos agentes a la vez, cada uno en su frente (buscar en 10 directorios distintos)."] },
+          { cells: ["Pipeline", "Cada ítem pasa por etapas encadenadas sin esperar a los demás."] },
+          { cells: ["Verificación adversaria", "Otros agentes intentan refutar cada hallazgo; sobrevive solo lo confirmado."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "El último es el más subestimado. Un agente puede producir un hallazgo que suena bien pero es falso. La cura es enfrentarlo a verificadores que intenten **derribarlo**; lo que sobrevive al ataque es lo que reportas. Sin ese paso, la orquestación multiplica errores en vez de multiplicar trabajo útil.",
+      },
+
+      { type: "h2", id: "dos-niveles", text: "Los dos niveles de orquestación" },
+      {
+        type: "p",
+        text: "Cuando hablamos de «orquestar agentes» solemos mezclar dos cosas que se complementan, y conviene separarlas:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Orquestar herramientas:** saber *cuándo invocar cada capacidad*. Es un router sobre tus habilidades: arrancar un proyecto, guardar memoria, construir, desplegar —cada paso a su agente— sin dejar cabos sueltos.",
+          "**Orquestar trabajo pesado:** descomponer una tarea amplia y lanzar subagentes en paralelo. El ciclo canónico es **explorar → descomponer → paralelizar → verificar → sintetizar**.",
+        ],
+      },
+      {
+        type: "p",
+        text: "El primero da orden; el segundo da escala. Un buen orquestador hace ambos: es el punto de entrada que impone secuencia y, cuando la tarea lo pide, abre el abanico de agentes.",
+      },
+
+      { type: "h2", id: "practica", text: "Cómo se ve en la práctica" },
+      {
+        type: "p",
+        text: "Esto no es teoría. Cuando IBM presentó **Bob 2.0**, su mayor salto fue justo este: dejar de ser un solo agente para coordinar *subagentes* que buscan cada uno en un directorio en paralelo y devuelven solo lo que importa. Las herramientas de desarrollo con IA ya traen las piezas: un mecanismo para lanzar un subagente y otro para definir *workflows* —procesos con pasos, estado y manejo de errores— que corren de forma determinista.",
+      },
+      {
+        type: "figure",
+        seed: "orquestador-fan-out-agentes",
+        chip: "Orquestación",
+        caption: "El patrón fan-out: un orquestador reparte la tarea entre varios subagentes que trabajan en paralelo, cada uno en su frente. Cada uno devuelve su conclusión y un verificador confirma antes de sintetizar el resultado final.",
+      },
+      {
+        type: "p",
+        text: "Si te preguntan por nombres, estos son los frameworks que implementan estos patrones hoy:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**LangGraph** — orquestación como un grafo de estados (nodos, aristas y ciclos).",
+          "**CrewAI** — equipos de agentes por roles que colaboran en una misión.",
+          "**AutoGen (Microsoft)** — conversación entre múltiples agentes que se coordinan por mensajes.",
+          "**OpenAI Agents SDK** — agentes con *handoffs* (pases) entre especialistas.",
+        ],
+      },
+
+      { type: "h2", id: "regla", text: "La regla que evita quemar plata" },
+      {
+        type: "p",
+        text: "No todo se orquesta. Lanzar agentes en paralelo **cuesta tokens**, y muchos. Si la tarea es trivial o es una secuencia con dependencias fuertes (el paso 2 necesita el resultado del paso 1), un solo hilo es más barato, más rápido y más claro.",
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "Cuándo SÍ vale la pena:",
+        text: "cuando hay amplitud real —auditar, migrar, revisar a fondo, investigar varios frentes—. Ahí el paralelismo compensa su costo. Y siempre con verificación: ningún hallazgo se reporta sin confirmarse.",
+      },
+
+      { type: "h2", id: "farid", text: "Lo que veo desde acá" },
+      {
+        type: "p",
+        text: "El mismo principio escala desde un proyecto local hasta un mainframe. En AutoSGSST, un agente lee una foto y redacta un informe de SST; cuando el trabajo crece, la respuesta no es un agente más grande, es repartirlo. Esa separación —un director que reparte, obreros que ejecutan, un verificador que confirma— es idéntica en un banco de IBM y en una automatización que hacemos desde Colombia. Cambia el tamaño, no la idea.",
+      },
+      {
+        type: "p",
+        text: "Por eso en Xentris Tech tratamos la orquestación como una buena práctica, no como un lujo: es lo que separa una demo que impresiona de un sistema que aguanta trabajo real sin ensuciarse ni dispararse en costo.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "Un agente no basta cuando la tarea es grande. El orquestador es el director que la reparte: divide, paraleliza, verifica y sintetiza. No es magia —son unos pocos patrones bien aplicados y una regla de oro: orquesta cuando hay amplitud real, y nunca reportes un hallazgo sin que sobreviva al ataque. Ese es el salto de «pídele a la IA que lo intente» a «un sistema que puedes correr en producción».",
+      },
+    ],
+  },
+  {
     slug: "ibm-bob-2-el-socio-de-desarrollo-agentico",
     title: "Saludar a Bob 2.0: cuando IBM cambia el autocompletado por un socio de desarrollo agéntico",
     excerpt:
@@ -875,6 +1026,157 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "orquestadores-de-agentes-ia-un-agente-no-basta",
+    title: "One agent isn't enough: how orchestrators split work across multiple AI agents",
+    excerpt:
+      "A single AI agent gets overloaded: its context clutters and it gets worse. The orchestrator is the conductor that splits the work across several agents —each on its own front, each result verified— to solve tasks one thread can't handle well. The real patterns, when to use them and when NOT to, with Bob, Claude Code and AutoSGSST as proof.",
+    eyebrow: "AI agents · Architecture",
+    category: "AI agents",
+    author: "Farid · Eathan",
+    date: "2026-08-19",
+    dateLabel: "August 2026",
+    readTime: "8 min",
+    tags: ["AI agents", "Orchestration", "Multi-agent", "Subagents", "Workflows", "LangGraph", "CrewAI", "Xentris Tech"],
+    seed: "orquestadores-agentes-ia",
+    suggestions: [
+      "What is an agent orchestrator?",
+      "When is it NOT worth orchestrating in parallel?",
+      "What is adversarial verification of findings?",
+    ],
+    toc: [
+      { id: "problema", label: "One agent isn't enough" },
+      { id: "que-es", label: "What an orchestrator is" },
+      { id: "patrones", label: "The patterns that are used" },
+      { id: "dos-niveles", label: "The two levels" },
+      { id: "practica", label: "What it looks like in practice" },
+      { id: "regla", label: "The rule that saves money" },
+      { id: "farid", label: "What I see from here" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "problema", text: "One agent isn't enough" },
+      {
+        type: "p",
+        text: "An AI agent is powerful, but it has a physical limit: its **context window**. That's the working memory it reasons with. If you ask it to audit a project with two hundred files, or to research ten fronts at once, that memory saturates: the model starts forgetting the beginning, mixing things up and getting worse right when the task gets big. More context isn't more intelligence; often it's the opposite.",
+      },
+      {
+        type: "p",
+        text: "The fix isn't a bigger agent. It's **several well-directed agents**. And what directs them is the orchestrator.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The core idea:",
+        text: "instead of stuffing everything into one thread, you split the work. Each subagent sees only its piece, returns the conclusion —not the whole dump— and the main thread stays clean, fast and cheap.",
+      },
+
+      { type: "h2", id: "que-es", text: "What an agent orchestrator is" },
+      {
+        type: "p",
+        text: "An orchestrator is the component that **coordinates several agents to solve a task one alone couldn't handle well**. It doesn't do the specialized work: it decides who acts, in what order, in parallel or in series, and what to do with what each one returns. It's the difference between a solo musician and an orchestra conductor.",
+      },
+      {
+        type: "quote",
+        text: "The conductor doesn't play the instruments. They decide who plays and when. That, exactly, is an agent orchestrator.",
+      },
+      {
+        type: "p",
+        text: "The human is still in charge: sets the goal, reviews and approves. But the mechanical work of splitting, running and merging results stops being theirs. The orchestrator does it for them, and at a scale a single agent can't reach.",
+      },
+
+      { type: "h2", id: "patrones", text: "The patterns that are actually used" },
+      {
+        type: "p",
+        text: "Orchestrating isn't one technique; it's a handful of patterns you combine depending on the task. These are the ones that show up again and again:",
+      },
+      {
+        type: "table",
+        head: ["Pattern", "What it does"],
+        rows: [
+          { cells: ["Router / dispatcher", "Classifies the request and sends it to the right agent or skill (is this support, sales or legal?)."], highlight: true },
+          { cells: ["Orchestrator–worker", "A boss decomposes the task and hands it to N workers running in parallel."] },
+          { cells: ["Parallel fan-out", "Launches many agents at once, each on its own front (search 10 different directories)."] },
+          { cells: ["Pipeline", "Each item flows through chained stages without waiting for the others."] },
+          { cells: ["Adversarial verification", "Other agents try to refute each finding; only the confirmed ones survive."] },
+        ],
+      },
+      {
+        type: "p",
+        text: "The last one is the most underrated. An agent can produce a finding that sounds right but is false. The cure is to pit it against verifiers that try to **tear it down**; what survives the attack is what you report. Without that step, orchestration multiplies errors instead of multiplying useful work.",
+      },
+
+      { type: "h2", id: "dos-niveles", text: "The two levels of orchestration" },
+      {
+        type: "p",
+        text: "When we talk about «orchestrating agents» we tend to mix two things that complement each other, and it helps to keep them apart:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Orchestrating tools:** knowing *when to invoke each capability*. It's a router over your skills: start a project, save memory, build, deploy —each step to its agent— leaving no loose ends.",
+          "**Orchestrating heavy work:** decomposing a broad task and launching subagents in parallel. The canonical cycle is **explore → decompose → parallelize → verify → synthesize**.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The first gives order; the second gives scale. A good orchestrator does both: it's the entry point that imposes sequence and, when the task calls for it, opens the fan of agents.",
+      },
+
+      { type: "h2", id: "practica", text: "What it looks like in practice" },
+      {
+        type: "p",
+        text: "This isn't theory. When IBM unveiled **Bob 2.0**, its biggest leap was exactly this: going from a single agent to coordinating *subagents* that each search a directory in parallel and return only what matters. AI development tools already ship the pieces: a mechanism to launch a subagent and another to define *workflows* —processes with steps, state and error handling— that run deterministically.",
+      },
+      {
+        type: "figure",
+        seed: "orquestador-fan-out-agentes",
+        chip: "Orchestration",
+        caption: "The fan-out pattern: an orchestrator splits the task across several subagents working in parallel, each on its own front. Each returns its conclusion and a verifier confirms it before the final result is synthesized.",
+      },
+      {
+        type: "p",
+        text: "If they ask you for names, these are the frameworks implementing these patterns today:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**LangGraph** — orchestration as a state graph (nodes, edges and cycles).",
+          "**CrewAI** — role-based agent teams collaborating on a mission.",
+          "**AutoGen (Microsoft)** — a conversation among multiple agents coordinating via messages.",
+          "**OpenAI Agents SDK** — agents with handoffs between specialists.",
+        ],
+      },
+
+      { type: "h2", id: "regla", text: "The rule that saves money" },
+      {
+        type: "p",
+        text: "Not everything gets orchestrated. Launching agents in parallel **costs tokens**, and plenty of them. If the task is trivial or a sequence with strong dependencies (step 2 needs step 1's result), a single thread is cheaper, faster and clearer.",
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "When it IS worth it:",
+        text: "when there's real breadth —auditing, migrating, deep review, researching several fronts—. There the parallelism pays for its cost. And always with verification: no finding is reported without being confirmed.",
+      },
+
+      { type: "h2", id: "farid", text: "What I see from here" },
+      {
+        type: "p",
+        text: "The same principle scales from a local project to a mainframe. In AutoSGSST, an agent reads a photo and drafts an occupational-safety report; when the work grows, the answer isn't a bigger agent, it's splitting it. That separation —a conductor that splits, workers that execute, a verifier that confirms— is identical at an IBM bank and in an automation we build from Colombia. The size changes, not the idea.",
+      },
+      {
+        type: "p",
+        text: "That's why at Xentris Tech we treat orchestration as a best practice, not a luxury: it's what separates a demo that impresses from a system that holds real work without cluttering or blowing up its cost.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "One agent isn't enough when the task is big. The orchestrator is the conductor that splits it: divide, parallelize, verify and synthesize. It's not magic —it's a few patterns applied well and a golden rule: orchestrate when there's real breadth, and never report a finding unless it survives the attack. That's the leap from «ask the AI to give it a try» to «a system you can run in production».",
+      },
+    ],
+  },
   {
     slug: "ibm-bob-2-el-socio-de-desarrollo-agentico",
     title: "Say hello to Bob 2.0: when IBM trades autocomplete for an agentic development partner",
