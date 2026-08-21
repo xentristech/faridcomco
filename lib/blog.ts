@@ -45,6 +45,148 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "el-windows-que-les-falta-a-los-agentes-de-ia",
+    title: "El «Windows» que les falta a los agentes de IA",
+    excerpt:
+      "Los agentes de IA de hoy son como MS-DOS: potentes, pero solo quien lee la terminal entiende qué hacen. Les falta su «Windows» —la capa visual que deja ver el trabajo—. Por qué la observabilidad es la próxima gran capa, y el panel que construí para verlo.",
+    eyebrow: "Agentes de IA · Observabilidad",
+    category: "Agentes de IA",
+    author: "Farid · Eathan",
+    date: "2026-08-21",
+    dateLabel: "Agosto 2026",
+    readTime: "7 min",
+    tags: ["Agentes de IA", "Observabilidad", "MCP", "Orquestación", "Mission Control", "Xentris Tech", "MS-DOS", "Windows"],
+    seed: "windows-agentes-ia-observabilidad",
+    image: "/blog/agentes-hero.svg",
+    suggestions: [
+      "¿Por qué un agente de IA se parece a MS-DOS?",
+      "¿Qué es la observabilidad de agentes?",
+      "¿Qué es un panel tipo Mission Control?",
+    ],
+    toc: [
+      { id: "intro", label: "Volvió la terminal" },
+      { id: "dos", label: "Un agente es como MS-DOS" },
+      { id: "observabilidad", label: "El problema: observabilidad" },
+      { id: "visual", label: "El «Windows» de los agentes" },
+      { id: "asimov", label: "Asimov y la gobernanza" },
+      { id: "farid", label: "Lo que veo desde acá" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "intro", text: "Volvió la terminal, y casi nadie lo notó" },
+      {
+        type: "p",
+        text: "Un amigo me preguntó el otro día si me acordaba de **WordStar** y de **Visual Basic**. WordStar era el procesador de textos de los ochenta que se manejaba con acordes de teclas; Visual Basic, el que dejaba armar una aplicación arrastrando botones. Pura nostalgia, hasta que soltó la frase que me dejó pensando: «tú eres como eso, pero con IA; el MCP es como una API… ¿por qué no hay un sistema operativo, como cuando salió Windows?».",
+      },
+      {
+        type: "p",
+        text: "Tenía razón en algo profundo. Después de años de interfaces gráficas, el software más avanzado de 2026 —los agentes de IA— se maneja otra vez **escribiendo en una terminal**. La interfaz más vieja de la computación volvió a ser la más nueva. Y con ella volvió un problema viejo que ya habíamos resuelto una vez.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "La idea de fondo:",
+        text: "un agente de IA hoy se parece muchísimo a una máquina con MS-DOS. Es poderosa, pero solo quien sabe leer la pantalla entiende qué está pasando. Lo que falta es el salto que ya dimos una vez: de DOS a Windows.",
+      },
+
+      { type: "h2", id: "dos", text: "Por qué un agente hoy se parece a MS-DOS" },
+      {
+        type: "p",
+        text: "Un agente moderno ya tiene casi todo lo que define a un sistema operativo. No es una exageración: es literal.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Memoria** que persiste entre sesiones.",
+          "**Sistema de archivos** al que lee y escribe.",
+          "**«Programas»** que amplían lo que sabe hacer (los skills).",
+          "**Tareas programadas** que corren solas.",
+          "**Conexión a servicios** por un estándar —el MCP—, que cumple el papel que cumplían las APIs de Windows: un enchufe común para hablar con cualquier herramienta.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Lo que todavía le falta para ser un sistema operativo de verdad son tres cosas concretas: **determinismo** (un OS no puede «más o menos» guardar tu archivo; un agente aún es probabilístico), **costo y latencia** (cada acción cuesta y tarda segundos, no milisegundos) y **confianza** (por eso trabajamos con permisos y entornos controlados, y con razón). Windows, al principio, tampoco hacía más que DOS. Ganó por otra cosa.",
+      },
+      {
+        type: "figure",
+        seed: "dos-a-windows-agentes-1985-2026",
+        image: "/blog/agentes-dos-windows.svg",
+        chip: "1985 → 2026",
+        caption: "El mismo salto, cuarenta años después: en 1985, de la terminal de DOS a las ventanas de Windows; en 2026, del agente que corre en la terminal al panel que deja ver qué hace.",
+      },
+
+      { type: "h2", id: "observabilidad", text: "El problema que casi nadie nombra: observabilidad" },
+      {
+        type: "p",
+        text: "Cuando uno coordina varios agentes a la vez —como hago casi todos los días— aparece un dolor muy concreto. Con cinco tareas corriendo, **uno mismo pierde el hilo** de cuál hace qué. Y cuando le muestras la pantalla a un cliente, ve texto técnico cayendo en verde en vez de trabajo entendible.",
+      },
+      {
+        type: "p",
+        text: "Eso tiene nombre: **observabilidad**. La buena noticia es que la información ya existe —cada agente deja registro de todo lo que hace en tiempo real—; lo que falta es una capa que la traduzca a lenguaje humano. Nadie la está mirando, pero está ahí.",
+      },
+      {
+        type: "figure",
+        seed: "observabilidad-multiples-terminales-verde",
+        image: "/blog/agentes-observabilidad.svg",
+        chip: "Observabilidad",
+        caption: "Cuatro terminales, cuatro relatos en verde a la vez. El trabajo está hecho y bien hecho —pero nadie lo está viendo, y no sabes cuál te está esperando.",
+      },
+
+      { type: "h2", id: "visual", text: "La solución es visual: el «Windows» de los agentes" },
+      {
+        type: "p",
+        text: "Windows no ganó porque hiciera más que DOS. Ganó porque **cualquiera podía ver qué estaba pasando**. La próxima gran capa de la IA es exactamente eso: un panel que muestra, por cada agente, qué está haciendo ahora mismo, en una frase clara. Un buen panel responde de un vistazo tres preguntas:",
+      },
+      {
+        type: "ul",
+        items: [
+          "¿Qué está haciendo cada agente en este momento, dicho en lenguaje sencillo?",
+          "¿Cuál terminó y está esperando una decisión mía?",
+          "¿Cuál se quedó detenido o necesita un permiso?",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Lo llevé a la práctica:",
+        text: "construí un panel local, «Mission Control», que lee esos registros y muestra una tarjeta por agente con un semáforo —trabajando, esperándote, pausado, inactivo— y una frase de qué hace. Tiene un «modo presentación» que oculta lo técnico para mostrárselo a un cliente. De hecho, ese panel me dijo que el otro agente con el que trabajaba ya había cerrado, sin tener que preguntarle a nadie.",
+      },
+
+      { type: "h2", id: "asimov", text: "Asimov, y por qué un panel es gobernanza" },
+      {
+        type: "p",
+        text: "En 1950, Isaac Asimov publicó sus **Tres Leyes de la Robótica**. Lo interesante es que su libro no es un manual: es un catálogo de **cómo fallan** esas reglas. Tres normas simples, al pie de la letra, terminan produciendo resultados absurdos. La lección, 75 años después, sigue vigente: un puñado de reglas rígidas no alcanza para gobernar una inteligencia compleja; siempre hay huecos, y la inteligencia los encuentra.",
+      },
+      {
+        type: "quote",
+        text: "Por eso la IA responsable no se basa en tres reglas, sino en capas: buenos valores de base, permisos acotados, entornos controlados y —la última capa— supervisión humana. Un panel de observabilidad es, ni más ni menos, esa supervisión hecha visible.",
+      },
+
+      { type: "h2", id: "farid", text: "Lo que veo desde acá" },
+      {
+        type: "p",
+        text: "Esto conecta directo con lo que ya conté sobre los **orquestadores de agentes**: si un director reparte el trabajo entre varios agentes, alguien tiene que poder ver qué hace cada uno. La capa visual no es un adorno; es lo que vuelve la orquestación supervisable, explicable al cliente y confiable. En Xentris Tech lo tratamos como buena práctica: antes de escalar una automatización con IA, aseguras que puedes **ver y contar** lo que hace.",
+      },
+      {
+        type: "p",
+        text: "Para Colombia y Latinoamérica la lección es la de siempre en este blog: no hay que ser una gran tecnológica para aplicarlo. El panel que describo lo armé en una tarde, en mi propia máquina, leyendo archivos que ya estaban ahí. La oportunidad está justo en ese hueco: los agentes que corren en la terminal ya funcionan; el «Windows» que los vuelve entendibles para cualquier humano todavía está por construir.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Para leer más:",
+        text: "escribí una versión de esta idea, enfocada en empresas, en el blog de [Xentris Tech](https://xentris.tech/blog/el-windows-de-los-agentes-ia). Si te interesa cómo aplicar agentes de IA con esta capa de supervisión en tu negocio, ese es el lugar.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "WordStar era memorizar acordes; Visual Basic fue arrastrar botones; y hoy volvimos a la terminal, pero conversando en español. La interfaz más vieja terminó siendo la más nueva. Estamos en un momento tipo 1985: el «DOS» de la IA —los agentes— ya existe y funciona. El «Windows» —la capa que deja ver el trabajo— está vacante. Y quien lo construya bien, aunque sea en su propia máquina un martes por la tarde, va un paso adelante.",
+      },
+    ],
+  },
+  {
     slug: "orquestadores-de-agentes-ia-un-agente-no-basta",
     title: "Un agente no basta: cómo los orquestadores reparten el trabajo entre varios agentes de IA",
     excerpt:
@@ -1026,6 +1168,148 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "el-windows-que-les-falta-a-los-agentes-de-ia",
+    title: "The «Windows» that AI agents are still missing",
+    excerpt:
+      "Today's AI agents are like MS-DOS: powerful, but only whoever reads the terminal understands what they do. They're missing their «Windows» —the visual layer that lets you see the work—. Why observability is the next big layer, and the dashboard I built to see it.",
+    eyebrow: "AI Agents · Observability",
+    category: "AI Agents",
+    author: "Farid · Eathan",
+    date: "2026-08-21",
+    dateLabel: "August 2026",
+    readTime: "7 min",
+    tags: ["AI Agents", "Observability", "MCP", "Orchestration", "Mission Control", "Xentris Tech", "MS-DOS", "Windows"],
+    seed: "windows-agentes-ia-observabilidad",
+    image: "/blog/agentes-hero.svg",
+    suggestions: [
+      "Why does an AI agent resemble MS-DOS?",
+      "What is agent observability?",
+      "What is a Mission Control-style dashboard?",
+    ],
+    toc: [
+      { id: "intro", label: "The terminal came back" },
+      { id: "dos", label: "An agent is like MS-DOS" },
+      { id: "observabilidad", label: "The problem: observability" },
+      { id: "visual", label: "The «Windows» of agents" },
+      { id: "asimov", label: "Asimov and governance" },
+      { id: "farid", label: "What I see from here" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "intro", text: "The terminal came back, and almost nobody noticed" },
+      {
+        type: "p",
+        text: "A friend asked me the other day if I remembered **WordStar** and **Visual Basic**. WordStar was the 1980s word processor you drove with key chords; Visual Basic, the one that let you build an application by dragging buttons. Pure nostalgia — until he dropped the line that stuck with me: «you're like that, but with AI; MCP is like an API… why isn't there an operating system, like when Windows came out?».",
+      },
+      {
+        type: "p",
+        text: "He was onto something deep. After years of graphical interfaces, the most advanced software of 2026 —AI agents— is once again driven by **typing into a terminal**. The oldest interface in computing became the newest again. And with it came back an old problem we had already solved once.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The core idea:",
+        text: "an AI agent today looks a lot like a machine running MS-DOS. It's powerful, but only whoever can read the screen understands what's happening. What's missing is the leap we already made once: from DOS to Windows.",
+      },
+
+      { type: "h2", id: "dos", text: "Why an agent today resembles MS-DOS" },
+      {
+        type: "p",
+        text: "A modern agent already has almost everything that defines an operating system. It's not an exaggeration — it's literal.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Memory** that persists across sessions.",
+          "**A file system** it reads from and writes to.",
+          "**«Programs»** that extend what it can do (skills).",
+          "**Scheduled tasks** that run on their own.",
+          "**A connection to services** through a standard —MCP—, which plays the role Windows APIs once played: a common plug to talk to any tool.",
+        ],
+      },
+      {
+        type: "p",
+        text: "What it still lacks to be a true operating system is three concrete things: **determinism** (an OS can't «sort of» save your file; an agent is still probabilistic), **cost and latency** (every action costs money and takes seconds, not milliseconds) and **trust** (that's why we work with permissions and controlled environments, rightly so). At first, Windows didn't do more than DOS either. It won for another reason.",
+      },
+      {
+        type: "figure",
+        seed: "dos-a-windows-agentes-1985-2026",
+        image: "/blog/agentes-dos-windows.svg",
+        chip: "1985 → 2026",
+        caption: "The same leap, forty years later: in 1985, from the DOS terminal to Windows; in 2026, from the agent running in the terminal to the dashboard that lets you see what it does.",
+      },
+
+      { type: "h2", id: "observabilidad", text: "The problem almost nobody names: observability" },
+      {
+        type: "p",
+        text: "When you coordinate several agents at once —as I do almost every day— a very concrete pain shows up. With five tasks running, **you lose track** of which one is doing what. And when you show the screen to a client, they see technical text scrolling in green instead of understandable work.",
+      },
+      {
+        type: "p",
+        text: "That has a name: **observability**. The good news is the information already exists —every agent records everything it does in real time—; what's missing is a layer that translates it into human language. Nobody is watching it, but it's there.",
+      },
+      {
+        type: "figure",
+        seed: "observabilidad-multiples-terminales-verde",
+        image: "/blog/agentes-observabilidad.svg",
+        chip: "Observability",
+        caption: "Four terminals, four green stories at once. The work is done and done well —but nobody is watching, and you don't know which one is waiting for you.",
+      },
+
+      { type: "h2", id: "visual", text: "The solution is visual: the «Windows» of agents" },
+      {
+        type: "p",
+        text: "Windows didn't win because it did more than DOS. It won because **anyone could see what was happening**. The next big AI layer is exactly that: a dashboard that shows, for each agent, what it's doing right now, in one clear sentence. A good dashboard answers three questions at a glance:",
+      },
+      {
+        type: "ul",
+        items: [
+          "What is each agent doing right now, in plain language?",
+          "Which one finished and is waiting for a decision from me?",
+          "Which one is stuck or needs a permission?",
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "I put it into practice:",
+        text: "I built a local dashboard, «Mission Control», that reads those logs and shows one card per agent with a traffic light —working, waiting for you, paused, idle— and a sentence of what it's doing. It has a «presentation mode» that hides the technical bits to show a client. In fact, that dashboard told me the other agent I was working with had already closed, without asking anyone.",
+      },
+
+      { type: "h2", id: "asimov", text: "Asimov, and why a dashboard is governance" },
+      {
+        type: "p",
+        text: "In 1950, Isaac Asimov published his **Three Laws of Robotics**. The interesting part is that his book isn't a manual: it's a catalog of **how those rules fail**. Three simple rules, applied literally, end up producing absurd results. The lesson, 75 years later, still holds: a handful of rigid rules isn't enough to govern a complex intelligence; there are always gaps, and intelligence finds them.",
+      },
+      {
+        type: "quote",
+        text: "That's why responsible AI isn't based on three rules, but on layers: good baseline values, scoped permissions, controlled environments and —the final layer— human supervision. An observability dashboard is, quite simply, that supervision made visible.",
+      },
+
+      { type: "h2", id: "farid", text: "What I see from here" },
+      {
+        type: "p",
+        text: "This connects directly to what I already wrote about **agent orchestrators**: if a director splits the work among several agents, someone has to be able to see what each one is doing. The visual layer isn't decoration; it's what makes orchestration supervisable, explainable to the client and trustworthy. At Xentris Tech we treat it as a best practice: before scaling an AI automation, you make sure you can **see and tell** what it does.",
+      },
+      {
+        type: "p",
+        text: "For Colombia and Latin America the lesson is the usual one on this blog: you don't have to be a big tech company to apply it. I built the dashboard I'm describing in one afternoon, on my own machine, reading files that were already there. The opportunity is exactly in that gap: the agents that run in the terminal already work; the «Windows» that makes them understandable to any human is still to be built.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Further reading:",
+        text: "I wrote a business-focused version of this idea on the [Xentris Tech](https://xentris.tech/en/blog/el-windows-de-los-agentes-ia) blog. If you're interested in applying AI agents with this supervision layer in your company, that's the place.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "WordStar was memorizing chords; Visual Basic was dragging buttons; and today we came back to the terminal, but chatting in plain language. The oldest interface turned out to be the newest. We're in a 1985 moment: the «DOS» of AI —the agents— already exists and works. The «Windows» —the layer that lets you see the work— is vacant. And whoever builds it well, even on their own machine on a Tuesday afternoon, is a step ahead.",
+      },
+    ],
+  },
   {
     slug: "orquestadores-de-agentes-ia-un-agente-no-basta",
     title: "One agent isn't enough: how orchestrators split work across multiple AI agents",

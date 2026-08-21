@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="De la terminal DOS al panel visual de agentes de IA">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0a12"/>
+      <stop offset="1" stop-color="#171227"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#6d28d9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.6"/></filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="640" cy="315" rx="520" ry="300" fill="url(#glow)"/>
+
+  <!-- Terminal DOS (izquierda) -->
+  <g transform="translate(70,150)">
+    <rect x="0" y="0" width="360" height="330" rx="10" fill="#05060a" stroke="#1f2a1f" stroke-width="2"/>
+    <rect x="0" y="0" width="360" height="26" rx="10" fill="#0e1410"/>
+    <circle cx="18" cy="13" r="5" fill="#3b4a3b"/><circle cx="36" cy="13" r="5" fill="#3b4a3b"/><circle cx="54" cy="13" r="5" fill="#3b4a3b"/>
+    <g font-family="Consolas,monospace" font-size="15" fill="#33d17a">
+      <text x="18" y="58">C:\&gt; agente --run</text>
+      <text x="18" y="84" fill="#2aa25f">loading skills....... ok</text>
+      <text x="18" y="110" fill="#2aa25f">mcp connect......... ok</text>
+      <text x="18" y="136">&gt; leyendo inventario</text>
+      <text x="18" y="162">&gt; editando index.tsx</text>
+      <text x="18" y="188" fill="#2aa25f">&gt; deploy vercel....</text>
+      <text x="18" y="214">&gt; grep "error" src/</text>
+      <text x="18" y="240" fill="#2aa25f">44 archivos, 3 hits</text>
+      <text x="18" y="266">&gt; _<tspan fill="#33d17a">█</tspan></text>
+    </g>
+    <text x="180" y="316" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="13" fill="#5a6b5a">solo el operador entiende</text>
+  </g>
+
+  <!-- Flecha de transformación -->
+  <g transform="translate(470,300)">
+    <path d="M0 15 H120" stroke="url(#purple)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M112 2 L132 15 L112 28 Z" fill="#a78bfa"/>
+    <text x="66" y="-12" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" fill="#a78bfa" font-weight="600">capa visual</text>
+  </g>
+
+  <!-- Panel de tarjetas (derecha) -->
+  <g transform="translate(640,120)">
+    <rect x="0" y="0" width="470" height="390" rx="16" fill="#14121f" stroke="#2a2545" stroke-width="2"/>
+    <rect x="0" y="0" width="470" height="44" rx="16" fill="#1b1830"/>
+    <circle cx="26" cy="22" r="9" fill="url(#purple)"/>
+    <text x="46" y="27" font-family="Segoe UI,sans-serif" font-size="15" fill="#e8e6f2" font-weight="700">Mission Control</text>
+
+    <!-- card 1 working -->
+    <g transform="translate(20,64)">
+      <rect width="430" height="86" rx="12" fill="#1b1830" stroke="#25603f" stroke-width="1.5"/>
+      <circle cx="24" cy="26" r="7" fill="#34d399"/>
+      <text x="42" y="31" font-family="Segoe UI,sans-serif" font-size="16" fill="#e8e6f2" font-weight="600">Inventario YOTA</text>
+      <text x="400" y="30" text-anchor="end" font-family="Segoe UI,sans-serif" font-size="12" fill="#34d399">Trabajando</text>
+      <rect x="20" y="46" width="390" height="26" rx="7" fill="#0f0d18"/>
+      <text x="32" y="63" font-family="Segoe UI,sans-serif" font-size="13" fill="#c9c4de">⚡ Desplegando en Vercel…</text>
+    </g>
+    <!-- card 2 waiting -->
+    <g transform="translate(20,162)">
+      <rect width="430" height="86" rx="12" fill="#1b1830" stroke="#5b4a1a" stroke-width="1.5"/>
+      <circle cx="24" cy="26" r="7" fill="#fbbf24"/>
+      <text x="42" y="31" font-family="Segoe UI,sans-serif" font-size="16" fill="#e8e6f2" font-weight="600">Blog MAQUIRED</text>
+      <text x="400" y="30" text-anchor="end" font-family="Segoe UI,sans-serif" font-size="12" fill="#fbbf24">Esperándote</text>
+      <rect x="20" y="46" width="390" height="26" rx="7" fill="#0f0d18"/>
+      <text x="32" y="63" font-family="Segoe UI,sans-serif" font-size="13" fill="#c9c4de">💬 ¿Publico el artículo nuevo?</text>
+    </g>
+    <!-- card 3 idle -->
+    <g transform="translate(20,260)">
+      <rect width="430" height="86" rx="12" fill="#1b1830" stroke="#2a2545" stroke-width="1.5"/>
+      <circle cx="24" cy="26" r="7" fill="#6b7280"/>
+      <text x="42" y="31" font-family="Segoe UI,sans-serif" font-size="16" fill="#e8e6f2" font-weight="600">CV Farid</text>
+      <text x="400" y="30" text-anchor="end" font-family="Segoe UI,sans-serif" font-size="12" fill="#8d87a8">Inactiva</text>
+      <rect x="20" y="46" width="390" height="26" rx="7" fill="#0f0d18"/>
+      <text x="32" y="63" font-family="Segoe UI,sans-serif" font-size="13" fill="#8d87a8">✅ Desplegado en cv.farid.com.co</text>
+    </g>
+  </g>
+</svg>

@@ -3,20 +3,36 @@ import type { Block } from "@/lib/blog";
 import { seedGradient } from "@/lib/gradient";
 import { Info, Warning, Quotes } from "@phosphor-icons/react/dist/ssr";
 
-// Renderiza **negrita** dentro de un texto plano.
+// Renderiza **negrita** y enlaces [texto](url) dentro de un texto plano.
 function Inline({ text }: { text: string }) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
   return (
     <>
-      {parts.map((p, i) =>
-        p.startsWith("**") && p.endsWith("**") ? (
-          <strong key={i} className="font-semibold text-[var(--text)]">
-            {p.slice(2, -2)}
-          </strong>
-        ) : (
-          <span key={i}>{p}</span>
-        )
-      )}
+      {parts.map((p, i) => {
+        if (p.startsWith("**") && p.endsWith("**")) {
+          return (
+            <strong key={i} className="font-semibold text-[var(--text)]">
+              {p.slice(2, -2)}
+            </strong>
+          );
+        }
+        const link = p.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (link) {
+          const external = link[2].startsWith("http");
+          return (
+            <a
+              key={i}
+              href={link[2]}
+              className="text-[var(--accent-2)] underline underline-offset-2 hover:opacity-80"
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+            >
+              {link[1]}
+            </a>
+          );
+        }
+        return <span key={i}>{p}</span>;
+      })}
     </>
   );
 }

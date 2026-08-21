@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480" role="img" aria-label="La misma transición: DOS a Windows, agentes CLI a capa visual">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0a12"/><stop offset="1" stop-color="#141020"/>
+    </linearGradient>
+    <linearGradient id="pur2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="480" fill="url(#bg2)"/>
+
+  <!-- Fila 1: 1985 -->
+  <text x="40" y="60" font-family="Segoe UI,sans-serif" font-size="18" fill="#8d87a8" font-weight="700">1985</text>
+  <g transform="translate(40,80)">
+    <rect width="360" height="120" rx="8" fill="#05060a" stroke="#1f2a1f"/>
+    <g font-family="Consolas,monospace" font-size="14" fill="#33d17a">
+      <text x="16" y="34">A:\&gt; WS DOCUMENTO.TXT</text>
+      <text x="16" y="60" fill="#2aa25f">^K^S guardar  ^K^D salir</text>
+      <text x="16" y="86">C:\&gt; _█</text>
+    </g>
+    <text x="180" y="112" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#5a6b5a">DOS · comandos memorizados</text>
+  </g>
+  <g transform="translate(430,120)"><path d="M0 20 H90" stroke="url(#pur2)" stroke-width="5" stroke-linecap="round"/><path d="M84 8 L102 20 L84 32 Z" fill="#a78bfa"/></g>
+  <g transform="translate(560,80)">
+    <rect width="400" height="120" rx="8" fill="#1b1830" stroke="#2a2545"/>
+    <rect width="400" height="24" rx="8" fill="#2a2545"/>
+    <text x="12" y="17" font-family="Segoe UI,sans-serif" font-size="12" fill="#e8e6f2">Documento — Ventana</text>
+    <rect x="16" y="40" width="120" height="60" rx="6" fill="#0f0d18"/>
+    <rect x="150" y="40" width="120" height="60" rx="6" fill="#0f0d18"/>
+    <rect x="284" y="40" width="100" height="60" rx="6" fill="#0f0d18"/>
+    <text x="200" y="114" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#8d87a8">Windows · lo ves y lo tocas</text>
+  </g>
+
+  <!-- Divisor -->
+  <line x1="40" y1="250" x2="960" y2="250" stroke="#2a2545" stroke-dasharray="4 6"/>
+
+  <!-- Fila 2: 2026 -->
+  <text x="40" y="300" font-family="Segoe UI,sans-serif" font-size="18" fill="#a78bfa" font-weight="700">2026</text>
+  <g transform="translate(40,320)">
+    <rect width="360" height="120" rx="8" fill="#05060a" stroke="#241f3a"/>
+    <g font-family="Consolas,monospace" font-size="14" fill="#8b5cf6">
+      <text x="16" y="34" fill="#a78bfa">&gt; claude "arma el embudo"</text>
+      <text x="16" y="60" fill="#6d5ba8">tool: Write, Edit, Deploy…</text>
+      <text x="16" y="86" fill="#a78bfa">&gt; _█</text>
+    </g>
+    <text x="180" y="112" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#6d5ba8">Agente CLI · texto que corre</text>
+  </g>
+  <g transform="translate(430,360)"><path d="M0 20 H90" stroke="url(#pur2)" stroke-width="5" stroke-linecap="round"/><path d="M84 8 L102 20 L84 32 Z" fill="#a78bfa"/></g>
+  <g transform="translate(560,320)">
+    <rect width="400" height="120" rx="8" fill="#14121f" stroke="#2a2545"/>
+    <rect width="400" height="24" rx="8" fill="#1b1830"/>
+    <circle cx="16" cy="12" r="6" fill="url(#pur2)"/>
+    <text x="30" y="17" font-family="Segoe UI,sans-serif" font-size="12" fill="#e8e6f2" font-weight="600">Mission Control</text>
+    <g transform="translate(16,40)">
+      <rect width="368" height="26" rx="6" fill="#1b1830" stroke="#25603f"/><circle cx="16" cy="13" r="5" fill="#34d399"/><text x="30" y="17" font-family="Segoe UI,sans-serif" font-size="11" fill="#c9c4de">Trabajando · desplegando</text>
+      <rect y="34" width="368" height="26" rx="6" fill="#1b1830" stroke="#5b4a1a"/><circle cx="16" cy="47" r="5" fill="#fbbf24"/><text x="30" y="51" font-family="Segoe UI,sans-serif" font-size="11" fill="#c9c4de">Esperándote · ¿publico?</text>
+    </g>
+    <text x="200" y="114" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11" fill="#8d87a8">Panel de agentes · lo ves y lo tocas</text>
+  </g>
+</svg>
