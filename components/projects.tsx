@@ -16,6 +16,7 @@ const SHOTS: Record<string, string> = {
   "yota-montacargas-industrial": "/projects/yota.jpg",
   "neona-tech-neural-violet": "/projects/neona.jpg",
   "dominiogpt-ai-domains": "/projects/dominiogpt.jpg",
+  "sinagoga-beit-jasdo-comunidad": "/projects/sinagoga.jpg",
   "autosgsst-safety-ai-vision": "/projects/autosgsst.jpg",
 };
 

@@ -155,6 +155,13 @@ export const projects = [
     url: "https://autosgsst.vercel.app",
   },
   {
+    name: "Sinagoga Beit Jasdó",
+    tag: "Sitio comunitario · con IA",
+    desc: "Web trilingüe (español, inglés y hebreo) de la comunidad judía de Barranquilla: horarios de Shabat, curso de hebreo, blog, galería y \"Moré\", un asistente de IA que explica festividades y conceptos judaicos.",
+    seed: "sinagoga-beit-jasdo-comunidad",
+    url: "https://sinagogabeitjasdo.com",
+  },
+  {
     name: "Trading Pro GPT",
     tag: "Agente IA",
     desc: "Asistente de análisis de mercados potenciado por modelos de lenguaje.",
