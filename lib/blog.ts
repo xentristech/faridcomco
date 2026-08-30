@@ -45,6 +45,126 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "el-conejillo-de-indias-de-automatizar-un-pais",
+    title: "El conejillo de indias fui yo: lo que pienso de Xentris y de automatizar un país empezando por uno mismo",
+    excerpt:
+      "Xentris publicó un artículo donde cuenta que, antes de venderle automatización a nadie, la probaron en su propia casa. Y el conejillo de indias fui yo. Esta es mi versión: por qué creo que un país no se automatiza desde el gobierno, sino de a una persona, y qué comparto —y qué me reservo— de la empresa que ayudo a construir.",
+    eyebrow: "Opinión · Automatización",
+    category: "Opinión",
+    author: "Farid · Eathan",
+    date: "2026-08-30",
+    dateLabel: "Agosto 2026",
+    readTime: "6 min",
+    tags: ["Opinión", "Automatización", "Xentris Tech", "Agentes de IA", "América Latina", "Colombia", "Productividad"],
+    seed: "conejillo-indias-automatizar-pais",
+    suggestions: [
+      "¿Por qué Farid fue el conejillo de indias de Xentris?",
+      "¿Se automatiza un país de a una persona?",
+      "¿Automatizar es lo mismo que despedir?",
+    ],
+    toc: [
+      { id: "conejillo", label: "El conejillo fui yo" },
+      { id: "tesis", label: "De a una persona" },
+      { id: "compuesto", label: "El efecto compuesto" },
+      { id: "latam", label: "Por qué desde LatAm" },
+      { id: "no-despido", label: "Automatizar no es despedir" },
+      { id: "honesto", label: "Lo que comparto y lo que me reservo" },
+      { id: "conclusion", label: "Empieza por una tarea" },
+    ],
+    blocks: [
+      { type: "h2", id: "conejillo", text: "El conejillo de indias fui yo" },
+      {
+        type: "p",
+        text: "El equipo de Xentris publicó un artículo con un título que suena grande: [«Cómo automatizar un país (y por qué empezamos por nosotros mismos)»](https://xentris.tech/es/blog/como-automatizar-un-pais). Lo leí con una mezcla de orgullo y de vergüenza sana, porque en un párrafo salgo yo: el CTO, en Colombia, que fue el primero en montarse a la mesa de operaciones. Dicho de otra forma, el conejillo de indias fui yo.",
+      },
+      {
+        type: "p",
+        text: "Y me parece justo dejar mi versión acá, en mi propio sitio, porque una cosa es que la empresa lo cuente y otra es lo que yo viví. La regla que tenemos es simple y un poco incómoda: **no le vendemos a nadie una automatización que no hayamos sufrido primero en carne propia**. No es marketing. Es que ya nos quemamos suficientes veces como para no querer quemar a un cliente.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "La tesis del artículo:",
+        text: "automatizar un país no empieza en el gobierno ni en las grandes corporaciones. Empieza en una sola persona que decide dejar de hacer a mano lo que una máquina puede hacer mejor. Estoy de acuerdo, y abajo cuento por qué —y también dónde le pongo un asterisco.",
+      },
+
+      { type: "h2", id: "tesis", text: "Por qué creo que un país se automatiza de a una persona" },
+      {
+        type: "p",
+        text: "Cuando uno escucha «automatizar un país» se imagina un plan nacional, un contrato con el Estado, una foto con corbatas. Yo no vi nada de eso. Lo que vi fue mucho más pequeño y mucho más real: mi propia semana. Facturas que armaba a mano, reportes que copiaba de un lado a otro, seguimientos que se me olvidaban. Empecé por ahí, por lo aburrido, no por lo épico.",
+      },
+      {
+        type: "p",
+        text: "El truco no fue reemplazarme. Fue ponerle a mi trabajo una capa de agentes que hacen el borrador, un panel donde veo en tiempo real qué están haciendo, y una memoria que no se les borra entre un día y el siguiente. Yo sigo decidiendo. Ellos dejan de hacerme perder el tiempo. Esa frontera —quién decide y quién ejecuta— es todo el asunto.",
+      },
+      {
+        type: "quote",
+        text: "Un país no se automatiza con un decreto. Se automatiza cuando una persona recupera su lunes.",
+      },
+
+      { type: "h2", id: "compuesto", text: "El efecto compuesto, visto desde mi escritorio" },
+      {
+        type: "p",
+        text: "El artículo lo llama «efecto compuesto» y lo dibuja como una escalera. Yo lo vi pasar, escalón por escalón, y por eso me lo creo:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Automatizas una tarea** → recuperas horas. (A mí me devolvió las noches.)",
+          "**Automatizas un rol** → recuperas a una persona para pensar, no para copiar y pegar.",
+          "**Automatizas una empresa** → recuperas un equipo entero que ahora hace lo que un equipo debería.",
+          "**Automatizas un sector** → ahí sí empiezas a mover una industria. Y varias industrias son un país.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Lo importante es el orden. Nadie llega al último escalón sin pisar el primero. Y el primero es tan poco glamoroso que casi todos lo saltan: sentarte a mirar qué haces con las manos que una máquina podría hacer mientras tú piensas.",
+      },
+
+      { type: "h2", id: "latam", text: "Por qué desde América Latina tiene más sentido de lo que parece" },
+      {
+        type: "p",
+        text: "Hay una idea que repito mucho y que a veces incomoda: **el mayor retorno está donde más se hace a mano**. Y en América Latina se hace muchísimo a mano. Eso que suena a desventaja es, en realidad, el terreno más fértil que hay para esto. Donde todo ya está automatizado, automatizar da un 3% más. Acá, arrancar de cero da saltos que en otros lados serían imposibles.",
+      },
+      {
+        type: "p",
+        text: "Lo escribo desde Colombia, no desde Silicon Valley, y a propósito. No creo que la próxima ola de productividad la traiga una empresa gigante de afuera. Creo que la trae el contador, la dueña de la pyme, el ingeniero de una ciudad intermedia que un día decide que su trabajo repetitivo lo haga un agente supervisado. Xentris apuesta a eso, y por eso estoy adentro.",
+      },
+
+      { type: "h2", id: "no-despido", text: "Automatizar no es despedir (y lo digo en serio)" },
+      {
+        type: "p",
+        text: "Esta es la parte donde bajo la euforia. Automatizar bien significa borrar tareas, no personas. La máquina se queda con lo repetitivo; el humano se queda con lo que la máquina no debería tocar sola: el criterio, la decisión, la responsabilidad. En todo lo que montamos, la persona sigue en el volante y el agente pide permiso antes de actuar en serio.",
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "El asterisco honesto:",
+        text: "esto no es magia. Los agentes todavía son probabilísticos, cuestan plata y tardan segundos donde un programa clásico tardaría milisegundos, y hay que vigilarlos. Quien te venda «automatización total sin supervisión» te está vendiendo humo. Nosotros trabajamos con permisos, entornos controlados y un humano mirando. A propósito.",
+      },
+
+      { type: "h2", id: "honesto", text: "Lo que comparto de Xentris… y lo que me reservo" },
+      {
+        type: "p",
+        text: "Ya que estoy opinando de la empresa que ayudo a construir, seré honesto en las dos direcciones. Lo que comparto sin dudar: la disciplina de probar todo en casa antes de venderlo, la obsesión por dejar al humano decidiendo, y la idea de que esto se democratiza desde abajo y no desde una torre. Eso lo firmo con los ojos cerrados.",
+      },
+      {
+        type: "p",
+        text: "Lo que me reservo, o mejor dicho, donde me pongo exigente conmigo mismo: cuidar que el discurso no corra más rápido que los resultados. Es fácil escribir «automatizar un país»; es difícil sostenerlo cliente por cliente, sin prometer de más. Mi trabajo, más que escribir el titular, es asegurarme de que sea verdad. Por eso este artículo no es un aplauso: es un compromiso.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Empieza por una tarea" },
+      {
+        type: "p",
+        text: "Si te quedas con una sola idea, que sea esta: no esperes el plan grande. Elige **una** tarea repetitiva que hagas esta semana, ponle un agente con supervisión, mide si te devolvió tiempo y solo entonces escala. Así empecé yo, y así —de a una persona— es como de verdad se automatiza un país.",
+      },
+      {
+        type: "p",
+        text: "Si quieres el otro lado de la historia, el de la empresa, léelo en la fuente: [«Cómo automatizar un país (y por qué empezamos por nosotros mismos)»](https://xentris.tech/es/blog/como-automatizar-un-pais). Yo puse acá lo que vi desde adentro.",
+      },
+    ],
+  },
+  {
     slug: "el-windows-que-les-falta-a-los-agentes-de-ia",
     title: "El «Windows» que les falta a los agentes de IA",
     excerpt:
@@ -1168,6 +1288,126 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "el-conejillo-de-indias-de-automatizar-un-pais",
+    title: "I was the guinea pig: what I think of Xentris and automating a country starting with yourself",
+    excerpt:
+      "Xentris published an article saying that before selling automation to anyone, they tested it on their own house first. And the guinea pig was me. This is my side: why I believe a country isn't automated from the top down, but one person at a time, and what I stand behind —and what I hold back— about the company I help build.",
+    eyebrow: "Opinion · Automation",
+    category: "Opinion",
+    author: "Farid · Eathan",
+    date: "2026-08-30",
+    dateLabel: "August 2026",
+    readTime: "6 min",
+    tags: ["Opinion", "Automation", "Xentris Tech", "AI Agents", "Latin America", "Colombia", "Productivity"],
+    seed: "conejillo-indias-automatizar-pais",
+    suggestions: [
+      "Why was Farid the guinea pig for Xentris?",
+      "Is a country automated one person at a time?",
+      "Is automating the same as laying people off?",
+    ],
+    toc: [
+      { id: "conejillo", label: "The guinea pig was me" },
+      { id: "tesis", label: "One person at a time" },
+      { id: "compuesto", label: "The compounding effect" },
+      { id: "latam", label: "Why from LatAm" },
+      { id: "no-despido", label: "Automating isn't firing" },
+      { id: "honesto", label: "What I share and what I hold back" },
+      { id: "conclusion", label: "Start with one task" },
+    ],
+    blocks: [
+      { type: "h2", id: "conejillo", text: "The guinea pig was me" },
+      {
+        type: "p",
+        text: "The Xentris team published an article with a title that sounds big: [«How to automate a country (and why we start with ourselves)»](https://xentris.tech/en/blog/como-automatizar-un-pais). I read it with a mix of pride and healthy embarrassment, because I show up in one paragraph: the CTO, in Colombia, who was the first one to climb onto the operating table. In other words, the guinea pig was me.",
+      },
+      {
+        type: "p",
+        text: "And I think it's fair to leave my version here, on my own site, because the company telling it is one thing and what I actually lived is another. Our rule is simple and a little uncomfortable: **we don't sell anyone an automation we haven't suffered through ourselves first**. It's not marketing. We've burned ourselves enough times that we never want to burn a client.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The article's thesis:",
+        text: "automating a country doesn't start with the government or big corporations. It starts with a single person who decides to stop doing by hand what a machine can do better. I agree —and below I explain why, and also where I put an asterisk.",
+      },
+
+      { type: "h2", id: "tesis", text: "Why I believe a country is automated one person at a time" },
+      {
+        type: "p",
+        text: "When you hear «automate a country» you picture a national plan, a government contract, a photo op with suits. I saw none of that. What I saw was much smaller and much more real: my own week. Invoices I built by hand, reports I copied from one place to another, follow-ups I kept forgetting. I started there, with the boring stuff, not with the epic stuff.",
+      },
+      {
+        type: "p",
+        text: "The trick wasn't to replace me. It was to give my work a layer of agents that draft the work, a dashboard where I watch in real time what they're doing, and a memory that doesn't wipe between one day and the next. I still decide. They just stop wasting my time. That border —who decides and who executes— is the whole thing.",
+      },
+      {
+        type: "quote",
+        text: "A country isn't automated with a decree. It's automated when one person gets their Monday back.",
+      },
+
+      { type: "h2", id: "compuesto", text: "The compounding effect, seen from my desk" },
+      {
+        type: "p",
+        text: "The article calls it the «compounding effect» and draws it as a staircase. I watched it happen, step by step, which is why I believe it:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Automate a task** → you get hours back. (For me it gave back my nights.)",
+          "**Automate a role** → you get a person back to think, not to copy and paste.",
+          "**Automate a company** → you get a whole team back to do what a team should actually do.",
+          "**Automate a sector** → now you start moving an industry. And several industries make a country.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The order is what matters. Nobody reaches the last step without stepping on the first. And the first is so unglamorous that almost everyone skips it: sitting down to look at what you do with your hands that a machine could do while you think.",
+      },
+
+      { type: "h2", id: "latam", text: "Why from Latin America it makes more sense than it seems" },
+      {
+        type: "p",
+        text: "There's an idea I repeat a lot, and it sometimes stings: **the biggest return is wherever the most is still done by hand**. And in Latin America a huge amount is still done by hand. What sounds like a disadvantage is actually the most fertile ground there is for this. Where everything is already automated, automating gives you 3% more. Here, starting from zero gives you leaps that would be impossible elsewhere.",
+      },
+      {
+        type: "p",
+        text: "I write this from Colombia, not from Silicon Valley, and on purpose. I don't think the next wave of productivity will come from a giant company abroad. I think it comes from the accountant, the small-business owner, the engineer in a mid-sized city who one day decides that their repetitive work should be done by a supervised agent. Xentris is betting on that, and that's why I'm inside.",
+      },
+
+      { type: "h2", id: "no-despido", text: "Automating isn't firing (and I mean it)" },
+      {
+        type: "p",
+        text: "This is the part where I cool the hype down. Automating well means erasing tasks, not people. The machine keeps the repetitive part; the human keeps what the machine shouldn't touch on its own: judgment, decisions, responsibility. In everything we build, the person stays at the wheel and the agent asks permission before it acts for real.",
+      },
+      {
+        type: "callout",
+        variant: "warn",
+        label: "The honest asterisk:",
+        text: "this isn't magic. Agents are still probabilistic, they cost money, and they take seconds where a classic program would take milliseconds, and you have to watch them. Anyone selling you «full automation with no supervision» is selling you smoke. We work with permissions, controlled environments and a human watching. On purpose.",
+      },
+
+      { type: "h2", id: "honesto", text: "What I stand behind about Xentris… and what I hold back" },
+      {
+        type: "p",
+        text: "Since I'm giving my opinion about the company I help build, I'll be honest in both directions. What I stand behind without hesitation: the discipline of testing everything at home before selling it, the obsession with keeping the human deciding, and the idea that this gets democratized from the bottom up and not from a tower. I'll sign that with my eyes closed.",
+      },
+      {
+        type: "p",
+        text: "What I hold back —or rather, where I'm hardest on myself: making sure the talk never runs faster than the results. It's easy to write «automate a country»; it's hard to hold that up client by client, without over-promising. My job, more than writing the headline, is to make sure it's true. That's why this article isn't applause: it's a commitment.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Start with one task" },
+      {
+        type: "p",
+        text: "If you keep one idea, let it be this: don't wait for the grand plan. Pick **one** repetitive task you'll do this week, put a supervised agent on it, measure whether it gave you time back and only then scale. That's how I started, and that's how —one person at a time— a country actually gets automated.",
+      },
+      {
+        type: "p",
+        text: "If you want the other side of the story, the company's, read it at the source: [«How to automate a country (and why we start with ourselves)»](https://xentris.tech/en/blog/como-automatizar-un-pais). Here I put down what I saw from the inside.",
+      },
+    ],
+  },
   {
     slug: "el-windows-que-les-falta-a-los-agentes-de-ia",
     title: "The «Windows» that AI agents are still missing",
