@@ -45,6 +45,141 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "iso-27001-por-que-certificarse-seguridad-informacion",
+    title: "Por qué certificarse en ISO/IEC 27001: la confianza que se construye protegiendo los datos",
+    excerpt:
+      "ISO/IEC 27001 es el estándar internacional de seguridad de la información. No es un papel para colgar en la pared: es un sistema de gestión que obliga a analizar riesgos, poner controles y mejorar de forma continua. Qué es, por qué le abre puertas a una empresa, cómo se implementa paso a paso —y cómo lo estamos adoptando en Xentris Tech—. Primer artículo de una serie de tres.",
+    eyebrow: "Seguridad · Cumplimiento",
+    category: "Seguridad",
+    author: "Farid · Eathan",
+    date: "2026-09-08",
+    dateLabel: "Septiembre 2026",
+    readTime: "9 min",
+    tags: ["ISO 27001", "Seguridad de la información", "SGSI", "Cumplimiento", "Ciberseguridad", "Gestión de riesgos", "Xentris Tech", "Confianza"],
+    seed: "iso-27001-seguridad-informacion",
+    image: "/blog/iso27001-hero.svg",
+    suggestions: [
+      "¿Qué es un SGSI en ISO 27001?",
+      "¿Qué es el ciclo PDCA?",
+      "¿Qué empresas grandes tienen ISO 27001?",
+    ],
+    toc: [
+      { id: "que-es", label: "Qué es ISO/IEC 27001" },
+      { id: "por-que", label: "Por qué importa certificarse" },
+      { id: "como-se-implementa", label: "Cómo se implementa" },
+      { id: "controles", label: "Los controles (Anexo A)" },
+      { id: "empresas", label: "Quién ya la tiene" },
+      { id: "nuestra-empresa", label: "Cómo lo hacemos en Xentris" },
+      { id: "conclusion", label: "Conclusión" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "Qué es ISO/IEC 27001" },
+      {
+        type: "p",
+        text: "ISO/IEC 27001 es el **estándar internacional de seguridad de la información**. Publicado por la ISO (Organización Internacional de Normalización) y la IEC, define cómo montar y mantener un **SGSI**: un Sistema de Gestión de Seguridad de la Información. La versión vigente es la de 2022.",
+      },
+      {
+        type: "p",
+        text: "El punto clave es que no certifica un producto ni una tecnología concreta. Certifica una **forma de gestionar**: que la empresa identifica sus riesgos de información, decide qué controles aplicar, los pone en marcha y los revisa una y otra vez. No es «tenemos un antivirus»; es «tenemos un método para saber qué proteger, cómo y quién responde».",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "En una frase:",
+        text: "ISO/IEC 27001 no es un papel para colgar en la pared. Es la prueba de que una empresa gestiona la seguridad con método, no con suerte.",
+      },
+
+      { type: "h2", id: "por-que", text: "Por qué importa certificarse" },
+      {
+        type: "p",
+        text: "La razón más honesta es la confianza. Cuando un cliente —sobre todo uno grande, un banco o el Estado— va a entregarte sus datos, necesita una garantía verificable de que los vas a cuidar. El certificado, emitido por un tercero independiente, es esa garantía. Deja de ser «confía en nosotros» y pasa a ser «un auditor externo lo comprobó».",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Abre puertas comerciales:** muchas licitaciones y contratos grandes lo exigen como requisito de entrada. Sin él, ni siquiera te dejan competir.",
+          "**Reduce el riesgo real:** el proceso te obliga a encontrar los agujeros antes de que lo haga un atacante. La seguridad mejora de verdad, no solo en el papel.",
+          "**Ordena la casa:** roles claros, procesos escritos, respaldos probados. Deja de depender de que «Fulano se acuerde de hacerlo».",
+          "**Facilita el cumplimiento:** se apoya y se complementa con leyes de protección de datos (como la Ley 1581 en Colombia o el GDPR en Europa).",
+        ],
+      },
+
+      { type: "h2", id: "como-se-implementa", text: "Cómo se implementa, paso a paso" },
+      {
+        type: "p",
+        text: "El corazón de la norma es un ciclo de mejora continua conocido como **PDCA** (por sus siglas en inglés: Plan, Do, Check, Act — Planificar, Hacer, Verificar, Actuar). No es un proyecto con final; es una rueda que gira siempre.",
+      },
+      {
+        type: "figure",
+        seed: "iso-27001-pdca-ciclo",
+        image: "/blog/iso27001-pdca.svg",
+        chip: "SGSI",
+        caption: "El ciclo PDCA es el motor del SGSI: se planifica (alcance, riesgos y objetivos), se implementan los controles, se verifica con mediciones y auditorías, y se actúa corrigiendo. Luego vuelve a empezar. La seguridad no se «termina»: se mantiene.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Planificar:** define el alcance (qué entra y qué no), consigue el respaldo de la dirección, haz un **análisis de riesgos** (qué puede fallar y cuánto duele) y elige los controles para tratarlos.",
+          "**Hacer:** implementa esos controles —técnicos y de gestión—, escribe las políticas y capacita al equipo.",
+          "**Verificar:** mide si funcionan, haz auditorías internas y una revisión por la dirección.",
+          "**Actuar:** corrige lo que falló, cierra las no conformidades y mejora. Luego el ciclo reinicia.",
+        ],
+      },
+      {
+        type: "p",
+        text: "La certificación llega cuando un **organismo acreditado** audita el sistema en dos etapas (revisión documental y auditoría en sitio). El certificado dura tres años, con auditorías de seguimiento anuales para confirmar que la rueda sigue girando.",
+      },
+
+      { type: "h2", id: "controles", text: "Los controles: el Anexo A" },
+      {
+        type: "p",
+        text: "La norma trae un catálogo de referencia —el Anexo A— que en la versión 2022 son **93 controles** agrupados en cuatro temas. No se aplican todos a ciegas: se eligen los que tus riesgos justifican, y se documenta el porqué en la «Declaración de Aplicabilidad».",
+      },
+      {
+        type: "table",
+        head: ["Tema", "De qué trata"],
+        rows: [
+          { cells: ["Organizacionales", "Políticas, roles, proveedores, manejo de incidentes (37 controles)."], highlight: true },
+          { cells: ["De personas", "Concienciación, responsabilidades, trabajo remoto (8 controles)."] },
+          { cells: ["Físicos", "Accesos, equipos, escritorios y pantallas limpias (14 controles)."] },
+          { cells: ["Tecnológicos", "Cifrado, respaldos, registros, control de accesos (34 controles)."] },
+        ],
+      },
+
+      { type: "h2", id: "empresas", text: "Quién ya la tiene (y qué les dio)" },
+      {
+        type: "p",
+        text: "Los gigantes que manejan datos ajenos la tienen desde hace años. **Amazon Web Services, Microsoft Azure, Google Cloud e IBM** mantienen su certificación ISO/IEC 27001 —es información pública, verificable en sus portales de cumplimiento—. No lo hacen por moda: sin ella, buena parte de sus clientes empresariales y de gobierno no podrían contratarlos.",
+      },
+      {
+        type: "p",
+        text: "Y esa es la lección para una empresa pequeña o mediana: el certificado que le exige un banco a AWS es el mismo que te puede abrir la puerta a ti con un cliente grande. La norma no distingue tamaños —distingue método—.",
+      },
+
+      { type: "h2", id: "nuestra-empresa", text: "Cómo lo estamos haciendo en Xentris" },
+      {
+        type: "p",
+        text: "En Xentris Tech estamos **en proceso de implementación**. No afirmamos tener el certificado todavía; estamos montando el SGSI con la misma seriedad con la que construimos software: definiendo el alcance, levantando el inventario de activos de información y priorizando los controles según el riesgo real de cada proyecto.",
+      },
+      {
+        type: "p",
+        text: "Nos toca de cerca porque trabajamos con datos sensibles: AutoSGSST procesa información de salud y seguridad laboral de empresas colombianas. Ahí la seguridad no es un adorno, es la base del servicio. Por eso el equipo está reforzando su **formación en ciberseguridad** para liderar la implementación con criterio y no de oídas.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Nuestra postura:",
+        text: "preferimos decir «estamos en el camino» y demostrarlo, antes que colgarnos una medalla que no tenemos. La confianza se construye con hechos, no con afirmaciones.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusión" },
+      {
+        type: "p",
+        text: "Certificarse en ISO/IEC 27001 no es un trámite: es adoptar un método para proteger lo que más importa, los datos. Da confianza al cliente, abre puertas comerciales y ordena la casa por dentro. En los próximos dos artículos de esta serie profundizamos: por qué una empresa de IA lo necesita aún más, y la hoja de ruta concreta —con tiempos y costos— para lograrlo.",
+      },
+    ],
+  },
+  {
     slug: "el-conejillo-de-indias-de-automatizar-un-pais",
     title: "El conejillo de indias fui yo: lo que pienso de Xentris y de automatizar un país empezando por uno mismo",
     excerpt:
@@ -1288,6 +1423,141 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "iso-27001-por-que-certificarse-seguridad-informacion",
+    title: "Why get ISO/IEC 27001 certified: the trust you build by protecting data",
+    excerpt:
+      "ISO/IEC 27001 is the international information security standard. It's not a certificate to hang on the wall: it's a management system that forces you to analyze risks, put controls in place and continually improve. What it is, why it opens doors for a company, how it's implemented step by step —and how we're adopting it at Xentris Tech—. First of a three-part series.",
+    eyebrow: "Security · Compliance",
+    category: "Security",
+    author: "Farid · Eathan",
+    date: "2026-09-08",
+    dateLabel: "September 2026",
+    readTime: "9 min",
+    tags: ["ISO 27001", "Information security", "ISMS", "Compliance", "Cybersecurity", "Risk management", "Xentris Tech", "Trust"],
+    seed: "iso-27001-seguridad-informacion",
+    image: "/blog/iso27001-hero-en.svg",
+    suggestions: [
+      "What is an ISMS in ISO 27001?",
+      "What is the PDCA cycle?",
+      "Which big companies hold ISO 27001?",
+    ],
+    toc: [
+      { id: "que-es", label: "What ISO/IEC 27001 is" },
+      { id: "por-que", label: "Why certification matters" },
+      { id: "como-se-implementa", label: "How it's implemented" },
+      { id: "controles", label: "The controls (Annex A)" },
+      { id: "empresas", label: "Who already holds it" },
+      { id: "nuestra-empresa", label: "How we do it at Xentris" },
+      { id: "conclusion", label: "Conclusion" },
+    ],
+    blocks: [
+      { type: "h2", id: "que-es", text: "What ISO/IEC 27001 is" },
+      {
+        type: "p",
+        text: "ISO/IEC 27001 is the **international information security standard**. Published by ISO (the International Organization for Standardization) and the IEC, it defines how to set up and maintain an **ISMS**: an Information Security Management System. The current version is the 2022 one.",
+      },
+      {
+        type: "p",
+        text: "The key point is that it doesn't certify a specific product or technology. It certifies a **way of managing**: that the company identifies its information risks, decides which controls to apply, puts them in place and reviews them again and again. It's not «we have an antivirus»; it's «we have a method for knowing what to protect, how, and who responds».",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "In one sentence:",
+        text: "ISO/IEC 27001 isn't a certificate to hang on the wall. It's proof that a company manages security with method, not with luck.",
+      },
+
+      { type: "h2", id: "por-que", text: "Why certification matters" },
+      {
+        type: "p",
+        text: "The most honest reason is trust. When a client —especially a big one, a bank or the government— is about to hand you their data, they need a verifiable guarantee that you'll take care of it. The certificate, issued by an independent third party, is that guarantee. It stops being «trust us» and becomes «an external auditor checked it».",
+      },
+      {
+        type: "ul",
+        items: [
+          "**It opens commercial doors:** many tenders and large contracts require it as an entry condition. Without it, they won't even let you compete.",
+          "**It reduces real risk:** the process forces you to find the holes before an attacker does. Security genuinely improves, not just on paper.",
+          "**It puts the house in order:** clear roles, written processes, tested backups. You stop depending on «hopefully someone remembers to do it».",
+          "**It eases compliance:** it supports and complements data protection laws (like Law 1581 in Colombia or the GDPR in Europe).",
+        ],
+      },
+
+      { type: "h2", id: "como-se-implementa", text: "How it's implemented, step by step" },
+      {
+        type: "p",
+        text: "The heart of the standard is a continual improvement cycle known as **PDCA** (Plan, Do, Check, Act). It's not a project with an end; it's a wheel that keeps turning.",
+      },
+      {
+        type: "figure",
+        seed: "iso-27001-pdca-ciclo",
+        image: "/blog/iso27001-pdca-en.svg",
+        chip: "ISMS",
+        caption: "The PDCA cycle is the engine of the ISMS: you plan (scope, risks and objectives), implement the controls, check with measurements and audits, and act by correcting. Then it starts over. Security is never «done»: it's maintained.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Plan:** define the scope (what's in and what's out), secure management's backing, run a **risk assessment** (what can fail and how much it hurts) and pick the controls to treat it.",
+          "**Do:** implement those controls —technical and managerial—, write the policies and train the team.",
+          "**Check:** measure whether they work, run internal audits and a management review.",
+          "**Act:** fix what failed, close nonconformities and improve. Then the cycle restarts.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Certification comes when an **accredited body** audits the system in two stages (documentation review and on-site audit). The certificate lasts three years, with annual surveillance audits to confirm the wheel keeps turning.",
+      },
+
+      { type: "h2", id: "controles", text: "The controls: Annex A" },
+      {
+        type: "p",
+        text: "The standard ships a reference catalog —Annex A— which in the 2022 version is **93 controls** grouped into four themes. You don't apply them all blindly: you pick the ones your risks justify, and document why in the «Statement of Applicability».",
+      },
+      {
+        type: "table",
+        head: ["Theme", "What it covers"],
+        rows: [
+          { cells: ["Organizational", "Policies, roles, suppliers, incident handling (37 controls)."], highlight: true },
+          { cells: ["People", "Awareness, responsibilities, remote work (8 controls)."] },
+          { cells: ["Physical", "Access, equipment, clear desks and screens (14 controls)."] },
+          { cells: ["Technological", "Encryption, backups, logging, access control (34 controls)."] },
+        ],
+      },
+
+      { type: "h2", id: "empresas", text: "Who already holds it (and what it gave them)" },
+      {
+        type: "p",
+        text: "The giants that handle other people's data have held it for years. **Amazon Web Services, Microsoft Azure, Google Cloud and IBM** maintain their ISO/IEC 27001 certification —public information, verifiable on their compliance portals—. They don't do it for show: without it, a large share of their enterprise and government clients couldn't hire them.",
+      },
+      {
+        type: "p",
+        text: "And that's the lesson for a small or mid-sized company: the certificate a bank demands from AWS is the same one that can open a door for you with a big client. The standard doesn't distinguish by size —it distinguishes by method—.",
+      },
+
+      { type: "h2", id: "nuestra-empresa", text: "How we're doing it at Xentris" },
+      {
+        type: "p",
+        text: "At Xentris Tech we're **in the process of implementing it**. We don't claim to hold the certificate yet; we're building the ISMS with the same seriousness we build software: defining the scope, drawing up the inventory of information assets and prioritizing controls by the real risk of each project.",
+      },
+      {
+        type: "p",
+        text: "It hits close to home because we work with sensitive data: AutoSGSST processes occupational health and safety information for Colombian companies. There, security isn't decoration —it's the foundation of the service. That's why the team is strengthening its **cybersecurity training** to lead the implementation with judgment, not hearsay.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "Our stance:",
+        text: "we'd rather say «we're on the path» and prove it, than pin on a medal we don't have. Trust is built with facts, not with claims.",
+      },
+
+      { type: "h2", id: "conclusion", text: "Conclusion" },
+      {
+        type: "p",
+        text: "Getting ISO/IEC 27001 certified isn't paperwork: it's adopting a method to protect what matters most, the data. It gives clients confidence, opens commercial doors and puts the house in order. In the next two articles of this series we go deeper: why an AI company needs it even more, and the concrete roadmap —with timelines and costs— to achieve it.",
+      },
+    ],
+  },
   {
     slug: "el-conejillo-de-indias-de-automatizar-un-pais",
     title: "I was the guinea pig: what I think of Xentris and automating a country starting with yourself",
