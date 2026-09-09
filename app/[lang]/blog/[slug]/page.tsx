@@ -75,7 +75,9 @@ const CHROME = {
   es: {
     back: "Volver al blog",
     toc: "En este artículo",
-    cta: "¿Un proyecto con IA? Hablemos",
+    ctaTitle: "¿Esto le sirve a tu negocio?",
+    ctaSub: "Recibe un diagnóstico de IA gratis, hecho para tu caso en 60 segundos: qué automatizar, qué stack y el primer paso.",
+    ctaBtn: "Diagnóstico gratis",
     suggestions: [
       "¿Qué es la memoria unificada del GB10?",
       "¿Me conviene frente a una RTX 5090?",
@@ -85,7 +87,9 @@ const CHROME = {
   en: {
     back: "Back to the blog",
     toc: "In this article",
-    cta: "An AI project? Let's talk",
+    ctaTitle: "Could this help your business?",
+    ctaSub: "Get a free AI diagnosis, tailored to your case in 60 seconds: what to automate, what stack and the first step.",
+    ctaBtn: "Free AI diagnosis",
     suggestions: [
       "What is the GB10's unified memory?",
       "Is it worth it vs. an RTX 5090?",
@@ -203,20 +207,29 @@ export default async function BlogPostPage(props: PageProps<"/[lang]/blog/[slug]
               suggestions={post.suggestions ?? chrome.suggestions}
             />
 
-            {/* CTA */}
-            <div className="not-prose mt-14 flex flex-wrap items-center justify-between gap-4 rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-6">
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--text-dim)]"
-                  >
-                    {t}
-                  </span>
-                ))}
+            {/* Tags */}
+            <div className="not-prose mt-14 flex flex-wrap gap-2">
+              {post.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--text-dim)]"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* CTA del embudo → diagnóstico gratis (captura de leads) */}
+            <div className="not-prose mt-6 overflow-hidden rounded-[22px] border border-[rgba(79,124,255,0.3)] bg-[rgba(79,124,255,0.08)] p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+              <div className="min-w-0">
+                <p className="text-lg font-semibold">{chrome.ctaTitle}</p>
+                <p className="mt-1 text-sm text-[var(--text-dim)]">{chrome.ctaSub}</p>
               </div>
-              <Link href={`${localizedHref("/", locale)}#contacto`} className="btn btn-primary !py-2.5 text-sm">
-                {chrome.cta} <ArrowRight size={16} weight="bold" />
+              <Link
+                href={localizedHref("/diagnostico", locale)}
+                className="btn btn-primary mt-4 shrink-0 !py-2.5 text-sm sm:mt-0"
+              >
+                {chrome.ctaBtn} <ArrowRight size={16} weight="bold" />
               </Link>
             </div>
 
