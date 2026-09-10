@@ -45,6 +45,97 @@ export type Post = {
 
 export const postsEs: Post[] = [
   {
+    slug: "soltar-para-avanzar",
+    title: "Soltar para avanzar: por qué lo que más nos frena es lo que no queremos dejar ir",
+    excerpt:
+      "Confundimos soltar con perder. Y es al revés: las manos llenas no pueden agarrar nada nuevo. Una reflexión sobre el puño cerrado, el costo hundido, y por qué avanzar no es solo dar el paso adelante, sino levantar el pie de atrás.",
+    eyebrow: "Filosofía · Opinión",
+    category: "Filosofía",
+    author: "Farid · Eathan",
+    date: "2026-09-09",
+    dateLabel: "Septiembre 2026",
+    readTime: "5 min",
+    tags: ["Filosofía", "Crecimiento personal", "Soltar", "Estoicismo", "Decisiones", "Mentalidad", "Opinión"],
+    seed: "soltar-para-avanzar",
+    image: "/blog/soltar-hero.svg",
+    suggestions: [
+      "¿Qué es la trampa del mono?",
+      "¿Qué tiene que ver el costo hundido con soltar?",
+      "¿Soltar el control es rendirse?",
+    ],
+    toc: [
+      { id: "puno", label: "El puño cerrado" },
+      { id: "costo-hundido", label: "La trampa del costo hundido" },
+      { id: "control", label: "Soltar el control, no el timón" },
+      { id: "capas", label: "Se suelta por capas" },
+      { id: "kintsugi", label: "Lo que sueltas se transforma" },
+      { id: "cierre", label: "Un acto de confianza" },
+    ],
+    blocks: [
+      { type: "h2", id: "puno", text: "El puño cerrado" },
+      {
+        type: "p",
+        text: "Hoy no quiero hablar de tecnología. Quiero hablar de algo que me ha costado años entender: lo bueno que es **soltar** para avanzar. Y lo difícil que es, porque casi siempre confundimos soltar con *perder*. Sentimos que dejar ir un plan, una relación, una versión de nosotros mismos, un negocio que ya no camina, es retroceder. Y es exactamente al revés: las manos llenas no pueden agarrar nada nuevo.",
+      },
+      {
+        type: "p",
+        text: "Hay una imagen que se me quedó grabada: la **trampa del mono**. En algunos lugares atrapan monos con un frasco anclado al suelo y una fruta adentro. El mono mete la mano, agarra la fruta, pero con el puño cerrado ya no cabe por la boca del frasco. Está libre en cualquier momento —solo tiene que abrir la mano—. Pero no lo hace. Lo que lo atrapa no es el frasco: es su propio agarre.",
+      },
+      {
+        type: "quote",
+        text: "No estás atrapado por lo que sostienes. Estás atrapado por no querer soltarlo.",
+      },
+      {
+        type: "p",
+        text: "Nosotros hacemos eso todo el tiempo. Con ideas, con orgullos, con «lo que ya invertí», con «lo que la gente va a pensar». Cargamos cosas que ya no nos sirven solo porque nos cuesta abrir la mano.",
+      },
+
+      { type: "h2", id: "costo-hundido", text: "La trampa del costo hundido" },
+      {
+        type: "p",
+        text: "El agarre más traicionero tiene nombre: el **costo hundido**. Seguimos aferrados a algo porque ya le metimos mucho —tiempo, plata, esfuerzo, corazón—, no porque valga la pena de aquí en adelante. Pero eso que ya gastaste ya no existe, lo sueltes o no. No vuelve.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "La única pregunta honesta:",
+        text: "no es «cuánto llevo invertido en esto», sino «de aquí en adelante, ¿esto me lleva a donde quiero ir?». Soltar es dejar de pagarle renta al pasado.",
+      },
+
+      { type: "h2", id: "control", text: "Soltar el control, no el timón" },
+      {
+        type: "p",
+        text: "Aquí hay un malentendido que hay que desarmar: soltar no es rendirse. No es volverse pasivo ni dejar de intentar. Es dejar de exigirle al mundo una forma exacta y quedarte con la dirección. Los estoicos lo decían simple: enfócate en lo que depende de ti, suelta lo que no. Y pasa algo raro y hermoso: cuando sueltas el resultado, actúas mejor, porque dejas de pelear con lo que no controlas.",
+      },
+      {
+        type: "p",
+        text: "Soltar el control no es soltar el timón. Sigues llevando el barco; solo dejas de pretender que también mandas sobre el viento.",
+      },
+
+      { type: "h2", id: "capas", text: "Se suelta por capas" },
+      {
+        type: "p",
+        text: "Otra mentira que nos contamos es que soltar es un acto heroico de un día. Casi nunca. Es ir aflojando el puño dedo por dedo, un poco cada vez. Y está bien que duela un rato —el duelo es la prueba de que sí importaba—. No tienes que soltar sin sentir nada. Solo tienes que soltar.",
+      },
+
+      { type: "h2", id: "kintsugi", text: "Lo que sueltas se transforma" },
+      {
+        type: "p",
+        text: "Los japoneses reparan la cerámica rota con oro: es el **kintsugi**. La grieta no se esconde, se honra. La pieza vale más rota y reparada que intacta, porque cuenta una historia. Lo que soltamos funciona parecido: no se pierde, nos deja forma. No vuelves vacío de un cierre, de una despedida, de un fracaso. Vuelves distinto, con una línea de oro donde antes había una grieta.",
+      },
+      {
+        type: "p",
+        text: "Y sí, un guiño a lo mío aunque prometí no hablar de tecnología: automatizar es soltar tareas para agarrar las que importan. Delegar lo repetitivo es soltar el control del *cómo* para quedarte con el *porqué*. La misma filosofía, en código.",
+      },
+
+      { type: "h2", id: "cierre", text: "Un acto de confianza" },
+      {
+        type: "p",
+        text: "En el fondo, soltar es un acto de confianza en tu yo futuro. Le dices: «voy a estar bien sin esto, porque lo que viene lo vale». Aferrarse, casi siempre, es miedo disfrazado de lealtad. Así que si hay algo que hoy estás agarrando con el puño cerrado —un proyecto, una idea de ti mismo, un rencor, una versión vieja de tu vida— quizá no te tiene atrapado el frasco. Te tiene atrapado tu mano. Y esa, la puedes abrir cuando quieras.",
+      },
+    ],
+  },
+  {
     slug: "iso-27001-por-que-certificarse-seguridad-informacion",
     title: "Por qué certificarse en ISO/IEC 27001: la confianza que se construye protegiendo los datos",
     excerpt:
@@ -1423,6 +1514,97 @@ export const postsEs: Post[] = [
 ];
 
 export const postsEn: Post[] = [
+  {
+    slug: "soltar-para-avanzar",
+    title: "Letting go to move forward: why what holds us back most is what we won't release",
+    excerpt:
+      "We confuse letting go with losing. It's the opposite: full hands can't grab anything new. A reflection on the closed fist, the sunk cost, and why moving forward isn't just stepping ahead —it's lifting your back foot.",
+    eyebrow: "Philosophy · Opinion",
+    category: "Philosophy",
+    author: "Farid · Eathan",
+    date: "2026-09-09",
+    dateLabel: "September 2026",
+    readTime: "5 min",
+    tags: ["Philosophy", "Personal growth", "Letting go", "Stoicism", "Decisions", "Mindset", "Opinion"],
+    seed: "soltar-para-avanzar",
+    image: "/blog/soltar-hero-en.svg",
+    suggestions: [
+      "What is the monkey trap?",
+      "What does sunk cost have to do with letting go?",
+      "Is letting go of control giving up?",
+    ],
+    toc: [
+      { id: "puno", label: "The closed fist" },
+      { id: "costo-hundido", label: "The sunk-cost trap" },
+      { id: "control", label: "Let go of control, not the wheel" },
+      { id: "capas", label: "You let go in layers" },
+      { id: "kintsugi", label: "What you release transforms" },
+      { id: "cierre", label: "An act of trust" },
+    ],
+    blocks: [
+      { type: "h2", id: "puno", text: "The closed fist" },
+      {
+        type: "p",
+        text: "Today I don't want to talk about technology. I want to talk about something that took me years to understand: how good it is to **let go** in order to move forward. And how hard it is, because we almost always confuse letting go with *losing*. We feel that releasing a plan, a relationship, a version of ourselves, a business that no longer works, is going backward. And it's exactly the opposite: full hands can't grab anything new.",
+      },
+      {
+        type: "p",
+        text: "There's an image that stuck with me: the **monkey trap**. In some places they catch monkeys with a jar anchored to the ground and a fruit inside. The monkey reaches in, grabs the fruit, but with its fist closed its hand no longer fits through the mouth of the jar. It's free at any moment —it just has to open its hand—. But it doesn't. What traps it isn't the jar: it's its own grip.",
+      },
+      {
+        type: "quote",
+        text: "You're not trapped by what you hold. You're trapped by not wanting to let it go.",
+      },
+      {
+        type: "p",
+        text: "We do that all the time. With ideas, with pride, with «what I already invested», with «what people will think». We carry things that no longer serve us just because opening our hand is hard.",
+      },
+
+      { type: "h2", id: "costo-hundido", text: "The sunk-cost trap" },
+      {
+        type: "p",
+        text: "The most treacherous grip has a name: the **sunk cost**. We stay attached to something because we already poured a lot into it —time, money, effort, heart—, not because it's worth it going forward. But what you already spent no longer exists, whether you let go or not. It doesn't come back.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        label: "The only honest question:",
+        text: "isn't «how much have I invested in this», but «from here on, does this take me where I want to go?». Letting go is refusing to keep paying rent to the past.",
+      },
+
+      { type: "h2", id: "control", text: "Let go of control, not the wheel" },
+      {
+        type: "p",
+        text: "Here's a misunderstanding worth dismantling: letting go isn't giving up. It's not becoming passive or ceasing to try. It's no longer demanding an exact shape from the world and keeping the direction instead. The Stoics put it simply: focus on what depends on you, release what doesn't. And something strange and beautiful happens: when you let go of the outcome, you act better, because you stop fighting what you don't control.",
+      },
+      {
+        type: "p",
+        text: "Letting go of control isn't letting go of the wheel. You're still steering the boat; you just stop pretending you also command the wind.",
+      },
+
+      { type: "h2", id: "capas", text: "You let go in layers" },
+      {
+        type: "p",
+        text: "Another lie we tell ourselves is that letting go is a heroic act done in a single day. Almost never. It's loosening the fist finger by finger, a little at a time. And it's okay if it hurts for a while —the grief is proof that it mattered—. You don't have to let go feeling nothing. You just have to let go.",
+      },
+
+      { type: "h2", id: "kintsugi", text: "What you release transforms" },
+      {
+        type: "p",
+        text: "The Japanese repair broken pottery with gold: it's **kintsugi**. The crack isn't hidden, it's honored. The piece is worth more broken and mended than intact, because it tells a story. What we let go of works the same way: it isn't lost, it leaves us shape. You don't come back empty from a closure, a goodbye, a failure. You come back different, with a line of gold where there used to be a crack.",
+      },
+      {
+        type: "p",
+        text: "And yes, a nod to my world even though I promised not to talk about technology: automating is letting go of tasks to grab the ones that matter. Delegating the repetitive is letting go of control over the *how* to keep the *why*. The same philosophy, in code.",
+      },
+
+      { type: "h2", id: "cierre", text: "An act of trust" },
+      {
+        type: "p",
+        text: "Deep down, letting go is an act of trust in your future self. You tell it: «I'll be fine without this, because what's coming is worth it». Holding on, almost always, is fear disguised as loyalty. So if there's something you're gripping with a closed fist today —a project, an idea of yourself, a grudge, an old version of your life— maybe the jar isn't what traps you. Your hand is. And that one, you can open whenever you want.",
+      },
+    ],
+  },
   {
     slug: "iso-27001-por-que-certificarse-seguridad-informacion",
     title: "Why get ISO/IEC 27001 certified: the trust you build by protecting data",
